@@ -6,6 +6,7 @@ namespace VKmfSoft_EHealth_API.Models
     {
         [Key]
         public int Id { get; set; }
+        //todo rijksregisternummer unique
         [Required(ErrorMessage = "LastName is required.")]
         [StringLength(40, ErrorMessage = "LastName cannot longer than 40 characters")]
         public required string LastName { get; set; }
@@ -26,5 +27,11 @@ namespace VKmfSoft_EHealth_API.Models
         [StringLength(45, ErrorMessage = "Email cannot longer than 45 characters")]
         [EmailAddress(ErrorMessage = "Invalid email address.")]
         public required string Email { get; set; }
+        public int FirstLanguageID { get; set; }
+        public byte[]? Photo { get; set; }//todo add photo
+        public DateTime CreatedAt { get; set; }
+        public int CreatedBy { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public int? UpdatedBy { get; set; }
     }
 }

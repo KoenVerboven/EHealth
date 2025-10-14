@@ -6,7 +6,7 @@ namespace VKmfSoft_EHealth_API.Models
     {
         [Key]
         public int Id { get; set; }
-        public int PatientId { get; set; }
+        public int PatientMedicalHistoryId { get; set; }//FK to PatientMedicalHistory
         public int MedicationId { get; set; }
         public string? Dosage { get; set; }
         public string? Frequency { get; set; }

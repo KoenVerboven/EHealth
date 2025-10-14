@@ -21,7 +21,9 @@ namespace VKmfSoft_EHealth_API.Controllers
                     Gender = 'M',
                     InsuranceNumber = "INS123456",
                     InsuranceProvider = "HealthCare Inc.",
-                    IsMobile = true
+                    IsMobile = true,
+                    PhoneNumber = "123-456-7890",
+                    Email = "test@test.com"
                 },
 
                 new()
@@ -33,7 +35,9 @@ namespace VKmfSoft_EHealth_API.Controllers
                      Gender = 'V',
                     InsuranceNumber = "INS654321",
                     InsuranceProvider = "MediPlus",
-                    IsMobile = false
+                    IsMobile = false,
+                    PhoneNumber = "098-765-4321",
+                    Email = "test@test.com"
                 }
             };
         }
