@@ -1,22 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace VKmfSoft_EHealth_API.Models
+namespace VKmfSoft_EHealth_API.Models.Patient
 {
-    public class PatientSurgery
+    public class PatientScan
     {
         [Key]
         public int Id { get; set; }
         public int PatientMedicalHistoryId { get; set; }//FK to PatientMedicalHistory
-        [Required(ErrorMessage = "SurgeryType is required.")]
-        public required int SurgeryTypeId { get; set; }
-        public DateTime SurgeryDate { get; set; }
+        public required int ScanTypeId { get; set; }
+        public DateTime ScanDate { get; set; }
         public int PerformingMedicalWorkerId { get; set; }
-        public int HospitalNameId { get; set; }
         public string? Notes { get; set; }
-        public int StatusId { get; set; } 
+        public int StatusId { get; set; } // e.g., Completed, Scheduled, Canceled
         public DateTime CreatedAt { get; set; }
         public int CreatedBy { get; set; }
-        public int UpdatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
         public int UpdatedBy { get; set; }
+
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using VKmfSoft_EHealth_API.Models;
+using VKmfSoft_EHealth_API.Models.Patient;
 
 namespace VKmfSoft_EHealth_API.Controllers
 {

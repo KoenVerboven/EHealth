@@ -1,4 +1,6 @@
-﻿namespace VKmfSoft_EHealth_API.Models
+﻿using VKmfSoft_EHealth_API.Models.Other;
+
+namespace VKmfSoft_EHealth_API.Models.Patient
 {
     public class Patient : Person
     {

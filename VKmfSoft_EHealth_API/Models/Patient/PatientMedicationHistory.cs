@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace VKmfSoft_EHealth_API.Models
+namespace VKmfSoft_EHealth_API.Models.Patient
 {
     public class PatientMedicationHistory
     {
