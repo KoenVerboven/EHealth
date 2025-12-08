@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace VKmfSoft_EHealth_API.Models.Patient
+namespace VKmfSoft_EHealth_API.Models.Domain.Patient
 {
     public class PatientVaccination
     {

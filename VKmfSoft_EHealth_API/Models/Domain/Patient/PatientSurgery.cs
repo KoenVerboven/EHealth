@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using VKmfSoft_EHealth_API.Models.Other;
+using VKmfSoft_EHealth_API.Models.Domain.Other;
 
-namespace VKmfSoft_EHealth_API.Models.Patient
+namespace VKmfSoft_EHealth_API.Models.Domain.Patient
 {
     public class PatientSurgery
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace VKmfSoft_EHealth_API.Models.Other
+namespace VKmfSoft_EHealth_API.Models.Domain.Other
 {
     public class Person
     {

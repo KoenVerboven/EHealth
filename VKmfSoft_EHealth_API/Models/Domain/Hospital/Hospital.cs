@@ -1,4 +1,4 @@
-﻿namespace VKmfSoft_EHealth_API.Models.Hospital
+﻿namespace VKmfSoft_EHealth_API.Models.Domain.Hospital
 {
     public class Hospital
     {

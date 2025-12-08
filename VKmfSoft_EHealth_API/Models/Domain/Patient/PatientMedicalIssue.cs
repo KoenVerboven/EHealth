@@ -1,4 +1,4 @@
-﻿namespace VKmfSoft_EHealth_API.Models.Patient
+﻿namespace VKmfSoft_EHealth_API.Models.Domain.Patient
 {
     public class PatientMedicalIssue
     {
