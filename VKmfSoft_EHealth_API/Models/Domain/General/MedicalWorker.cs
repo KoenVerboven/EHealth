@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using VKmfSoft_EHealth_API.Models.Domain.Hospital;
 
 namespace VKmfSoft_EHealth_API.Models.Domain.Other
 {
-    public class MedicalWorker : Person
+    public class MedicalWorker : HospitalEmployee
     {
         public int MedicalTitle { get; set; } //0: nurse, 1: doctor, 2: specialist, 3: professor
        

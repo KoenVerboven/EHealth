@@ -1,4 +1,4 @@
-﻿using VKmfSoft_EHealth_API.Models.Domain.Other;
+﻿using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
 
 namespace VKmfSoft_EHealth_API.Repositories.Repos
@@ -6,7 +6,7 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
     public class AppointmentRepository : IAppointmentRepository
 
     {
-        public Task<Appointment> CreateAsync(Appointment appointment)
+        public Task<DoctorAppointment> CreateAsync(DoctorAppointment appointment)
         {
             throw new NotImplementedException();
         }
@@ -16,17 +16,17 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Appointment>> GetAllAsync()
+        public Task<IEnumerable<DoctorAppointment>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Appointment?> GetByIdAsync(int id)
+        public Task<DoctorAppointment?> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Appointment?> UpdateAsync(Appointment appointment)
+        public Task<DoctorAppointment?> UpdateAsync(DoctorAppointment appointment)
         {
             throw new NotImplementedException();
         }

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace VKmfSoft_EHealth_API.Models.Domain.Other
+namespace VKmfSoft_EHealth_API.Models.Domain.TimeShedule
 {
-    public class Appointment
+    public class DoctorAppointment
     {
         [Key]
         public int Id { get; set; }

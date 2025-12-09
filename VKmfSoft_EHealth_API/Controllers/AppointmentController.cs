@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using VKmfSoft_EHealth_API.Models.Domain.Other;
+using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
 
 namespace VKmfSoft_EHealth_API.Controllers
 {
@@ -8,9 +8,9 @@ namespace VKmfSoft_EHealth_API.Controllers
     public class AppointmentController : ControllerBase
     {
         [HttpGet]   
-        public IEnumerable<Appointment> Get()
+        public IEnumerable<DoctorAppointment> Get()
         {
-            return new List<Appointment>
+            return new List<DoctorAppointment>
             {
                 new()
                 {

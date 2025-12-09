@@ -5,6 +5,24 @@
     Canceled = 3
 }
 
+public enum  ScannerType
+{
+    MRI = 1,
+    CT = 2,
+    XRay = 3,
+    Ultrasound = 4,
+    PET = 5,
+    Other = 6
+}
+
+public enum ScanPriority
+{
+    Low = 1,
+    Medium = 2,
+    High = 3,
+    Urgent = 4
+}
+
 public enum SurgeryStatus
 {
     Scheduled = 1,
