@@ -1,6 +1,6 @@
 ﻿namespace VKmfSoft_EHealth_API.Models.DTO.Patient
 {
-    public class PatientDTOCreateDTO
+    public class PatientCreateDTO
     {
     }
 }

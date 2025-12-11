@@ -5,5 +5,6 @@
         public int Id { get; set; }
         public int ScannerId { get; set; }
         public int PatientId { get; set; }
+        public DateTime StartTime { get; set; }
     }
 }

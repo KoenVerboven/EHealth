@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VKmfSoft_EHealth_API.Models.Domain.Patient;
+using VKmfSoft_EHealth_API.Repositories.Interfaces;
+
 
 namespace VKmfSoft_EHealth_API.Controllers
 {
@@ -7,39 +9,18 @@ namespace VKmfSoft_EHealth_API.Controllers
     [ApiController]
     public class PatientController : ControllerBase
     {
-        [HttpGet]
-        public IEnumerable<Patient> Get()
-        {
-            return new List<Patient>
-            {
-                new()
-                {
-                    Id = 1,
-                    LastName = "Doe",
-                    FirstName = "John",
-                    Address = "", 
-                    Gender = 'M',
-                    InsuranceNumber = "INS123456",
-                    InsuranceProvider = "HealthCare Inc.",
-                    IsMobile = true,
-                    PhoneNumber = "123-456-7890",
-                    Email = "test@test.com"
-                },
+        private readonly IPatientRepository patientRepository;
 
-                new()
-                {
-                    Id = 2,
-                    LastName = "Smith",
-                    FirstName = "Jane",
-                    Address = "", 
-                     Gender = 'V',
-                    InsuranceNumber = "INS654321",
-                    InsuranceProvider = "MediPlus",
-                    IsMobile = false,
-                    PhoneNumber = "098-765-4321",
-                    Email = "test@test.com"
-                }
-            };
+        public PatientController(IPatientRepository patientRepository)
+        {
+            this.patientRepository = patientRepository;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Patient>>> Get()
+        {
+            var patients = await patientRepository.GetAllAsync();
+            return Ok(patients);
         }
     }
 }

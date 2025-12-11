@@ -15,9 +15,37 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Patient>> GetAllAsync()
+        public async Task<IEnumerable<Patient>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return new List<Patient>
+            {
+                new()
+                {
+                    Id = 1,
+                    LastName = "Doe",
+                    FirstName = "John",
+                    Address = "",
+                    Gender = 'M',
+                    InsuranceNumber = "INS123456",
+                    InsuranceProvider = "HealthCare Inc.",
+                    IsMobile = true,
+                    PhoneNumber = "123-456-7890",
+                    Email = "test@test.com"
+                },
+                new()
+                {
+                    Id = 2,
+                    LastName = "Smith",
+                    FirstName = "Jane",
+                    Address = "",
+                     Gender = 'V',
+                    InsuranceNumber = "INS654321",
+                    InsuranceProvider = "MediPlus",
+                    IsMobile = false,
+                    PhoneNumber = "098-765-4321",
+                    Email = "test@test.com"
+                }
+            };
         }
 
         public Task<Patient?> GetByIdAsync(int id)
