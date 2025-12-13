@@ -28,8 +28,8 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
                     AppointmentDate = new DateTime(2024, 7, 15, 10, 30, 0),
                     ReasonForVisit = "Routine check-up",
                     Notes = "Patient is in good health.",
-                    Status = 0, // Scheduled
-                    DegreeOfUrgency = 1, // Normal
+                    Status = (int)AppointmentStatus.Scheduled, 
+                    DegreeOfUrgency = (int)DegreeOfUrgency.Normal, 
                     CreatedBy = 1, // Admin user ID
                     CreatedAt = DateTime.Now,
                 },
@@ -41,8 +41,8 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
                     AppointmentDate = new DateTime(2024, 7, 16, 14, 0, 0),
                     ReasonForVisit = "Follow-up on blood test results",
                     Notes = "Discussed lifestyle changes.",
-                    Status = 0, // Scheduled
-                    DegreeOfUrgency = 2, // Urgent
+                    Status = (int)AppointmentStatus.Scheduled,
+                    DegreeOfUrgency = (int)DegreeOfUrgency.Urgent, 
                     CreatedBy = 1, // Admin user ID
                     CreatedAt = DateTime.Now,
                 }

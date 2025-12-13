@@ -1,22 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace VKmfSoft_EHealth_API.Models.Domain.TimeShedule
+﻿namespace VKmfSoft_EHealth_API.Models.DTO.TimeShedule
 {
-    public class DoctorAppointment
+    public class DoctorAppointmentDTO
     {
-        [Key]
         public int Id { get; set; }
         public int PatientId { get; set; }
         public int MedicalWorkerId { get; set; }
         public DateTime AppointmentDate { get; set; }
-        [Required(ErrorMessage = "ReasonForVisit is required.")]
         public required string ReasonForVisit { get; set; }
         public string? Notes { get; set; }
-        public int Status { get; set; } // Scheduled, Completed, Canceled
+        public int Status { get; set; }
         public int DegreeOfUrgency { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }
-        public int AppointmentPlaceId { get; set; } //home visit or practice
-
+        public int AppointmentPlaceId { get; set; }
     }
 }

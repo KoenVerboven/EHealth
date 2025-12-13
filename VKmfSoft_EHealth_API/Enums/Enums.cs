@@ -1,4 +1,28 @@
-﻿public enum ScanStatus
+﻿
+public enum Gender
+{
+    Unknown = 0,
+    Male = 1,
+    Female = 2,
+    Other = 3
+}
+
+
+public enum AppointmentStatus
+{
+    Scheduled = 1,
+    Completed = 2,
+    Canceled = 3,
+    NoShow = 4
+}
+
+public enum DegreeOfUrgency{        
+    Normal = 1,
+    Urgent = 2,
+    Emergency = 3
+}
+
+public enum ScanStatus
 {
     Scheduled = 1,
     Completed = 2,
