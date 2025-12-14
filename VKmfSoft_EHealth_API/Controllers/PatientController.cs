@@ -46,7 +46,7 @@ namespace VKmfSoft_EHealth_API.Controllers
                 BloodTypeId = p.BloodTypeId,
                 PatientHealthHistory = p.PatientHealthHistory
                 });
-            return Ok(patients);
+            return Ok(patientsDTO);
         }
     }
 }

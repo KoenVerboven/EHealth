@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VKmfSoft_EHealth_API.Models.DTO.General;
+using VKmfSoft_EHealth_API.Models.DTO.TimeShedule;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
+using VKmfSoft_EHealth_API.Repositories.Repos;
 
 namespace VKmfSoft_EHealth_API.Controllers
 {
@@ -12,6 +15,33 @@ namespace VKmfSoft_EHealth_API.Controllers
         public MedicalWorkerController(IMedicalWorkerRepository medicalWorkerRepository)
         {
             this.medicalWorkerRepository = medicalWorkerRepository;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<MedicalWorkerDTO>>> Get()
+        {
+            var medicalWorkers = await medicalWorkerRepository.GetAllAsync();
+            var medicalWorkerDTO = medicalWorkers.Select(mw => new MedicalWorkerDTO
+            {
+                Id = mw.Id,
+                FirstName = mw.FirstName,
+                LastName = mw.LastName,
+                MiddleName  = mw.MiddleName,
+                DateOfBirth = mw.DateOfBirth,   
+                Address = mw.Address,
+                Gender = mw.Gender,
+                PhoneNumber = mw.PhoneNumber,
+                Email = mw.Email,
+                FirstLanguageID = mw.FirstLanguageID,
+                Photo = mw.Photo,
+                MedicalTitle = mw.MedicalTitle,
+                SpecializationId = mw.SpecializationId,
+                LicenseNumber = mw.LicenseNumber,
+                LicenseValidUntil = mw.LicenseValidUntil,
+                Hospital = mw.Hospital,
+                Department = mw.Department
+            });
+            return Ok(medicalWorkerDTO);
         }
 
     }
