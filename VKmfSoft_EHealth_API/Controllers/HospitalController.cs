@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using VKmfSoft_EHealth_API.Models.Domain.Hospital;
+using VKmfSoft_EHealth_API.Models.DTO.Hospital;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
 
 namespace VKmfSoft_EHealth_API.Controllers
@@ -13,15 +13,22 @@ namespace VKmfSoft_EHealth_API.Controllers
         public HospitalController(IHospitalRepository hospitalRepository)
         {
             this.hospitalRepository = hospitalRepository;
+
         }
 
         [HttpGet]
-        public async Task<ActionResult< IEnumerable<Hospital>>> Get()
+        public async Task<ActionResult<IEnumerable<HospitalDTO>>> Get()
         {
             var hospitals = await hospitalRepository.GetAllAsync();
-            return Ok(hospitals);
+            var hospitalsDTO = hospitals.Select(h => new HospitalDTO
+            {
+                Id = h.Id,
+                Name = h.Name,
+                Address = h.Address,
+                PhoneNumber = h.PhoneNumber,
+                Email = h.Email
+            });
+            return Ok(hospitalsDTO);
         }
-
-       
     }
 }

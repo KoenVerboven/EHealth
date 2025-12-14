@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using VKmfSoft_EHealth_API.Models.Domain.Other;
-using VKmfSoft_EHealth_API.Models.Domain.Patient;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
-using VKmfSoft_EHealth_API.Repositories.Repos;
 
 namespace VKmfSoft_EHealth_API.Controllers
 {
@@ -16,14 +13,6 @@ namespace VKmfSoft_EHealth_API.Controllers
         {
             this.medicalWorkerRepository = medicalWorkerRepository;
         }
-
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<MedicalWorker>>> Get()
-        {
-            var medicalWorkers = await medicalWorkerRepository.GetAllAsync();
-            return Ok(medicalWorkers);
-        }
-
 
     }
 }

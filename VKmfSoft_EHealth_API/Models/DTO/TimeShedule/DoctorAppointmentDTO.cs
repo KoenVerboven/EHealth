@@ -10,8 +10,6 @@
         public string? Notes { get; set; }
         public int Status { get; set; }
         public int DegreeOfUrgency { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime CreatedAt { get; set; }
         public int AppointmentPlaceId { get; set; }
     }
 }

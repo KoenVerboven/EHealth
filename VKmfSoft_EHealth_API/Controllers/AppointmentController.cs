@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
+using VKmfSoft_EHealth_API.Models.DTO.TimeShedule;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
 
 namespace VKmfSoft_EHealth_API.Controllers
@@ -16,10 +16,22 @@ namespace VKmfSoft_EHealth_API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DoctorAppointment>>> Get()
+        public async Task<ActionResult<IEnumerable<DoctorAppointmentDTO>>> Get()
         {
             var doctorAppointments = await appointmentRepository.GetAllAsync();
-            return Ok(doctorAppointments);
+            var doctorAppointmentsDTO = doctorAppointments.Select(da => new DoctorAppointmentDTO
+            {
+                Id = da.Id,
+                PatientId = da.PatientId,
+                MedicalWorkerId = da.MedicalWorkerId,
+                AppointmentDate = da.AppointmentDate,
+                ReasonForVisit = da.ReasonForVisit,
+                Notes = da.Notes,
+                Status = da.Status,
+                DegreeOfUrgency = da.DegreeOfUrgency,
+                AppointmentPlaceId = da.AppointmentPlaceId
+            });
+            return Ok(doctorAppointmentsDTO);
         }
 
     }

@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
 using VKmfSoft_EHealth_API.Repositories.Repos;
 
@@ -8,7 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-builder.Services.AddSwaggerGen();   
+builder.Services.AddSwaggerGen();
+
 
 // Dependency Injection for Repositories:
 builder.Services.AddScoped<IHospitalRepository, HospitalRepository>();
