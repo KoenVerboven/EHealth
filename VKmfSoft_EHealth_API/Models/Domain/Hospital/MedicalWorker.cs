@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using VKmfSoft_EHealth_API.Models.Domain.Hospital;
 
-namespace VKmfSoft_EHealth_API.Models.Domain.Other
+namespace VKmfSoft_EHealth_API.Models.Domain.Hospital
 {
     public class MedicalWorker : HospitalEmployee
     {
@@ -13,10 +12,6 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Other
         public required string LicenseNumber { get; set; }
        
         public DateTime LicenseValidUntil { get; set; }
-        
-        public int HospitalId { get; set; } 
-        
-        public int DepartmentId { get; set; } 
 
     }
 }

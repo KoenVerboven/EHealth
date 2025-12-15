@@ -10,5 +10,6 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Hospital
         public DateTime InServiceDate { get; set; }
         public DateTime OutServiceDate { get; set; }
         public Hospital Hospital { get; set; } = null!;
+        public decimal? Salery { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using VKmfSoft_EHealth_API.Models.Domain.Hospital;
-using VKmfSoft_EHealth_API.Models.Domain.Other;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
 
 namespace VKmfSoft_EHealth_API.Repositories.Repos

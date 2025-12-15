@@ -1,6 +1,6 @@
-﻿namespace VKmfSoft_EHealth_API.Models.DTO.General
+﻿namespace VKmfSoft_EHealth_API.Models.DTO.Hospital
 {
-    public class MedicalWorkerUpdateDTO
+    public class MedicalWorkerCreateDTO
     {
         public int Id { get; set; }
         public required string LastName { get; set; }
@@ -19,7 +19,7 @@
         public DateTime LicenseValidUntil { get; set; }
         public int HospitalId { get; set; }
         public int DepartmentId { get; set; }
-        public int UpdatedByPersonId { get; set; }  
-        public DateTime UpdateDate { get; set; }
+        public int CreatedByPersonId { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }
