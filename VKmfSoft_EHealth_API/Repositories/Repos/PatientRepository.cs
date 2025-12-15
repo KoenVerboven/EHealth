@@ -25,12 +25,13 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
                     LastName = "Doe",
                     FirstName = "John",
                     Address = "",
-                    Gender = 'M',
+                    Gender = (Byte)Gender.Male,
                     InsuranceNumber = "INS123456",
                     InsuranceProvider = "HealthCare Inc.",
                     IsMobile = true,
                     PhoneNumber = "123-456-7890",
-                    Email = "test@test.com"
+                    Email = "test@test.com",
+                    BloodTypeId = (byte)BloodType.O_Negative
                 },
                 new()
                 {
@@ -38,12 +39,13 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
                     LastName = "Smith",
                     FirstName = "Jane",
                     Address = "",
-                     Gender = 'V',
+                    Gender = (byte)Gender.Male,
                     InsuranceNumber = "INS654321",
                     InsuranceProvider = "MediPlus",
                     IsMobile = false,
                     PhoneNumber = "098-765-4321",
-                    Email = "test@test.com"
+                    Email = "test@test.com",
+                    BloodTypeId = (byte)BloodType.A_Positive
                 }
             };
         }

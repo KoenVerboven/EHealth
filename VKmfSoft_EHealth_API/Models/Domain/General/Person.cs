@@ -18,7 +18,7 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Other
         [Required(ErrorMessage = "DateOfBirth is required.")]
         public DateTime DateOfBirth { get; set; }
         [Required(ErrorMessage = "Gender is required.")]
-        public required char Gender { get; set; }
+        public required byte Gender { get; set; }
         [Required(ErrorMessage = "Address is required.")]
         public required string Address { get; set; }
         [Required(ErrorMessage = "PhoneNumber is required.")]

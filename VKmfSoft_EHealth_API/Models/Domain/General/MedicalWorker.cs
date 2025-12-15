@@ -14,9 +14,9 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Other
        
         public DateTime LicenseValidUntil { get; set; }
         
-        public int Hospital { get; set; } //hospital ID
+        public int HospitalId { get; set; } 
         
-        public int Department { get; set; } //department ID
+        public int DepartmentId { get; set; } 
 
     }
 }

@@ -10,7 +10,7 @@ namespace VKmfSoft_EHealth_API.Models.DTO.Patient
         public required string FirstName { get; set; }
         public string? MiddleName { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public required char Gender { get; set; }
+        public required byte Gender { get; set; }
         public required string Address { get; set; }
         public required string PhoneNumber { get; set; }
         public required string Email { get; set; }
@@ -23,7 +23,7 @@ namespace VKmfSoft_EHealth_API.Models.DTO.Patient
         public string? EmergencyContactName { get; set; }
         public string? EmergencyContactPhoneNumber { get; set; }
         public string? EmergencyContactDescription { get; set; }
-        public int BloodTypeId { get; set; }
+        public byte BloodTypeId { get; set; }
         public PatientHealthHistory? PatientHealthHistory { get; set; }
     }
 }

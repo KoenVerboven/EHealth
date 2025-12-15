@@ -38,8 +38,8 @@ namespace VKmfSoft_EHealth_API.Controllers
                 SpecializationId = mw.SpecializationId,
                 LicenseNumber = mw.LicenseNumber,
                 LicenseValidUntil = mw.LicenseValidUntil,
-                Hospital = mw.Hospital,
-                Department = mw.Department
+                HospitalId = mw.HospitalId,
+                DepartmentId = mw.DepartmentId
             });
             return Ok(medicalWorkerDTO);
         }

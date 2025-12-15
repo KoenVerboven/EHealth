@@ -1,12 +1,11 @@
 ﻿
-public enum Gender
+public enum Gender : byte
 {
     Unknown = 0,
     Male = 1,
     Female = 2,
     Other = 3
 }
-
 
 public enum AppointmentStatus
 {
@@ -16,7 +15,8 @@ public enum AppointmentStatus
     NoShow = 4
 }
 
-public enum DegreeOfUrgency{        
+public enum DegreeOfUrgency
+{        
     Normal = 1,
     Urgent = 2,
     Emergency = 3
@@ -70,7 +70,7 @@ public enum AllergyType
     Other = 5
 }
 
-public enum BloodType
+public enum BloodType: byte
 {
     A_Positive = 1,
     A_Negative = 2,
@@ -172,7 +172,8 @@ public enum Language
     Other = 12
 }
 
-public enum HospitalRoomType{
+public enum HospitalRoomType
+{
     Regular = 1,
     IntensiveCare = 2
 }

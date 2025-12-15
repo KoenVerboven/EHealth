@@ -29,12 +29,16 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
                     Address = "123 Main St, Anytown, USA",
                     PhoneNumber = "123-456-7890",
                     Email = "",
-                    Gender = 'M',
+                    Gender = (byte)Gender.Male,
+                    FirstLanguageID = (int)Language.English,
                     MedicalTitle = 1, // Doctor,
                     SpecializationId = 0, // Therapist,
                     LicenseNumber = "MED123456",
                     LicenseValidUntil = new DateTime(2025, 12, 31),
-                    Hospital = 1, //hospital ID
+                    HospitalId = 1, 
+                            
+                                
+
                 },
                 new()
                 {
@@ -45,12 +49,12 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
                     Address = "456 Oak St, Sometown, USA",
                     PhoneNumber = "987-654-3210",
                     Email = "",
-                     Gender = 'M',
-                    MedicalTitle = 2, // Specialist,
+                    Gender = (byte)Gender.Male,
+                    MedicalTitle = 1, // Specialist,
                     SpecializationId = 3, // Cardiologist,
                     LicenseNumber = "MED654321",
                     LicenseValidUntil = new DateTime(2024, 6, 30),
-                    Hospital = 2, //hospital ID
+                    HospitalId = 2, 
                 },
                 new()
                 {
@@ -61,12 +65,12 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
                     Address = "789 Pine St, Othertown, USA",
                     PhoneNumber = "555-123-4567",
                     Email = "",
-                     Gender = 'V',
+                    Gender = (byte)Gender.Female,
                     MedicalTitle = 0, // Nurse,
                     SpecializationId = 2, // Pediatrician,
                     LicenseNumber = "MED789012",
                     LicenseValidUntil = new DateTime(2026, 11, 30),
-                    Hospital = 1, //hospital ID
+                    HospitalId = 1, 
                 }
             };
         }
