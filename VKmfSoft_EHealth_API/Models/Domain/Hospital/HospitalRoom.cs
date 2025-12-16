@@ -5,7 +5,7 @@
         public int Id { get; set; }
         public int ChamerNumber { get; set; }
         public  bool IsOnePersonRoom { get; set; }
-        public  int  CountOfBedsInRoom { get; set; }
-        public int RoomType { get; set; }// reqular; intensive care 
+        public  byte  CountOfBedsInRoom { get; set; }
+        public byte RoomType { get; set; } 
     }
 }

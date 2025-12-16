@@ -12,7 +12,7 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Patient
         public string? EmergencyContactPhoneNumber { get; set; }
         public string? EmergencyContactDescription { get; set; }
         public byte BloodTypeId { get; set; }
-        public PatientHealthHistory? PatientHealthHistory { get; set; }
+        public PatientHealthHistory? PatientHealthHistory { get; set; } // todo fill in with data n
        
     }
 }

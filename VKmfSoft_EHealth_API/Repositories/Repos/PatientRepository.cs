@@ -31,7 +31,71 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
                     IsMobile = true,
                     PhoneNumber = "123-456-7890",
                     Email = "test@test.com",
-                    BloodTypeId = (byte)BloodType.O_Negative
+                    BloodTypeId = (byte)BloodType.O_Negative,
+                    PatientHealthHistory = new PatientHealthHistory()
+                    {
+                        Id = 1,
+                        PatientId = 1,
+                        Scans = new List<PatientScan>(),
+                        Surgeries = new List<PatientSurgery>(),
+                        Vaccinations = new List<PatientVaccination>()
+                        {
+                            new PatientVaccination()
+                            {
+                                Id=1,
+                                PatientMedicalHistoryId=1,
+                                VaccineId=1,
+                                VaccineName="COVID-19",
+                                VaccinationDate= DateTime.Now,
+                                AdministeringMedicalWorkerId=1,
+                                Notes= null,
+                                StatusId=1
+                            },
+                            new PatientVaccination()
+                            {
+                                Id=2,
+                                PatientMedicalHistoryId=1,
+                                VaccineId=2,
+                                VaccineName="Influenza",
+                                VaccinationDate= DateTime.Now,
+                                AdministeringMedicalWorkerId=1,
+                                Notes= null,
+                                StatusId=1
+                            }
+                        },
+                        VitalSigns = new List<PatientVitalSigns>(),
+                        Medications = new List<PatientMedicationHistory>()
+                        {
+                            new PatientMedicationHistory()
+                            {
+                                Id=1,
+                                PatientMedicalHistoryId=1,
+                                MedicationId=1,
+                                MedicationName="Paracetamol",
+                                Dosage="10gram",
+                                Frequency="3Xday",
+                                StartDate= DateTime.Now,
+                                EndDate= null,
+                                PrescribingDoctorId=1,
+                                Notes= null
+
+                            },
+                            new PatientMedicationHistory()
+                            {
+                                Id=2,
+                                PatientMedicalHistoryId=1,
+                                MedicationId=2,
+                                MedicationName="Ibuprofen",
+                                Dosage="5gram",
+                                Frequency="2Xday",
+                                StartDate= DateTime.Now,
+                                EndDate= null,
+                                PrescribingDoctorId=1,
+                                Notes= null
+                            }
+                        }
+                    }
+
                 },
                 new()
                 {

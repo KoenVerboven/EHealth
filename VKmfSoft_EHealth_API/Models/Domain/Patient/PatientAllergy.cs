@@ -13,7 +13,7 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Patient
         
         [Required(ErrorMessage = "Severity is required.")]
        
-        public required int  SeverityId { get; set; } 
+        public required byte  SeverityId { get; set; } 
        
         public string? Reaction { get; set; }
        
@@ -21,7 +21,7 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Patient
        
         public string? Notes { get; set; }
        
-        public int StatusId { get; set; }
+        public byte StatusId { get; set; }
 
     }
 }

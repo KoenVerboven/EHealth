@@ -8,6 +8,7 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Patient
         public int Id { get; set; }
         public int PatientMedicalHistoryId { get; set; }//FK to PatientMedicalHistory
         public int MedicationId { get; set; }
+        public  string MedicationName { get; set; }
         public string? Dosage { get; set; }
         public string? Frequency { get; set; }
         public DateTime StartDate { get; set; }
