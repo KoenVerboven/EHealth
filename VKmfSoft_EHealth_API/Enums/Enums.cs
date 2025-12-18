@@ -172,8 +172,3 @@ public enum Language
     Other = 12
 }
 
-public enum HospitalRoomType
-{
-    Regular = 1,
-    IntensiveCare = 2
-}

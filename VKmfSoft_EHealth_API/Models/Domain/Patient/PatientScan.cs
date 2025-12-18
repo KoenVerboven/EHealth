@@ -11,7 +11,7 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Patient
         public DateTime ScanDate { get; set; }
         public int PerformingMedicalWorkerId { get; set; }
         public string? Notes { get; set; }
-        public int StatusId { get; set; } // e.g., Completed, Scheduled, Canceled
+        public byte StatusId { get; set; } 
         public DateTime CreatedAt { get; set; }
         public int CreatedBy { get; set; }
         public DateTime UpdatedAt { get; set; }

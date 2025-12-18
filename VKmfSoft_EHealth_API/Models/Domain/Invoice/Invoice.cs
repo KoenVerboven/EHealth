@@ -11,5 +11,6 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Invoice
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
         public Decimal TotalAmount { get; set; }
+        public required ICollection<InvoiceDetailLine> invoiceDetailLines { get; set; }
     }
 }

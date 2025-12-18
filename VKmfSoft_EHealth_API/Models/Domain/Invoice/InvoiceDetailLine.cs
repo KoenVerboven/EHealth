@@ -5,6 +5,7 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Invoice
 {
     public class InvoiceDetailLine
     {
+        [Key]
         public int Id { get; set; }
         public int InvoiceId { get; set; }
         public string Description { get; set; } = string.Empty;
