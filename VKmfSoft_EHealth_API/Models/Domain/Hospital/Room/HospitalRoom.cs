@@ -2,7 +2,7 @@
 
 namespace VKmfSoft_EHealth_API.Models.Domain.Hospital.Room
 {
-    public class HospitalRoom
+    public abstract class HospitalRoom
     {
         [Key]
         public int Id { get; set; }
