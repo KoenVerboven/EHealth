@@ -10,6 +10,6 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Hospital
         public required string Address { get; set; }
         public required string PhoneNumber { get; set; }
         public required string Email { get; set; }
-        public ICollection<HospitalDepartment> hosptialDepartments { get; set; }
+        public ICollection<HospitalDepartment>? hosptialDepartments { get; set; }
     }
 }

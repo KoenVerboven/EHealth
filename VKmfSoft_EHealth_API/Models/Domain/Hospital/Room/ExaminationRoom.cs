@@ -2,5 +2,8 @@
 {
     public class ExaminationRoom : HospitalRoom
     {
+        public bool Laptop { get; set; }
+        public int InUseByDoctorId { get; set; }
+
     }
 }

@@ -9,5 +9,6 @@ namespace VKmfSoft_EHealth_API.Models.Domain.TimeShedule
         public int ScannerId { get; set; }
         public int PatientId { get; set; }
         public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
     }
 }

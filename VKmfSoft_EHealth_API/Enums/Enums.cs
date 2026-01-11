@@ -36,7 +36,8 @@ public enum  ScannerType
     XRay = 3,
     Ultrasound = 4,
     PET = 5,
-    Other = 6
+    ultrasoundDoppler = 6,
+    Other = 7
 }
 
 public enum ScanPriority

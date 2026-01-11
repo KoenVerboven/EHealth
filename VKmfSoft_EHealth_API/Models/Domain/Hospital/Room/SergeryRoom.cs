@@ -2,5 +2,7 @@
 {
     public class SergeryRoom : HospitalRoom
     {
+        public byte SergeryRoomClasse { get; set; }
+        public bool ReadyToUse { get; set; }
     }
 }
