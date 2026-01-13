@@ -1,10 +1,19 @@
-﻿using VKmfSoft_EHealth_API.Models.Domain.Hospital;
+﻿using Microsoft.EntityFrameworkCore;
+using VKmfSoft_EHealth_API.Data;
+using VKmfSoft_EHealth_API.Models.Domain.Hospital;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
 
 namespace VKmfSoft_EHealth_API.Repositories.Repos
 {
     public class HospitalRepository : IHospitalRepository
     {
+        private readonly AppDbContext _context;
+
+        public HospitalRepository(AppDbContext context)
+        {
+            _context = context;
+        }
+
         public Task<Hospital> CreateAsync(Hospital hospital)
         {
             throw new NotImplementedException();
@@ -17,23 +26,7 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
 
         public async Task<IEnumerable<Hospital>> GetAllAsync()
         {
-            return new List<Hospital>
-            {
-               new()
-               {
-                    Id = 1,
-                    Name = "City Hospital",
-                    Address = "123 Main St, Anytown",
-                    PhoneNumber = "555-1234",
-                    Email = "test@gmail.com" },
-                new()
-                {
-                    Id = 2,
-                    Name = "County General",
-                    Address = "456 Oak Ave, Sometown",
-                    PhoneNumber = "555-5678",
-                    Email = "test@gmail.com" }
-            };
+            return await _context.Hospitals.ToListAsync();
         }
 
         public Task<Hospital?> GetByIdAsync(int id)

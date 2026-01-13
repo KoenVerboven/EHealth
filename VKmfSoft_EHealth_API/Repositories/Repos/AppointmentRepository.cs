@@ -1,4 +1,6 @@
-﻿using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
+﻿using Microsoft.EntityFrameworkCore;
+using VKmfSoft_EHealth_API.Data;
+using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
 
 namespace VKmfSoft_EHealth_API.Repositories.Repos
@@ -6,6 +8,13 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
     public class AppointmentRepository : IAppointmentRepository
 
     {
+        private readonly AppDbContext _context;
+
+        public AppointmentRepository(AppDbContext context)
+        {
+           _context = context;
+        }
+
         public Task<DoctorAppointment> CreateAsync(DoctorAppointment appointment)
         {
             throw new NotImplementedException();
@@ -18,35 +27,7 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
 
         public async Task<IEnumerable<DoctorAppointment>> GetAllAsync()
         {
-            return  new List<DoctorAppointment>
-            {
-                new()
-                {
-                    Id = 1,
-                    PatientId = 1,
-                    MedicalWorkerId = 2,
-                    AppointmentDate = new DateTime(2024, 7, 15, 10, 30, 0),
-                    ReasonForVisit = "Routine check-up",
-                    Notes = "Patient is in good health.",
-                    Status = (int)AppointmentStatus.Scheduled, 
-                    DegreeOfUrgency = (int)DegreeOfUrgency.Normal, 
-                    CreatedBy = 1, // Admin user ID
-                    CreatedAt = DateTime.Now,
-                },
-                new()
-                {
-                    Id = 2,
-                    PatientId = 2,
-                    MedicalWorkerId = 1,
-                    AppointmentDate = new DateTime(2024, 7, 16, 14, 0, 0),
-                    ReasonForVisit = "Follow-up on blood test results",
-                    Notes = "Discussed lifestyle changes.",
-                    Status = (int)AppointmentStatus.Scheduled,
-                    DegreeOfUrgency = (int)DegreeOfUrgency.Urgent, 
-                    CreatedBy = 1, // Admin user ID
-                    CreatedAt = DateTime.Now,
-                }
-            };
+            return await _context.DoctorAppointments.ToListAsync();
         }
 
         public Task<DoctorAppointment?> GetByIdAsync(int id)
