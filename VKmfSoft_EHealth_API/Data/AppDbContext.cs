@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using VKmfSoft_EHealth_API.Models.Domain.Hospital;
+using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hardware;
+using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
+using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel;
 using VKmfSoft_EHealth_API.Models.Domain.Patient;
 using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
 

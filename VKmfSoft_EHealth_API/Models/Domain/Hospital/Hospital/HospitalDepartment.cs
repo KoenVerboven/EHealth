@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hardware;
 
-namespace VKmfSoft_EHealth_API.Models.Domain.Hospital
+namespace VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital
 {
     public class HospitalDepartment
     {

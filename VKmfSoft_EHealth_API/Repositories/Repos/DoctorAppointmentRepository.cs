@@ -5,12 +5,12 @@ using VKmfSoft_EHealth_API.Repositories.Interfaces;
 
 namespace VKmfSoft_EHealth_API.Repositories.Repos
 {
-    public class AppointmentRepository : IAppointmentRepository
+    public class DoctorAppointmentRepository : IDoctorAppointmentRepository
 
     {
         private readonly AppDbContext _context;
 
-        public AppointmentRepository(AppDbContext context)
+        public DoctorAppointmentRepository(AppDbContext context)
         {
            _context = context;
         }

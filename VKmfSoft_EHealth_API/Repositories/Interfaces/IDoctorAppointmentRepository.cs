@@ -2,7 +2,7 @@
 
 namespace VKmfSoft_EHealth_API.Repositories.Interfaces
 {
-    public interface IAppointmentRepository
+    public interface IDoctorAppointmentRepository
     {
         Task<IEnumerable<DoctorAppointment>> GetAllAsync();
         Task<DoctorAppointment?> GetByIdAsync(int id);

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace VKmfSoft_EHealth_API.Models.Domain.Hospital
+namespace VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel
 {
     public class MedicalWorker : HospitalEmployee
     {

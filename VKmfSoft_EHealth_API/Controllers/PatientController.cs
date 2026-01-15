@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
 using VKmfSoft_EHealth_API.Models.Domain.Patient;
 using VKmfSoft_EHealth_API.Models.DTO.Patient;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
-using VKmfSoft_EHealth_API.Repositories.Repos;
-
 
 namespace VKmfSoft_EHealth_API.Controllers
 {
@@ -95,6 +94,90 @@ namespace VKmfSoft_EHealth_API.Controllers
             };
 
             return Ok(patientsDTO);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<Hospital>> AddPatient(PatientCreateDTO patientCreateDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+
+            var patient = new Patient
+            {
+                Id = patientCreateDTO.Id,
+                FirstName = patientCreateDTO.FirstName,
+                LastName = patientCreateDTO.LastName,
+                DateOfBirth = patientCreateDTO.DateOfBirth,
+                Address = patientCreateDTO.Address,
+                Gender = patientCreateDTO.Gender,
+                PhoneNumber = patientCreateDTO.PhoneNumber,
+                Email = patientCreateDTO.Email,
+                InsuranceNumber = patientCreateDTO.InsuranceNumber,
+                InsuranceProvider = patientCreateDTO.InsuranceProvider,
+                IsMobile = patientCreateDTO.IsMobile,
+                MiddleName = patientCreateDTO.MiddleName,
+                FirstLanguageID = patientCreateDTO.FirstLanguageID,
+                Photo = patientCreateDTO.Photo,
+                InsuranceExpiryDate = patientCreateDTO.InsuranceExpiryDate,
+                EmergencyContactName = patientCreateDTO.EmergencyContactName,
+                EmergencyContactPhoneNumber = patientCreateDTO.EmergencyContactPhoneNumber,
+                EmergencyContactDescription = patientCreateDTO.EmergencyContactDescription,
+                BloodTypeId = patientCreateDTO.BloodTypeId,
+                PatientHealthHistory = patientCreateDTO.PatientHealthHistory
+            };
+
+            await _patientRepository.AddAsync(patient);
+            return CreatedAtAction(nameof(GetPatientById), new { id = patient.Id }, patient);
+        }
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> UpdatePatient(int id, PatientUpdateDTO patientUpdateDTO)
+        {
+            if (id != patientUpdateDTO.Id)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var patient = new Patient
+            {
+                Id = patientUpdateDTO.Id,
+                FirstName = patientUpdateDTO.FirstName,
+                LastName = patientUpdateDTO.LastName,
+                DateOfBirth = patientUpdateDTO.DateOfBirth,
+                Address = patientUpdateDTO.Address,
+                Gender = patientUpdateDTO.Gender,
+                PhoneNumber = patientUpdateDTO.PhoneNumber,
+                Email = patientUpdateDTO.Email,
+                InsuranceNumber = patientUpdateDTO.InsuranceNumber,
+                InsuranceProvider = patientUpdateDTO.InsuranceProvider,
+                IsMobile = patientUpdateDTO.IsMobile,
+                MiddleName = patientUpdateDTO.MiddleName,
+                FirstLanguageID = patientUpdateDTO.FirstLanguageID,
+                Photo = patientUpdateDTO.Photo,
+                InsuranceExpiryDate = patientUpdateDTO.InsuranceExpiryDate,
+                EmergencyContactName = patientUpdateDTO.EmergencyContactName,
+                EmergencyContactPhoneNumber = patientUpdateDTO.EmergencyContactPhoneNumber,
+                EmergencyContactDescription = patientUpdateDTO.EmergencyContactDescription,
+                BloodTypeId = patientUpdateDTO.BloodTypeId,
+                PatientHealthHistory = patientUpdateDTO.PatientHealthHistory
+            };
+
+            await _patientRepository.UpdateAsync(patient);
+            return CreatedAtAction(nameof(GetPatientById), new { id = patient.Id }, patient);
         }
 
     }

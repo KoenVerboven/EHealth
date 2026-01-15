@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VKmfSoft_EHealth_API.Data;
-using VKmfSoft_EHealth_API.Models.Domain.Hospital;
+using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
 
 namespace VKmfSoft_EHealth_API.Repositories.Repos
@@ -14,14 +14,17 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             _context = context;
         }
 
-        public Task<HospitalDepartment> AddAsync(HospitalDepartment hospitalDepartment)
+        public async Task AddAsync(HospitalDepartment hospitalDepartment)
         {
-            throw new NotImplementedException();
+            await _context.HospitalDepartments.AddAsync(hospitalDepartment);
+            await _context.SaveChangesAsync(); ;
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var hospitalDepartmentFind = await _context.HospitalDepartments.FindAsync(id) ?? throw new KeyNotFoundException($"HospitalDepartment with id {id} was not found.");
+            _context.HospitalDepartments.Remove(hospitalDepartmentFind);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<HospitalDepartment>> GetAllAsync()
@@ -29,14 +32,15 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             return await _context.HospitalDepartments.ToListAsync();
         }
 
-        public Task<HospitalDepartment?> GetByIdAsync(int id)
+        public async Task<HospitalDepartment?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.HospitalDepartments.FindAsync(id);
         }
 
-        public Task<HospitalDepartment?> UpdateAsync(HospitalDepartment hospitalDepartment)
+        public async Task UpdateAsync(HospitalDepartment hospitalDepartment)
         {
-            throw new NotImplementedException();
+            _context.HospitalDepartments.Update(hospitalDepartment);
+            await _context.SaveChangesAsync();
         }
     }
 }

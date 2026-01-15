@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VKmfSoft_EHealth_API.Data;
-using VKmfSoft_EHealth_API.Models.Domain.Hospital;
+using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
+using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
 
 namespace VKmfSoft_EHealth_API.Repositories.Repos

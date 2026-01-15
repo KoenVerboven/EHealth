@@ -1,4 +1,4 @@
-﻿using VKmfSoft_EHealth_API.Models.Domain.Hospital;
+﻿using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
 using VKmfSoft_EHealth_API.Models.DTO.Hospital;
 
 namespace VKmfSoft_EHealth_API.Repositories.Interfaces
@@ -9,6 +9,6 @@ namespace VKmfSoft_EHealth_API.Repositories.Interfaces
         Task<Hospital?> GetByIdAsync(int id);
         Task AddAsync(Hospital hospital);
         Task UpdateAsync(Hospital hospital);
-        Task<bool> DeleteAsync(int id);
+        Task DeleteAsync(int id);
     }
 }

@@ -23,7 +23,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IHospitalRepository, HospitalRepository>();
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
 builder.Services.AddScoped<IMedicalWorkerRepository, MedicalWorkerRepository>();
-builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+builder.Services.AddScoped<IDoctorAppointmentRepository, DoctorAppointmentRepository>();
 
 var app = builder.Build();
 

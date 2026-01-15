@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using VKmfSoft_EHealth_API.Models.Domain.Hospital;
+using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
+using VKmfSoft_EHealth_API.Models.Domain.Patient;
 using VKmfSoft_EHealth_API.Models.DTO.Hospital;
+using VKmfSoft_EHealth_API.Models.DTO.Patient;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
+using VKmfSoft_EHealth_API.Repositories.Repos;
 
 namespace VKmfSoft_EHealth_API.Controllers
 {
@@ -36,13 +39,14 @@ namespace VKmfSoft_EHealth_API.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<Hospital>> AddClass(HospitalCreateDTO hospitalCreateDTO)
+        public async Task<ActionResult<Hospital>> AddHospital(HospitalCreateDTO hospitalCreateDTO)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            Hospital hospital = new Hospital
+            
+            var hospital = new Hospital
             {
                 Name = hospitalCreateDTO.Name,
                 Address = hospitalCreateDTO.Address,
@@ -51,7 +55,7 @@ namespace VKmfSoft_EHealth_API.Controllers
             };
 
             await _hospitalRepository.AddAsync(hospital);
-            return CreatedAtAction(nameof(GetClassById), new { id = hospital.Id }, hospital);
+            return CreatedAtAction(nameof(GetHospitalById), new { id = hospital.Id }, hospital);
         }
 
 
@@ -60,7 +64,7 @@ namespace VKmfSoft_EHealth_API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<HospitalDTO>> GetClassById(int id)
+        public async Task<ActionResult<HospitalDTO>> GetHospitalById(int id)
         {
             if (id == 0)
             {
@@ -83,6 +87,35 @@ namespace VKmfSoft_EHealth_API.Controllers
             };
 
             return Ok(hospitalsDTO);
+        }
+
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> UpdateHospital(int id, HospitalUpdateDTO hospitalUpdateDTO)
+        {
+            if (id != hospitalUpdateDTO.Id)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var hospital = new Hospital
+            {
+                Name = hospitalUpdateDTO.Name,
+                Address = hospitalUpdateDTO.Address,
+                PhoneNumber = hospitalUpdateDTO.PhoneNumber,
+                Email = hospitalUpdateDTO.Email
+            };
+
+            await _hospitalRepository.UpdateAsync(hospital);
+            return CreatedAtAction(nameof(GetHospitalById), new { id = hospital.Id }, hospital);
         }
 
 

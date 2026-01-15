@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VKmfSoft_EHealth_API.Data;
-using VKmfSoft_EHealth_API.Models.Domain.Hospital;
+using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
 
 namespace VKmfSoft_EHealth_API.Repositories.Repos
@@ -20,9 +20,11 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             await _context.SaveChangesAsync();
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var hospitalFind = await _context.Hospitals.FindAsync(id) ?? throw new KeyNotFoundException($"Hospital with id {id} was not found.");
+            _context.Hospitals.Remove(hospitalFind);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Hospital>> GetAllAsync()

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using VKmfSoft_EHealth_API.Models.Domain.Hospital;
+using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
 using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
 using VKmfSoft_EHealth_API.Models.DTO.TimeShedule;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
@@ -10,9 +10,9 @@ namespace VKmfSoft_EHealth_API.Controllers
     [ApiController]
     public class DoctorAppointmentController : ControllerBase
     {
-        private readonly IAppointmentRepository _appointmentRepository;
+        private readonly IDoctorAppointmentRepository _appointmentRepository;
 
-        public DoctorAppointmentController(IAppointmentRepository appointmentRepository)
+        public DoctorAppointmentController(IDoctorAppointmentRepository appointmentRepository)
         {
             _appointmentRepository = appointmentRepository;
         }
@@ -107,6 +107,39 @@ namespace VKmfSoft_EHealth_API.Controllers
         {
             await _appointmentRepository.DeleteAsync(id);
             return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> UpdateDoctorAppointment(int id, DoctorAppointmentUpdateDTO doctorAppointmentUpdateDTO)
+        {
+            if (id != doctorAppointmentUpdateDTO.Id)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var doctorAppointment = new DoctorAppointment
+            {
+                Id = doctorAppointmentUpdateDTO.Id,
+                PatientId = doctorAppointmentUpdateDTO.PatientId,
+                MedicalWorkerId = doctorAppointmentUpdateDTO.MedicalWorkerId,
+                AppointmentDate = doctorAppointmentUpdateDTO.AppointmentDate,
+                ReasonForVisit = doctorAppointmentUpdateDTO.ReasonForVisit,
+                Notes = doctorAppointmentUpdateDTO.Notes,
+                Status = doctorAppointmentUpdateDTO.Status,
+                DegreeOfUrgency = doctorAppointmentUpdateDTO.DegreeOfUrgency,
+                AppointmentPlaceId = doctorAppointmentUpdateDTO.AppointmentPlaceId
+            };
+
+            await _appointmentRepository.UpdateAsync(doctorAppointment);
+            return CreatedAtAction(nameof(GetAppointmentById), new { id = doctorAppointment.Id }, doctorAppointment);
         }
 
     }

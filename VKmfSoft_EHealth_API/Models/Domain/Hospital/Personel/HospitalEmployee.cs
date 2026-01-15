@@ -1,6 +1,7 @@
-﻿using VKmfSoft_EHealth_API.Models.Domain.Other;
+﻿using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
+using VKmfSoft_EHealth_API.Models.Domain.Other;
 
-namespace VKmfSoft_EHealth_API.Models.Domain.Hospital
+namespace VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel
 {
     public class HospitalEmployee : Person
     {
