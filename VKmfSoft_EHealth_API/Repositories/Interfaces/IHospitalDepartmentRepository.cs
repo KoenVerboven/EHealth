@@ -6,7 +6,7 @@ namespace VKmfSoft_EHealth_API.Repositories.Interfaces
     {
         Task<IEnumerable<HospitalDepartment>> GetAllAsync();
         Task<HospitalDepartment?> GetByIdAsync(int id);
-        Task<HospitalDepartment> CreateAsync(HospitalDepartment hospitalDepartment);
+        Task<HospitalDepartment> AddAsync(HospitalDepartment hospitalDepartment);
         Task<HospitalDepartment?> UpdateAsync(HospitalDepartment hospitalDepartment);
         Task<bool> DeleteAsync(int id);
     }

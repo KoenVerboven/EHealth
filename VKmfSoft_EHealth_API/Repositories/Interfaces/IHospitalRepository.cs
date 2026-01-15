@@ -1,4 +1,5 @@
 ﻿using VKmfSoft_EHealth_API.Models.Domain.Hospital;
+using VKmfSoft_EHealth_API.Models.DTO.Hospital;
 
 namespace VKmfSoft_EHealth_API.Repositories.Interfaces
 {
@@ -6,8 +7,8 @@ namespace VKmfSoft_EHealth_API.Repositories.Interfaces
     {
         Task<IEnumerable<Hospital>> GetAllAsync();
         Task<Hospital?> GetByIdAsync(int id);
-        Task<Hospital> CreateAsync(Hospital hospital);
-        Task<Hospital?> UpdateAsync(Hospital hospital);
+        Task AddAsync(Hospital hospital);
+        Task UpdateAsync(Hospital hospital);
         Task<bool> DeleteAsync(int id);
     }
 }

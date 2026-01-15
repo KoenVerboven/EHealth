@@ -15,9 +15,10 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
         }
 
 
-        public Task<Patient> CreateAsync(Patient patient)
+        public async Task AddAsync(Patient patient)
         {
-            throw new NotImplementedException();
+            await _context.Patients.AddAsync(patient);
+            await _context.SaveChangesAsync();
         }
 
         public Task<bool> DeleteAsync(int id)
@@ -30,14 +31,15 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             return await _context.Patients.ToListAsync();
         }
 
-        public Task<Patient?> GetByIdAsync(int id)
+        public async Task<Patient?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Patients.FindAsync(id);
         }
 
-        public Task<Patient?> UpdateAsync(Patient patient)
+        public async Task UpdateAsync(Patient patient)
         {
-            throw new NotImplementedException();
+            _context.Patients.Update(patient);
+            await _context.SaveChangesAsync();
         }
     }
 }

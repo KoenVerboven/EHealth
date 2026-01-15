@@ -14,7 +14,7 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             _context = context;
         }
 
-        public Task<Hospital> CreateAsync(MedicalWorker medicalWorker)
+        public Task<Hospital> AddAsync(MedicalWorker medicalWorker)
         {
             throw new NotImplementedException();
         }

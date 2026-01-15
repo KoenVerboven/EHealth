@@ -14,7 +14,7 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             _context = context;
         }
 
-        public Task<HospitalDepartment> CreateAsync(HospitalDepartment hospitalDepartment)
+        public Task<HospitalDepartment> AddAsync(HospitalDepartment hospitalDepartment)
         {
             throw new NotImplementedException();
         }

@@ -15,14 +15,17 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
            _context = context;
         }
 
-        public Task<DoctorAppointment> CreateAsync(DoctorAppointment appointment)
+        public async Task AddAsync(DoctorAppointment appointment)
         {
-            throw new NotImplementedException();
+            await _context.DoctorAppointments.AddAsync(appointment);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var classInDb = await _context.DoctorAppointments.FindAsync(id) ?? throw new KeyNotFoundException($"DoctorAppointment with id {id} was not found.");
+            _context.DoctorAppointments.Remove(classInDb);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<DoctorAppointment>> GetAllAsync()
@@ -30,14 +33,15 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             return await _context.DoctorAppointments.ToListAsync();
         }
 
-        public Task<DoctorAppointment?> GetByIdAsync(int id)
+        public async Task<DoctorAppointment?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.DoctorAppointments.FindAsync(id);
         }
 
-        public Task<DoctorAppointment?> UpdateAsync(DoctorAppointment appointment)
+        public  async Task UpdateAsync(DoctorAppointment appointment)
         {
-            throw new NotImplementedException();
+            _context.DoctorAppointments.Update(appointment);
+            await _context.SaveChangesAsync();
         }
     }
 }

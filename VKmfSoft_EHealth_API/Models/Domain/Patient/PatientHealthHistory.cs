@@ -7,7 +7,7 @@
         public List<PatientScan> Scans { get; set; } = [];
         public List<PatientSurgery> Surgeries { get; set; } = [];
         public List<PatientVaccination> Vaccinations { get; set; } = [];
-        public List<PatientVitalSigns> VitalSigns { get; set; } = [];
+        //public List<PatientVitalSigns> VitalSigns { get; set; } = [];
         public List<PatientMedicationHistory> Medications { get; set; } = [];  
             
     }
