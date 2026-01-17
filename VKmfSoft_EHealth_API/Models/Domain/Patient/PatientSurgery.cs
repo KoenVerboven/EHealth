@@ -22,7 +22,7 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Patient
 
         #region Info about Medcalworkers present during surgery
         public int ChiefOfSurgeryId { get; set; }
-        public  List<MedicalWorker> MediacalWorkers { get; set; }
+        public  List<Doctor> MediacalWorkers { get; set; }
         #endregion
 
         #region Info where surgery was performed

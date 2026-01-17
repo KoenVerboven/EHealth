@@ -2,6 +2,7 @@
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hardware;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel;
+using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personnel;
 using VKmfSoft_EHealth_API.Models.Domain.Patient;
 using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
 
@@ -13,7 +14,8 @@ namespace VKmfSoft_EHealth_API.Data
         public DbSet<HospitalDepartment> HospitalDepartments { get; set; }
         public DbSet<HospitalBed> HospitalBeds { get; set; }
         public DbSet<Patient> Patients { get; set; }
-        public DbSet<MedicalWorker> MedicalWorkers { get; set; }
+        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Nurse> Nurses { get; set; }
         public DbSet<DoctorAppointment> DoctorAppointments { get; set; }
 
 

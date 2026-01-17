@@ -1,6 +1,6 @@
 ﻿namespace VKmfSoft_EHealth_API.Models.DTO.Hospital
 {
-    public class MedicalWorkerUpdateDTO
+    public class DoctorUpdateDTO
     {
         public int Id { get; set; }
         public required string LastName { get; set; }

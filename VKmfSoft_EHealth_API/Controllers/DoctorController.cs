@@ -8,20 +8,20 @@ namespace VKmfSoft_EHealth_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MedicalWorkerController : ControllerBase
+    public class DoctorController : ControllerBase
     {
-        private readonly IMedicalWorkerRepository medicalWorkerRepository;
+        private readonly IDoctorRepository medicalWorkerRepository;
 
-        public MedicalWorkerController(IMedicalWorkerRepository medicalWorkerRepository)
+        public DoctorController(IDoctorRepository medicalWorkerRepository)
         {
             this.medicalWorkerRepository = medicalWorkerRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MedicalWorkerDTO>>> Get()
+        public async Task<ActionResult<IEnumerable<DoctorDTO>>> Get()
         {
             var medicalWorkers = await medicalWorkerRepository.GetAllAsync();
-            var medicalWorkerDTO = medicalWorkers.Select(mw => new MedicalWorkerDTO
+            var medicalWorkerDTO = medicalWorkers.Select(mw => new DoctorDTO
             {
                 Id = mw.Id,
                 FirstName = mw.FirstName,

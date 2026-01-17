@@ -6,16 +6,16 @@ using VKmfSoft_EHealth_API.Repositories.Interfaces;
 
 namespace VKmfSoft_EHealth_API.Repositories.Repos
 {
-    public class MedicalWorkerRepository : IMedicalWorkerRepository
+    public class DoctorRepository : IDoctorRepository
     {
         private readonly AppDbContext _context;
 
-        public MedicalWorkerRepository(AppDbContext context)
+        public DoctorRepository(AppDbContext context)
         {
             _context = context;
         }
 
-        public Task<Hospital> AddAsync(MedicalWorker medicalWorker)
+        public Task<Hospital> AddAsync(Doctor medicalWorker)
         {
             throw new NotImplementedException();
         }
@@ -25,17 +25,17 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<MedicalWorker>> GetAllAsync()
+        public async Task<IEnumerable<Doctor>> GetAllAsync()
         {
-            return await _context.MedicalWorkers.ToListAsync();
+            return await _context.Doctors.ToListAsync();
         }
 
         public Task<Hospital?> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
-
-        public Task<Hospital?> UpdateAsync(MedicalWorker medicalWorker)
+        
+        public Task<Hospital?> UpdateAsync(Doctor medicalWorker)
         {
             throw new NotImplementedException();
         }

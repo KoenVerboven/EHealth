@@ -2,9 +2,9 @@
 
 namespace VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel
 {
-    public class MedicalWorker : HospitalEmployee
+    public class Doctor : HospitalEmployee
     {
-        public int MedicalTitle { get; set; } //0: nurse, 1: doctor, 2: specialist, 3: professor
+        public int MedicalTitle { get; set; } // 1: doctor, 2: specialist, 3: professor
        
         public int SpecializationId { get; set; } //0: therapist, 1: surgeon, 2: pediatrician, 3: cardiologist, 4: dentist, 5: neurologist, 6: psychiatrist, 7: gynecologist
        

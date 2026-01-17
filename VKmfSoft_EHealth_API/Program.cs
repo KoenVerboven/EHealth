@@ -22,7 +22,7 @@ builder.Services.AddSwaggerGen();
 // Dependency Injection for Repositories:
 builder.Services.AddScoped<IHospitalRepository, HospitalRepository>();
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
-builder.Services.AddScoped<IMedicalWorkerRepository, MedicalWorkerRepository>();
+builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
 builder.Services.AddScoped<IDoctorAppointmentRepository, DoctorAppointmentRepository>();
 
 var app = builder.Build();

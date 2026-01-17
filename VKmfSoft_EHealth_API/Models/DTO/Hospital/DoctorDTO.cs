@@ -1,7 +1,10 @@
-﻿namespace VKmfSoft_EHealth_API.Models.DTO.Hospital
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace VKmfSoft_EHealth_API.Models.DTO.Hospital
 {
-    public class MedicalWorkerCreateDTO
+    public class DoctorDTO
     {
+        
         public int Id { get; set; }
         public required string LastName { get; set; }
         public required string FirstName { get; set; }
@@ -14,12 +17,10 @@
         public int FirstLanguageID { get; set; }
         public byte[]? Photo { get; set; }
         public int MedicalTitle { get; set; }
-        public int SpecializationId { get; set; }
+        public int SpecializationId { get; set; } 
         public required string LicenseNumber { get; set; }
         public DateTime LicenseValidUntil { get; set; }
-        public int HospitalId { get; set; }
-        public int DepartmentId { get; set; }
-        public int CreatedByPersonId { get; set; }
-        public DateTime CreateDate { get; set; }
+        public int HospitalId { get; set; } 
+        public int DepartmentId { get; set; } 
     }
 }

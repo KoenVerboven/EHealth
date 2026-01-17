@@ -9,6 +9,5 @@ namespace VKmfSoft_EHealth_API.Repositories.Interfaces
         Task AddAsync(DoctorAppointment appointment);
         Task UpdateAsync(DoctorAppointment appointment);
         Task DeleteAsync(int id);
-
     }
 }
