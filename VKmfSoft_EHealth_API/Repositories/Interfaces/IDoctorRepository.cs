@@ -6,10 +6,10 @@ namespace VKmfSoft_EHealth_API.Repositories.Interfaces
     public interface IDoctorRepository
     {
         Task<IEnumerable<Doctor>> GetAllAsync();
-        Task<Hospital?> GetByIdAsync(int id);
-        Task<Hospital> AddAsync(Doctor medicalWorker);
-        Task<Hospital?> UpdateAsync(Doctor medicalWorker);
-        Task<bool> DeleteAsync(int id);
+        Task<Doctor?> GetByIdAsync(int id);
+        Task AddAsync(Doctor doctor);
+        Task UpdateAsync(Doctor doctor);
+        Task DeleteAsync(int id);
     }
 }
 

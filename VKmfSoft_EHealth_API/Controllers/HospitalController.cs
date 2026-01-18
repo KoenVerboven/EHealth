@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
-using VKmfSoft_EHealth_API.Models.Domain.Patient;
 using VKmfSoft_EHealth_API.Models.DTO.Hospital;
-using VKmfSoft_EHealth_API.Models.DTO.Patient;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
-using VKmfSoft_EHealth_API.Repositories.Repos;
 
 namespace VKmfSoft_EHealth_API.Controllers
 {

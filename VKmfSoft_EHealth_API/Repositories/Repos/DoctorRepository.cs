@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VKmfSoft_EHealth_API.Data;
-using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
 
@@ -10,19 +9,22 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
     {
         private readonly AppDbContext _context;
 
-        public DoctorRepository(AppDbContext context)
+        public DoctorRepository(AppDbContext appDbContext)
         {
-            _context = context;
+            _context = appDbContext;
         }
 
-        public Task<Hospital> AddAsync(Doctor medicalWorker)
+        public async Task AddAsync(Doctor doctor)
         {
-            throw new NotImplementedException();
+            await _context.Doctors.AddAsync(doctor);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var DoctorInDb = await _context.Doctors.FindAsync(id) ?? throw new KeyNotFoundException($"Doctor with id {id} was not found.");
+            _context.Doctors.Remove(DoctorInDb);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Doctor>> GetAllAsync()
@@ -30,14 +32,15 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             return await _context.Doctors.ToListAsync();
         }
 
-        public Task<Hospital?> GetByIdAsync(int id)
+        public async Task<Doctor?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Doctors.FindAsync(id);
         }
-        
-        public Task<Hospital?> UpdateAsync(Doctor medicalWorker)
+
+        public async Task UpdateAsync(Doctor doctor)
         {
-            throw new NotImplementedException();
+            _context.Doctors.Update(doctor);
+            await _context.SaveChangesAsync();
         }
     }
 }

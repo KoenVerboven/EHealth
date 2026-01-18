@@ -1,0 +1,18 @@
+﻿namespace VKmfSoft_EHealth_API.Models.DTO.Hospital
+{
+    public class NurseCreateDTO
+    {
+        public int Id { get; set; }
+        public required string LastName { get; set; }
+        public required string FirstName { get; set; }
+        public string? MiddleName { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public required byte Gender { get; set; }
+        public required string Address { get; set; }
+        public required string PhoneNumber { get; set; }
+        public required string Email { get; set; }
+        public int FirstLanguageID { get; set; }
+        public byte[]? Photo { get; set; }
+        public int Grade { get; set; } // 0 : nurse ; 1 : head nurse
+    }
+}
