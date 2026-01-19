@@ -21,25 +21,25 @@ namespace VKmfSoft_EHealth_API.Controllers
         public async Task<ActionResult<IEnumerable<DoctorDTO>>> Get()
         {
             var doctors = await _doctorRepository.GetAllAsync();
-            var doctorDTO = doctors.Select(mw => new DoctorDTO
+            var doctorDTO = doctors.Select(doctor => new DoctorDTO
             {
-                Id = mw.Id,
-                FirstName = mw.FirstName,
-                LastName = mw.LastName,
-                MiddleName  = mw.MiddleName,
-                DateOfBirth = mw.DateOfBirth,   
-                Address = mw.Address,
-                Gender = mw.Gender,
-                PhoneNumber = mw.PhoneNumber,
-                Email = mw.Email,
-                FirstLanguageID = mw.FirstLanguageID,
-                Photo = mw.Photo,
-                MedicalTitle = mw.MedicalTitle,
-                SpecializationId = mw.SpecializationId,
-                LicenseNumber = mw.LicenseNumber,
-                LicenseValidUntil = mw.LicenseValidUntil,
-                HospitalId = mw.HospitalId,
-                DepartmentId = mw.DepartmentId
+                Id = doctor.Id,
+                FirstName = doctor.FirstName,
+                LastName = doctor.LastName,
+                MiddleName  = doctor.MiddleName,
+                DateOfBirth = doctor.DateOfBirth,   
+                Address = doctor.Address,
+                Gender = doctor.Gender,
+                PhoneNumber = doctor.PhoneNumber,
+                Email = doctor.Email,
+                FirstLanguageID = doctor.FirstLanguageID,
+                Photo = doctor.Photo,
+                MedicalTitle = doctor.MedicalTitle,
+                SpecializationId = doctor.SpecializationId,
+                LicenseNumber = doctor.LicenseNumber,
+                LicenseValidUntil = doctor.LicenseValidUntil,
+                HospitalId = doctor.HospitalId,
+                DepartmentId = doctor.DepartmentId
             });
             return Ok(doctorDTO);
         }
@@ -49,7 +49,7 @@ namespace VKmfSoft_EHealth_API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<HospitalDTO>> GetDoctorlById(int id)
+        public async Task<ActionResult<HospitalDTO>> GetDoctorById(int id)
         {
             if (id == 0)
             {
@@ -90,7 +90,7 @@ namespace VKmfSoft_EHealth_API.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<Hospital>> AddDoctor(DoctorCreateDTO doctorCreateDTO)
+        public async Task<ActionResult<Doctor>> AddDoctor(DoctorCreateDTO doctorCreateDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -118,7 +118,7 @@ namespace VKmfSoft_EHealth_API.Controllers
             };
 
             await _doctorRepository.AddAsync(doctor);
-            return CreatedAtAction(nameof(GetDoctorlById), new { id = doctor.Id }, doctor);
+            return CreatedAtAction(nameof(GetDoctorById), new { id = doctor.Id }, doctor);
         }
 
         [HttpPut("{id}")]
@@ -160,7 +160,7 @@ namespace VKmfSoft_EHealth_API.Controllers
             };
 
             await _doctorRepository.UpdateAsync(doctor);
-            return CreatedAtAction(nameof(GetDoctorlById), new { id = doctor.Id }, doctor);
+            return CreatedAtAction(nameof(GetDoctorById), new { id = doctor.Id }, doctor);
         }
 
     }
