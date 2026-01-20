@@ -1,33 +1,46 @@
-﻿using VKmfSoft_EHealth_API.Models.Domain.Hospital.Room;
+﻿using Microsoft.EntityFrameworkCore;
+using VKmfSoft_EHealth_API.Data;
+using VKmfSoft_EHealth_API.Models.Domain.Hospital.Room;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
 
 namespace VKmfSoft_EHealth_API.Repositories.Repos
 {
     public class MorePersonPatientRoomRepository : IMorePersonPatientRoomRepository
     {
-        public Task AddAsync(MorePersonPatientRoom morePersonPatientRoom)
+        private readonly AppDbContext _context;
+
+        public MorePersonPatientRoomRepository(AppDbContext appDbContext)
         {
-            throw new NotImplementedException();
+            _context = appDbContext;
         }
 
-        public Task DeleteAsync(int id)
+        public async Task AddAsync(MorePersonPatientRoom morePersonPatientRoom)
         {
-            throw new NotImplementedException();
+            await _context.MorePersonPatientRooms.AddAsync(morePersonPatientRoom);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<MorePersonPatientRoom>> GetAllAsync()
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var MorePersonPatientRoomInDb = await _context.MorePersonPatientRooms.FindAsync(id) ?? throw new KeyNotFoundException($"MorePersonPatientRoom with id {id} was not found.");
+            _context.MorePersonPatientRooms.Remove(MorePersonPatientRoomInDb);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<MorePersonPatientRoom?> GetByIdAsync(int id)
+        public async Task<IEnumerable<MorePersonPatientRoom>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.MorePersonPatientRooms.ToListAsync();
         }
 
-        public Task UpdateAsync(MorePersonPatientRoom morePersonPatientRoom)
+        public async Task<MorePersonPatientRoom?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.MorePersonPatientRooms.FindAsync(id);
+        }
+
+        public  async Task UpdateAsync(MorePersonPatientRoom morePersonPatientRoom)
+        {
+            _context.MorePersonPatientRooms.Update(morePersonPatientRoom);
+            await _context.SaveChangesAsync();
         }
     }
 }
