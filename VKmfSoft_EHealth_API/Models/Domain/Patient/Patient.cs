@@ -1,4 +1,5 @@
 ﻿using VKmfSoft_EHealth_API.Models.Domain.Other;
+using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
 
 namespace VKmfSoft_EHealth_API.Models.Domain.Patient
 {
@@ -12,7 +13,8 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Patient
         public string? EmergencyContactPhoneNumber { get; set; }
         public string? EmergencyContactDescription { get; set; }
         public byte BloodTypeId { get; set; }
-        public PatientHealthHistory? PatientHealthHistory { get; set; } // todo fill in with data n
-       
+        public PatientHealthHistory? PatientHealthHistory { get; set; }
+        public List<DoctorAppointment>? DoctorAppointments { get; set; } 
+
     }
 }

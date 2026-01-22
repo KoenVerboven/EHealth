@@ -7,7 +7,7 @@ namespace VKmfSoft_EHealth_API.Models.Domain.TimeShedule
         [Key]
         public int Id { get; set; }
         public int PatientId { get; set; }
-        public int MedicalWorkerId { get; set; }
+        public int DoctorId { get; set; }
         public DateTime AppointmentDate { get; set; }
         [Required(ErrorMessage = "ReasonForVisit is required.")]
         public required string ReasonForVisit { get; set; }

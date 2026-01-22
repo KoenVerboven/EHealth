@@ -25,7 +25,7 @@ namespace VKmfSoft_EHealth_API.Controllers
             {
                 Id = doctorAppointment.Id,
                 PatientId = doctorAppointment.PatientId,
-                MedicalWorkerId = doctorAppointment.MedicalWorkerId,
+                MedicalWorkerId = doctorAppointment.DoctorId,
                 AppointmentDate = doctorAppointment.AppointmentDate,
                 ReasonForVisit = doctorAppointment.ReasonForVisit,
                 Notes = doctorAppointment.Notes,
@@ -58,7 +58,7 @@ namespace VKmfSoft_EHealth_API.Controllers
             {
                 Id = doctorAppointment.Id,
                 PatientId = doctorAppointment.PatientId,
-                MedicalWorkerId = doctorAppointment.MedicalWorkerId,
+                MedicalWorkerId = doctorAppointment.DoctorId,
                 AppointmentDate = doctorAppointment.AppointmentDate,
                 ReasonForVisit = doctorAppointment.ReasonForVisit,
                 Notes = doctorAppointment.Notes,
@@ -86,7 +86,7 @@ namespace VKmfSoft_EHealth_API.Controllers
             {
                 Id = doctorAppointmentCreateDTO.Id,
                 PatientId = doctorAppointmentCreateDTO.PatientId,
-                MedicalWorkerId = doctorAppointmentCreateDTO.MedicalWorkerId,
+                DoctorId = doctorAppointmentCreateDTO.MedicalWorkerId,
                 AppointmentDate = doctorAppointmentCreateDTO.AppointmentDate,
                 ReasonForVisit = doctorAppointmentCreateDTO.ReasonForVisit,
                 Notes = doctorAppointmentCreateDTO.Notes,
@@ -129,7 +129,7 @@ namespace VKmfSoft_EHealth_API.Controllers
             {
                 Id = doctorAppointmentUpdateDTO.Id,
                 PatientId = doctorAppointmentUpdateDTO.PatientId,
-                MedicalWorkerId = doctorAppointmentUpdateDTO.MedicalWorkerId,
+                DoctorId = doctorAppointmentUpdateDTO.MedicalWorkerId,
                 AppointmentDate = doctorAppointmentUpdateDTO.AppointmentDate,
                 ReasonForVisit = doctorAppointmentUpdateDTO.ReasonForVisit,
                 Notes = doctorAppointmentUpdateDTO.Notes,
