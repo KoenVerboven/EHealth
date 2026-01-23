@@ -27,7 +27,7 @@ namespace VKmfSoft_EHealth_API.Controllers
             {
                 Id = intensiveCareRoom.Id,
                 RoomNumber = intensiveCareRoom.RoomNumber,
-                InUseByPatientId = intensiveCareRoom.InUseByPatientId,
+                InUseByPatientId = intensiveCareRoom.PatientId,
                 Status = intensiveCareRoom.Status
             });
             return Ok(intensiveCareRoomDTO);
@@ -55,7 +55,7 @@ namespace VKmfSoft_EHealth_API.Controllers
             {
                 Id = intensiveCareRoom.Id,
                 RoomNumber = intensiveCareRoom.RoomNumber,
-                InUseByPatientId = intensiveCareRoom.InUseByPatientId,
+                InUseByPatientId = intensiveCareRoom.PatientId,
                 Status = intensiveCareRoom.Status
             };
 
@@ -77,7 +77,7 @@ namespace VKmfSoft_EHealth_API.Controllers
             {
 
                 RoomNumber = intensiveCareRoomCreateDTO.RoomNumber,
-                InUseByPatientId = intensiveCareRoomCreateDTO.InUseByPatientId,
+                PatientId = intensiveCareRoomCreateDTO.InUseByPatientId,
                 Status = intensiveCareRoomCreateDTO.Status
             };
 
@@ -108,7 +108,7 @@ namespace VKmfSoft_EHealth_API.Controllers
 
                 Id = intensiveCareRoomUpdateDTO.Id,
                 RoomNumber = intensiveCareRoomUpdateDTO.RoomNumber,
-                InUseByPatientId = intensiveCareRoomUpdateDTO.InUseByPatientId,
+                PatientId = intensiveCareRoomUpdateDTO.InUseByPatientId,
                 Status = intensiveCareRoomUpdateDTO.Status
             };
 

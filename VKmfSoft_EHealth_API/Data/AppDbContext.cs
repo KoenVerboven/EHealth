@@ -6,7 +6,6 @@ using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personnel;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Room;
 using VKmfSoft_EHealth_API.Models.Domain.Patient;
 using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
-using VKmfSoft_EHealth_API.Repositories.Repos;
 
 namespace VKmfSoft_EHealth_API.Data
 {

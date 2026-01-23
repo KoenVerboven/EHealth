@@ -4,5 +4,6 @@
     {
         public byte SergeryRoomClasse { get; set; }
         public bool ReadyToUse { get; set; }
+        public int PatientId { get; set; }
     }
 }

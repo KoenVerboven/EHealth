@@ -3,5 +3,6 @@
     public class OnePersonPatientRoom : HospitalRoom
     {
         public  decimal DayPrice { get; set; }
+        public int PatientId { get; set; }
     }
 }
