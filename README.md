@@ -1,9 +1,9 @@
 web API (C#) for a hospital or doctor's practice.
 
-<img width="1318" height="3793" alt="localhost_44375_swagger_index html (2)" src="https://github.com/user-attachments/assets/478e6b0c-69fb-456c-9658-b2717b0d3abc" />
+<img width="1318" height="4685" alt="localhost_44375_swagger_index html (3)" src="https://github.com/user-attachments/assets/d7db396e-2152-4bba-b779-4740033d2a7a" />
 
+<img width="1436" height="892" alt="image" src="https://github.com/user-attachments/assets/4fd2f9c4-92c5-4ffa-bdcf-4c77ece16749" />
 
-<img width="1475" height="902" alt="image" src="https://github.com/user-attachments/assets/2b194e44-c70d-412b-93f0-0199caa3c542" />
 
 
 
