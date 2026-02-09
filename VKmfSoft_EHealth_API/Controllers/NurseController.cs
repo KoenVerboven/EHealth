@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personnel;
 using VKmfSoft_EHealth_API.Models.DTO.Hospital;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
@@ -11,31 +12,19 @@ namespace VKmfSoft_EHealth_API.Controllers
     public class NurseController : ControllerBase
     {
         private readonly INurseRepository _nurseRepository;
+        private readonly IMapper _mapper;
 
-        public NurseController(INurseRepository nurseRepository)
+        public NurseController(INurseRepository nurseRepository, IMapper mapper)
         {
             _nurseRepository = nurseRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<NurseDTO>>> Get()
         {
             var nurses = await _nurseRepository.GetAllAsync();
-            var nurseDTO = nurses.Select(nurse => new NurseDTO
-            {
-                Id = nurse.Id,
-                FirstName = nurse.FirstName,
-                LastName = nurse.LastName,
-                MiddleName = nurse.MiddleName,
-                DateOfBirth = nurse.DateOfBirth,
-                Address = nurse.Address,
-                Gender = nurse.Gender,
-                PhoneNumber = nurse.PhoneNumber,
-                Email = nurse.Email,
-                FirstLanguageID = nurse.FirstLanguageID,
-                Photo = nurse.Photo,
-                Grade = nurse.Grade
-            });
+            var nurseDTO = _mapper.Map<List<NurseDTO>>(nurses);
             return Ok(nurseDTO);
         }
 
@@ -57,22 +46,7 @@ namespace VKmfSoft_EHealth_API.Controllers
             {
                 return NotFound();
             }
-            var nurseDTO = new NurseDTO
-            {
-                Id = nurse.Id,
-                FirstName = nurse.FirstName,
-                LastName = nurse.LastName,
-                MiddleName = nurse.MiddleName,
-                DateOfBirth = nurse.DateOfBirth,
-                Address = nurse.Address,
-                Gender = nurse.Gender,
-                PhoneNumber = nurse.PhoneNumber,
-                Email = nurse.Email,
-                FirstLanguageID = nurse.FirstLanguageID,
-                Photo = nurse.Photo,
-                Grade = nurse.Grade
-            };
-
+            var nurseDTO = _mapper.Map<NurseDTO>(nurse);
             return Ok(nurseDTO);
         }
 
@@ -87,21 +61,7 @@ namespace VKmfSoft_EHealth_API.Controllers
                 return BadRequest();
             }
 
-            var nurse = new Nurse
-            {
-                FirstName = nurseCreateDTO.FirstName,
-                LastName = nurseCreateDTO.LastName,
-                MiddleName = nurseCreateDTO.MiddleName,
-                DateOfBirth = nurseCreateDTO.DateOfBirth,
-                Address = nurseCreateDTO.Address,
-                Gender = nurseCreateDTO.Gender,
-                PhoneNumber = nurseCreateDTO.PhoneNumber,
-                Email = nurseCreateDTO.Email,
-                FirstLanguageID = nurseCreateDTO.FirstLanguageID,
-                Photo = nurseCreateDTO.Photo,
-                Grade = nurseCreateDTO.Grade
-            };
-
+            var nurse = _mapper.Map<Nurse>(nurseCreateDTO);
             await _nurseRepository.AddAsync(nurse);
             return CreatedAtAction(nameof(GetNurseById), new { id = nurse.Id }, nurse);
         }
@@ -122,22 +82,7 @@ namespace VKmfSoft_EHealth_API.Controllers
                 return BadRequest();
             }
 
-            var nurse = new Nurse
-            {
-
-                FirstName = nurseUpdateDTO.FirstName,
-                LastName = nurseUpdateDTO.LastName,
-                MiddleName = nurseUpdateDTO.MiddleName,
-                DateOfBirth = nurseUpdateDTO.DateOfBirth,
-                Address = nurseUpdateDTO.Address,
-                Gender = nurseUpdateDTO.Gender,
-                PhoneNumber = nurseUpdateDTO.PhoneNumber,
-                Email = nurseUpdateDTO.Email,
-                FirstLanguageID = nurseUpdateDTO.FirstLanguageID,
-                Photo = nurseUpdateDTO.Photo,
-                Grade = nurseUpdateDTO.Grade
-            };
-
+            var nurse = _mapper.Map<Nurse>(nurseUpdateDTO);
             await _nurseRepository.UpdateAsync(nurse);
             return CreatedAtAction(nameof(GetNurseById), new { id = nurse.Id }, nurse);
         }

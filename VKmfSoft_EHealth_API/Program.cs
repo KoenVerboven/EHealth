@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using VKmfSoft_EHealth_API.AutoMapper;
 using VKmfSoft_EHealth_API.Data;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
 using VKmfSoft_EHealth_API.Repositories.Repos;
@@ -12,6 +13,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
 });
+
+builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

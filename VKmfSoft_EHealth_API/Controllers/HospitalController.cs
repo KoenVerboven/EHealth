@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
 using VKmfSoft_EHealth_API.Models.DTO.Hospital;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
@@ -10,25 +11,19 @@ namespace VKmfSoft_EHealth_API.Controllers
     public class HospitalController : ControllerBase
     {
         private readonly IHospitalRepository _hospitalRepository;
+        private readonly IMapper _mapper;
 
-        public HospitalController(IHospitalRepository hospitalRepository)
+        public HospitalController(IHospitalRepository hospitalRepository, IMapper mapper)
         {
             _hospitalRepository = hospitalRepository;
-
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<HospitalDTO>>> Get()
         {
             var hospitals = await _hospitalRepository.GetAllAsync();
-            var hospitalsDTO = hospitals.Select(h => new HospitalDTO
-            {
-                Id = h.Id,
-                Name = h.Name,
-                Address = h.Address,
-                PhoneNumber = h.PhoneNumber,
-                Email = h.Email
-            });
+            var hospitalsDTO = _mapper.Map<List<HospitalDTO>>(hospitals);
             return Ok(hospitalsDTO);
         }
 
@@ -43,14 +38,7 @@ namespace VKmfSoft_EHealth_API.Controllers
                 return BadRequest();
             }
             
-            var hospital = new Hospital
-            {
-                Name = hospitalCreateDTO.Name,
-                Address = hospitalCreateDTO.Address,
-                PhoneNumber = hospitalCreateDTO.PhoneNumber,
-                Email = hospitalCreateDTO.Email
-            };
-
+            var hospital = _mapper.Map<Hospital>(hospitalCreateDTO);
             await _hospitalRepository.AddAsync(hospital);
             return CreatedAtAction(nameof(GetHospitalById), new { id = hospital.Id }, hospital);
         }
@@ -74,15 +62,8 @@ namespace VKmfSoft_EHealth_API.Controllers
             {
                 return NotFound();
             }
-            var hospitalsDTO =  new HospitalDTO
-            {
-                Id = hospital.Id,
-                Name = hospital.Name,
-                Address = hospital.Address,
-                PhoneNumber = hospital.PhoneNumber,
-                Email = hospital.Email
-            };
 
+            var hospitalsDTO = _mapper.Map<HospitalDTO>(hospital);
             return Ok(hospitalsDTO);
         }
 
@@ -103,14 +84,7 @@ namespace VKmfSoft_EHealth_API.Controllers
                 return BadRequest();
             }
 
-            var hospital = new Hospital
-            {
-                Name = hospitalUpdateDTO.Name,
-                Address = hospitalUpdateDTO.Address,
-                PhoneNumber = hospitalUpdateDTO.PhoneNumber,
-                Email = hospitalUpdateDTO.Email
-            };
-
+            var hospital = _mapper.Map<Hospital>(hospitalUpdateDTO);
             await _hospitalRepository.UpdateAsync(hospital);
             return CreatedAtAction(nameof(GetHospitalById), new { id = hospital.Id }, hospital);
         }

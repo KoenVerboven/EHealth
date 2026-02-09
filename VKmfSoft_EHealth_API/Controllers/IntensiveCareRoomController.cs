@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using VKmfSoft_EHealth_API.Data;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Room;
 using VKmfSoft_EHealth_API.Models.DTO.Hospital;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
-using VKmfSoft_EHealth_API.Repositories.Repos;
 
 namespace VKmfSoft_EHealth_API.Controllers
 {
@@ -13,23 +12,20 @@ namespace VKmfSoft_EHealth_API.Controllers
     public class IntensiveCareRoomController : ControllerBase
     {
         private readonly IIntensiveCareRoomRepository _intensiveCareRoomRepository;
+        private readonly IMapper _mapper;
 
-        public IntensiveCareRoomController(IIntensiveCareRoomRepository intensiveCareRoomRepository)
+        public IntensiveCareRoomController(IIntensiveCareRoomRepository intensiveCareRoomRepository, IMapper mapper)
         {
             _intensiveCareRoomRepository = intensiveCareRoomRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<IntensiveCareRoom>>> Get()
         {
             var intensiveCareRooms = await _intensiveCareRoomRepository.GetAllAsync();
-            var intensiveCareRoomDTO = intensiveCareRooms.Select(intensiveCareRoom => new IntensiveCareRoomDTO
-            {
-                Id = intensiveCareRoom.Id,
-                RoomNumber = intensiveCareRoom.RoomNumber,
-                InUseByPatientId = intensiveCareRoom.PatientId,
-                Status = intensiveCareRoom.Status
-            });
+            
+            var intensiveCareRoomDTO = _mapper.Map<List<IntensiveCareRoomDTO>>(intensiveCareRooms);
             return Ok(intensiveCareRoomDTO);
         }
 
@@ -51,14 +47,8 @@ namespace VKmfSoft_EHealth_API.Controllers
             {
                 return NotFound();
             }
-            var intensiveCareRoomDTO = new IntensiveCareRoomDTO
-            {
-                Id = intensiveCareRoom.Id,
-                RoomNumber = intensiveCareRoom.RoomNumber,
-                InUseByPatientId = intensiveCareRoom.PatientId,
-                Status = intensiveCareRoom.Status
-            };
-
+            
+            var intensiveCareRoomDTO = _mapper.Map<IntensiveCareRoomDTO>(intensiveCareRoom);
             return Ok(intensiveCareRoomDTO);
         }
 
@@ -73,14 +63,7 @@ namespace VKmfSoft_EHealth_API.Controllers
                 return BadRequest();
             }
 
-            var intensiveCareRoom = new IntensiveCareRoom
-            {
-
-                RoomNumber = intensiveCareRoomCreateDTO.RoomNumber,
-                PatientId = intensiveCareRoomCreateDTO.InUseByPatientId,
-                Status = intensiveCareRoomCreateDTO.Status
-            };
-
+            var intensiveCareRoom = _mapper.Map<IntensiveCareRoom>(intensiveCareRoomCreateDTO);
             await _intensiveCareRoomRepository.AddAsync(intensiveCareRoom);
             return CreatedAtAction(nameof(GetIntensiveCareRoomById), new { id = intensiveCareRoom.Id }, intensiveCareRoom);
         }
@@ -103,16 +86,9 @@ namespace VKmfSoft_EHealth_API.Controllers
                 return BadRequest();
             }
 
-            var intensiveCareRoom = new IntensiveCareRoom
-            {
 
-                Id = intensiveCareRoomUpdateDTO.Id,
-                RoomNumber = intensiveCareRoomUpdateDTO.RoomNumber,
-                PatientId = intensiveCareRoomUpdateDTO.InUseByPatientId,
-                Status = intensiveCareRoomUpdateDTO.Status
-            };
-
-            await _intensiveCareRoomRepository.UpdateAsync(intensiveCareRoom);
+            var intensiveCareRoom = _mapper.Map<IntensiveCareRoom>(intensiveCareRoomUpdateDTO);
+             await _intensiveCareRoomRepository.UpdateAsync(intensiveCareRoom);
             return CreatedAtAction(nameof(GetIntensiveCareRoomById), new { id = intensiveCareRoom.Id }, intensiveCareRoom);
         }
 

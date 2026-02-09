@@ -5,5 +5,6 @@
         public byte SergeryRoomClasse { get; set; }
         public bool ReadyToUse { get; set; }
         public int PatientId { get; set; }
+        public Patient.Patient? Patient { get; set; }
     }
 }

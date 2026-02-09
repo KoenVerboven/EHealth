@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
 using VKmfSoft_EHealth_API.Models.Domain.Patient;
 using VKmfSoft_EHealth_API.Models.DTO.Patient;
@@ -11,10 +12,12 @@ namespace VKmfSoft_EHealth_API.Controllers
     public class PatientController : ControllerBase
     {
         private readonly IPatientRepository _patientRepository;
+        private readonly IMapper _mapper;
 
-        public PatientController(IPatientRepository patientRepository)
+        public PatientController(IPatientRepository patientRepository, IMapper mapper)
         {
             _patientRepository = patientRepository;
+            _mapper = mapper;
         }
 
 
@@ -23,30 +26,32 @@ namespace VKmfSoft_EHealth_API.Controllers
         public async Task<ActionResult<IEnumerable<PatientDTO>>> Get()
         {
             var patients = await _patientRepository.GetAllAsync();
-            var patientsDTO = patients.Select(p => new PatientDTO
-            {
-                Id = p.Id,
-                FirstName = p.FirstName,
-                LastName = p.LastName,
-                DateOfBirth = p.DateOfBirth,
-                Address = p.Address,
-                Gender = p.Gender,
-                PhoneNumber = p.PhoneNumber,
-                Email = p.Email,
-                InsuranceNumber = p.InsuranceNumber,
-                InsuranceProvider = p.InsuranceProvider,
-                IsMobile = p.IsMobile,
-                MiddleName = p.MiddleName,
-                FirstLanguageID = p.FirstLanguageID,
-                Photo = p.Photo,
-                InsuranceExpiryDate = p.InsuranceExpiryDate,
-                EmergencyContactName = p.EmergencyContactName,
-                EmergencyContactPhoneNumber = p.EmergencyContactPhoneNumber,
-                EmergencyContactDescription = p.EmergencyContactDescription,
-                BloodTypeId = p.BloodTypeId,
-                PatientHealthHistory = p.PatientHealthHistory
-            });
-            return Ok(patientsDTO);
+            var patientDTO = _mapper.Map<List<PatientDTO>>(patients);
+            //obsolete :
+            //var patientsDTO = patients.Select(p => new PatientDTO
+            //{
+            //    Id = p.Id,
+            //    FirstName = p.FirstName,
+            //    LastName = p.LastName,
+            //    DateOfBirth = p.DateOfBirth,
+            //    Address = p.Address,
+            //    Gender = p.Gender,
+            //    PhoneNumber = p.PhoneNumber,
+            //    Email = p.Email,
+            //    InsuranceNumber = p.InsuranceNumber,
+            //    InsuranceProvider = p.InsuranceProvider,
+            //    IsMobile = p.IsMobile,
+            //    MiddleName = p.MiddleName,
+            //    FirstLanguageID = p.FirstLanguageID,
+            //    Photo = p.Photo,
+            //    InsuranceExpiryDate = p.InsuranceExpiryDate,
+            //    EmergencyContactName = p.EmergencyContactName,
+            //    EmergencyContactPhoneNumber = p.EmergencyContactPhoneNumber,
+            //    EmergencyContactDescription = p.EmergencyContactDescription,
+            //    BloodTypeId = p.BloodTypeId,
+            //    PatientHealthHistory = p.PatientHealthHistory
+            //});
+            return Ok(patientDTO);
         }
 
 
@@ -68,32 +73,9 @@ namespace VKmfSoft_EHealth_API.Controllers
             {
                 return NotFound();
             }
-
-            var patientsDTO = new PatientDTO
-            {
-                Id = patient.Id,
-                FirstName = patient.FirstName,
-                LastName = patient.LastName,
-                DateOfBirth = patient.DateOfBirth,
-                Address = patient.Address,
-                Gender = patient.Gender,
-                PhoneNumber = patient.PhoneNumber,
-                Email = patient.Email,
-                InsuranceNumber = patient.InsuranceNumber,
-                InsuranceProvider = patient.InsuranceProvider,
-                IsMobile = patient.IsMobile,
-                MiddleName = patient.MiddleName,
-                FirstLanguageID = patient.FirstLanguageID,
-                Photo = patient.Photo,
-                InsuranceExpiryDate = patient.InsuranceExpiryDate,
-                EmergencyContactName = patient.EmergencyContactName,
-                EmergencyContactPhoneNumber = patient.EmergencyContactPhoneNumber,
-                EmergencyContactDescription = patient.EmergencyContactDescription,
-                BloodTypeId = patient.BloodTypeId,
-                PatientHealthHistory = patient.PatientHealthHistory
-            };
-
-            return Ok(patientsDTO);
+            var patientDTO = _mapper.Map<PatientDTO>(patient);
+            
+            return Ok(patientDTO);
         }
 
         [HttpPost]
@@ -107,31 +89,21 @@ namespace VKmfSoft_EHealth_API.Controllers
                 return BadRequest();
             }
 
+            //var patientWithSameEmail = await _patientRepository.GetByEmailAsync(patientCreateDTO.Email);
+            //if (patientWithSameEmail != null)
+            //{
+            //    ModelState.AddModelError("Email", "A patient with the same email already exists.");
+            //    return BadRequest(ModelState);
+            //}
 
-            var patient = new Patient
-            {
-                Id = patientCreateDTO.Id,
-                FirstName = patientCreateDTO.FirstName,
-                LastName = patientCreateDTO.LastName,
-                DateOfBirth = patientCreateDTO.DateOfBirth,
-                Address = patientCreateDTO.Address,
-                Gender = patientCreateDTO.Gender,
-                PhoneNumber = patientCreateDTO.PhoneNumber,
-                Email = patientCreateDTO.Email,
-                InsuranceNumber = patientCreateDTO.InsuranceNumber,
-                InsuranceProvider = patientCreateDTO.InsuranceProvider,
-                IsMobile = patientCreateDTO.IsMobile,
-                MiddleName = patientCreateDTO.MiddleName,
-                FirstLanguageID = patientCreateDTO.FirstLanguageID,
-                Photo = patientCreateDTO.Photo,
-                InsuranceExpiryDate = patientCreateDTO.InsuranceExpiryDate,
-                EmergencyContactName = patientCreateDTO.EmergencyContactName,
-                EmergencyContactPhoneNumber = patientCreateDTO.EmergencyContactPhoneNumber,
-                EmergencyContactDescription = patientCreateDTO.EmergencyContactDescription,
-                BloodTypeId = patientCreateDTO.BloodTypeId,
-                PatientHealthHistory = patientCreateDTO.PatientHealthHistory
-            };
+            //var patientWithSamePhoneNumber = await _patientRepository.GetByPhoneNumberAsync(patientCreateDTO.PhoneNumber);
+            //if (patientWithSamePhoneNumber != null)
+            //{
+            //    ModelState.AddModelError("PhoneNumber", "A patient with the same phone number already exists.");
+            //    return BadRequest(ModelState);
+            //}
 
+            var patient = _mapper.Map<Patient>(patientCreateDTO);
             await _patientRepository.AddAsync(patient);
             return CreatedAtAction(nameof(GetPatientById), new { id = patient.Id }, patient);
         }
@@ -152,32 +124,16 @@ namespace VKmfSoft_EHealth_API.Controllers
                 return BadRequest();
             }
 
-            var patient = new Patient
-            {
-                Id = patientUpdateDTO.Id,
-                FirstName = patientUpdateDTO.FirstName,
-                LastName = patientUpdateDTO.LastName,
-                DateOfBirth = patientUpdateDTO.DateOfBirth,
-                Address = patientUpdateDTO.Address,
-                Gender = patientUpdateDTO.Gender,
-                PhoneNumber = patientUpdateDTO.PhoneNumber,
-                Email = patientUpdateDTO.Email,
-                InsuranceNumber = patientUpdateDTO.InsuranceNumber,
-                InsuranceProvider = patientUpdateDTO.InsuranceProvider,
-                IsMobile = patientUpdateDTO.IsMobile,
-                MiddleName = patientUpdateDTO.MiddleName,
-                FirstLanguageID = patientUpdateDTO.FirstLanguageID,
-                Photo = patientUpdateDTO.Photo,
-                InsuranceExpiryDate = patientUpdateDTO.InsuranceExpiryDate,
-                EmergencyContactName = patientUpdateDTO.EmergencyContactName,
-                EmergencyContactPhoneNumber = patientUpdateDTO.EmergencyContactPhoneNumber,
-                EmergencyContactDescription = patientUpdateDTO.EmergencyContactDescription,
-                BloodTypeId = patientUpdateDTO.BloodTypeId,
-                PatientHealthHistory = patientUpdateDTO.PatientHealthHistory
-            };
+           var existingPatient = await _patientRepository.GetByIdAsync(id);
+           if (existingPatient == null)
+           {
+              return NotFound();
+           }
 
-            await _patientRepository.UpdateAsync(patient);
-            return CreatedAtAction(nameof(GetPatientById), new { id = patient.Id }, patient);
+           var patient = _mapper.Map<Patient>(patientUpdateDTO);
+        
+           await _patientRepository.UpdateAsync(patient);
+           return CreatedAtAction(nameof(GetPatientById), new { id = patient.Id }, patient);
         }
 
     }

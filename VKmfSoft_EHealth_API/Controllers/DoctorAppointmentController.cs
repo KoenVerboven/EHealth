@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
 using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
 using VKmfSoft_EHealth_API.Models.DTO.TimeShedule;
@@ -11,28 +12,19 @@ namespace VKmfSoft_EHealth_API.Controllers
     public class DoctorAppointmentController : ControllerBase
     {
         private readonly IDoctorAppointmentRepository _appointmentRepository;
+        private readonly IMapper _mapper;
 
-        public DoctorAppointmentController(IDoctorAppointmentRepository appointmentRepository)
+        public DoctorAppointmentController(IDoctorAppointmentRepository appointmentRepository, IMapper mapper)
         {
             _appointmentRepository = appointmentRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DoctorAppointmentDTO>>> Get()
         {
             var doctorAppointments = await _appointmentRepository.GetAllAsync();
-            var doctorAppointmentsDTO = doctorAppointments.Select(doctorAppointment => new DoctorAppointmentDTO
-            {
-                Id = doctorAppointment.Id,
-                PatientId = doctorAppointment.PatientId,
-                MedicalWorkerId = doctorAppointment.DoctorId,
-                AppointmentDate = doctorAppointment.AppointmentDate,
-                ReasonForVisit = doctorAppointment.ReasonForVisit,
-                Notes = doctorAppointment.Notes,
-                Status = doctorAppointment.Status,
-                DegreeOfUrgency = doctorAppointment.DegreeOfUrgency,
-                AppointmentPlaceId = doctorAppointment.AppointmentPlaceId
-            });
+            var doctorAppointmentsDTO = _mapper.Map<List<DoctorAppointmentDTO>>(doctorAppointments);
             return Ok(doctorAppointmentsDTO);
         }
 
@@ -54,19 +46,8 @@ namespace VKmfSoft_EHealth_API.Controllers
             {
                 return NotFound();
             }
-            var hospitalsDTO = new DoctorAppointmentDTO
-            {
-                Id = doctorAppointment.Id,
-                PatientId = doctorAppointment.PatientId,
-                MedicalWorkerId = doctorAppointment.DoctorId,
-                AppointmentDate = doctorAppointment.AppointmentDate,
-                ReasonForVisit = doctorAppointment.ReasonForVisit,
-                Notes = doctorAppointment.Notes,
-                Status = doctorAppointment.Status,
-                DegreeOfUrgency = doctorAppointment.DegreeOfUrgency,
-                AppointmentPlaceId = doctorAppointment.AppointmentPlaceId
-            };
 
+            var hospitalsDTO = _mapper.Map<DoctorAppointmentDTO>(doctorAppointment);
             return Ok(hospitalsDTO);
         }
 
@@ -81,20 +62,7 @@ namespace VKmfSoft_EHealth_API.Controllers
                 return BadRequest();
             }
 
-
-            DoctorAppointment doctorAppointment = new DoctorAppointment
-            {
-                Id = doctorAppointmentCreateDTO.Id,
-                PatientId = doctorAppointmentCreateDTO.PatientId,
-                DoctorId = doctorAppointmentCreateDTO.MedicalWorkerId,
-                AppointmentDate = doctorAppointmentCreateDTO.AppointmentDate,
-                ReasonForVisit = doctorAppointmentCreateDTO.ReasonForVisit,
-                Notes = doctorAppointmentCreateDTO.Notes,
-                Status = doctorAppointmentCreateDTO.Status,
-                DegreeOfUrgency = doctorAppointmentCreateDTO.DegreeOfUrgency,
-                AppointmentPlaceId = doctorAppointmentCreateDTO.AppointmentPlaceId
-            };
-
+            var doctorAppointment = _mapper.Map<DoctorAppointment>(doctorAppointmentCreateDTO);
             await _appointmentRepository.AddAsync(doctorAppointment);
             return CreatedAtAction(nameof(GetAppointmentById), new { id = doctorAppointment.Id }, doctorAppointment);
         }
@@ -125,19 +93,7 @@ namespace VKmfSoft_EHealth_API.Controllers
                 return BadRequest();
             }
 
-            var doctorAppointment = new DoctorAppointment
-            {
-                Id = doctorAppointmentUpdateDTO.Id,
-                PatientId = doctorAppointmentUpdateDTO.PatientId,
-                DoctorId = doctorAppointmentUpdateDTO.MedicalWorkerId,
-                AppointmentDate = doctorAppointmentUpdateDTO.AppointmentDate,
-                ReasonForVisit = doctorAppointmentUpdateDTO.ReasonForVisit,
-                Notes = doctorAppointmentUpdateDTO.Notes,
-                Status = doctorAppointmentUpdateDTO.Status,
-                DegreeOfUrgency = doctorAppointmentUpdateDTO.DegreeOfUrgency,
-                AppointmentPlaceId = doctorAppointmentUpdateDTO.AppointmentPlaceId
-            };
-
+            var doctorAppointment = _mapper.Map<DoctorAppointment>(doctorAppointmentUpdateDTO);
             await _appointmentRepository.UpdateAsync(doctorAppointment);
             return CreatedAtAction(nameof(GetAppointmentById), new { id = doctorAppointment.Id }, doctorAppointment);
         }
