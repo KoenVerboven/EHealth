@@ -47,8 +47,54 @@ namespace VKmfSoft_EHealth_API.Controllers
                 return NotFound();
             }
 
-            var hospitalsDTO = _mapper.Map<DoctorAppointmentDTO>(doctorAppointment);
-            return Ok(hospitalsDTO);
+            var doctorAppointmentDTO = _mapper.Map<DoctorAppointmentDTO>(doctorAppointment);
+            return Ok(doctorAppointmentDTO);
+        }
+
+        [HttpGet("getByPatientId")]
+        [ProducesResponseType(typeof(DoctorAppointmentDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<DoctorAppointmentDTO>> GetAppointmentByPatientId(int patientId, DateTime startDate, DateTime endDate)
+        {
+            if (patientId == 0)
+            {
+                return BadRequest();
+            }
+
+            var doctorAppointment = await _appointmentRepository.GetByPatientIdAsync(patientId,startDate,endDate);
+
+            if (doctorAppointment == null)
+            {
+                return NotFound();
+            }
+
+            var doctorAppointmentDTO = _mapper.Map<DoctorAppointmentDTO>(doctorAppointment);
+            return Ok(doctorAppointmentDTO);
+        }
+
+        [HttpGet("getByDoctorId")]
+        [ProducesResponseType(typeof(DoctorAppointmentDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<DoctorAppointmentDTO>> GetAppointmentByDoctorId(int doctorId, DateTime startDate, DateTime endDate)
+        {
+            if (doctorId == 0)
+            {
+                return BadRequest();
+            }
+
+            var doctorAppointment = await _appointmentRepository.GetByDoctorIdAsync(doctorId,startDate,endDate );
+
+            if (doctorAppointment == null)
+            {
+                return NotFound();
+            }
+
+            var doctorAppointmentDTO = _mapper.Map<DoctorAppointmentDTO>(doctorAppointment);
+            return Ok(doctorAppointmentDTO);
         }
 
         [HttpPost]

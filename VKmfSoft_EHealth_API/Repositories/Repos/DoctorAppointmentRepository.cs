@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using VKmfSoft_EHealth_API.Data;
 using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
@@ -32,10 +33,30 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
         {
             return await _context.DoctorAppointments.ToListAsync();
         }
+      
 
         public async Task<DoctorAppointment?> GetByIdAsync(int id)
         {
             return await _context.DoctorAppointments.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<DoctorAppointment?>> GetByDoctorIdAsync(int doctorId, DateTime startDate, DateTime endDate)
+        {
+            return await _context.DoctorAppointments.Where(
+                p=>p.DoctorId == doctorId && 
+                p.AppointmentDate >= startDate && 
+                p.AppointmentDate <= endDate
+                ).ToListAsync();
+        }
+
+
+        public async Task<IEnumerable<DoctorAppointment?>> GetByPatientIdAsync(int patientId, DateTime startDate, DateTime endDate)
+        {
+            return await _context.DoctorAppointments.Where(
+                p=>p.PatientId == patientId && 
+                p.AppointmentDate >= startDate && 
+                p.AppointmentDate <= endDate
+                ).ToListAsync();
         }
 
         public  async Task UpdateAsync(DoctorAppointment appointment)
