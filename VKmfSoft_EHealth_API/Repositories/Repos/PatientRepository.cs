@@ -36,6 +36,11 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             return await _context.Patients.FindAsync(id);
         }
 
+        public bool PatientExists(int patientId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task UpdateAsync(Patient patient)
         {
             _context.Patients.Update(patient);

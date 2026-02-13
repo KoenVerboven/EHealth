@@ -27,6 +27,11 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             await _context.SaveChangesAsync();
         }
 
+        public bool DoctorExists(int doctorId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<Doctor>> GetAllAsync()
         {
             return await _context.Doctors.ToListAsync();
@@ -35,6 +40,11 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
         public async Task<Doctor?> GetByIdAsync(int id)
         {
             return await _context.Doctors.FindAsync(id);
+        }
+
+        public Task<IEnumerable<Doctor>> GetFilterAsync(string? Name, string? Email, string Sort, int PageSize, int PageNumber)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task UpdateAsync(Doctor doctor)

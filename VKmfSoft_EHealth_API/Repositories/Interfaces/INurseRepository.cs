@@ -11,5 +11,6 @@ namespace VKmfSoft_EHealth_API.Repositories.Interfaces
         Task AddAsync(Nurse nurse);
         Task UpdateAsync(Nurse nurse);
         Task DeleteAsync(int id);
+        bool NurseExists(int nurseId);
     }
 }

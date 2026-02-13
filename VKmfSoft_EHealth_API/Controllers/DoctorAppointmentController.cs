@@ -51,7 +51,7 @@ namespace VKmfSoft_EHealth_API.Controllers
             return Ok(doctorAppointmentDTO);
         }
 
-        [HttpGet("getByPatientId")]
+        [HttpGet("getByPatientId/{patientid}/{startdate}/{enddate}")]
         [ProducesResponseType(typeof(DoctorAppointmentDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -74,7 +74,7 @@ namespace VKmfSoft_EHealth_API.Controllers
             return Ok(doctorAppointmentDTO);
         }
 
-        [HttpGet("getByDoctorId")]
+        [HttpGet("getByDoctorId/{doctorid}/{startdate}/{enddate}")]
         [ProducesResponseType(typeof(DoctorAppointmentDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
