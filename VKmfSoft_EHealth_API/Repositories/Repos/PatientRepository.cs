@@ -36,6 +36,23 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             return await _context.Patients.FindAsync(id);
         }
 
+        public async Task<IEnumerable<Patient>> GetPatientByFilterAsync(string? fullName)
+        {
+            IQueryable<Patient> patients;
+
+            patients = _context.Patients;
+
+            if (fullName is not null)
+            {
+                if (fullName.Trim() != string.Empty)
+                {
+                    patients = patients.Where(p => (p.LastName.ToLower() + " " + p.FirstName).Contains(fullName.ToLower())).AsQueryable();
+                }
+            }
+
+            return await patients.ToListAsync();
+        }
+
         public bool PatientExists(int patientId)
         {
             throw new NotImplementedException();

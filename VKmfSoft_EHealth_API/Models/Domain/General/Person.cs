@@ -26,6 +26,10 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Other
         [Required(ErrorMessage = "Gender is required.")]
         public required byte Gender { get; set; }
 
+        //todo add zipcode for address
+        //todo add city for address
+        //todo add country for address
+
         [Required(ErrorMessage = "Address is required.")]
         public required string Address { get; set; }
         [Required(ErrorMessage = "PhoneNumber is required.")]

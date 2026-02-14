@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel;
 using VKmfSoft_EHealth_API.Models.DTO.Hospital;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
+using VKmfSoft_EHealth_API.Repositories.Repos;
 
 namespace VKmfSoft_EHealth_API.Controllers
 {
@@ -48,6 +49,17 @@ namespace VKmfSoft_EHealth_API.Controllers
 
             var doctorDTO = _mapper.Map<DoctorDTO>(doctor);
             return Ok(doctorDTO);
+        }
+
+        [HttpGet("getDoctorByFilter")]
+        [ProducesResponseType(typeof(IEnumerable<DoctorDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<DoctorDTO>>> GetDoctorByFilter([FromQuery] string? fullName)
+        {
+            var doctors = await _doctorRepository.GetDoctorByFilterAsync(fullName);
+            var doctorsDTO = _mapper.Map<IEnumerable<DoctorDTO>>(doctors);
+            return Ok(doctorsDTO);
         }
 
         [HttpPost]

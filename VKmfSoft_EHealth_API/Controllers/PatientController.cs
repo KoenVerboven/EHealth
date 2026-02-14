@@ -27,30 +27,6 @@ namespace VKmfSoft_EHealth_API.Controllers
         {
             var patients = await _patientRepository.GetAllAsync();
             var patientDTO = _mapper.Map<List<PatientDTO>>(patients);
-            //obsolete :
-            //var patientsDTO = patients.Select(p => new PatientDTO
-            //{
-            //    Id = p.Id,
-            //    FirstName = p.FirstName,
-            //    LastName = p.LastName,
-            //    DateOfBirth = p.DateOfBirth,
-            //    Address = p.Address,
-            //    Gender = p.Gender,
-            //    PhoneNumber = p.PhoneNumber,
-            //    Email = p.Email,
-            //    InsuranceNumber = p.InsuranceNumber,
-            //    InsuranceProvider = p.InsuranceProvider,
-            //    IsMobile = p.IsMobile,
-            //    MiddleName = p.MiddleName,
-            //    FirstLanguageID = p.FirstLanguageID,
-            //    Photo = p.Photo,
-            //    InsuranceExpiryDate = p.InsuranceExpiryDate,
-            //    EmergencyContactName = p.EmergencyContactName,
-            //    EmergencyContactPhoneNumber = p.EmergencyContactPhoneNumber,
-            //    EmergencyContactDescription = p.EmergencyContactDescription,
-            //    BloodTypeId = p.BloodTypeId,
-            //    PatientHealthHistory = p.PatientHealthHistory
-            //});
             return Ok(patientDTO);
         }
 
@@ -78,6 +54,17 @@ namespace VKmfSoft_EHealth_API.Controllers
             return Ok(patientDTO);
         }
 
+        [HttpGet("getPatientByFilter")]
+        [ProducesResponseType(typeof(IEnumerable<PatientDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<PatientDTO>>> GetPatientByFilter([FromQuery] string? fullName)
+        {
+            var patients = await _patientRepository.GetPatientByFilterAsync(fullName);
+            var patientsDTO = _mapper.Map<IEnumerable<PatientDTO>>(patients);
+            return Ok(patientsDTO);
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -89,6 +76,7 @@ namespace VKmfSoft_EHealth_API.Controllers
                 return BadRequest();
             }
 
+            //todo: check if email or phone number already exists for another patient
             //var patientWithSameEmail = await _patientRepository.GetByEmailAsync(patientCreateDTO.Email);
             //if (patientWithSameEmail != null)
             //{

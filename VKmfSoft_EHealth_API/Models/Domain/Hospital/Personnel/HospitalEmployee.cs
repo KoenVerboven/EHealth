@@ -9,7 +9,7 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel
         public int HospitalId { get; set; }
         public int DepartmentId { get; set; }
         public DateTime InServiceDate { get; set; }
-        public DateTime OutServiceDate { get; set; }
+        public DateTime? OutServiceDate { get; set; }
         public  HospitalDepartment? hospitalDepartment { get; set; }
         public decimal? Salery { get; set; }
     }

@@ -1,4 +1,5 @@
 ﻿using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel;
+using VKmfSoft_EHealth_API.Models.Domain.Patient;
 
 namespace VKmfSoft_EHealth_API.Repositories.Interfaces
 {
@@ -6,6 +7,7 @@ namespace VKmfSoft_EHealth_API.Repositories.Interfaces
     {
         Task<IEnumerable<Doctor>> GetAllAsync();
         Task<Doctor?> GetByIdAsync(int id);
+        Task<IEnumerable<Doctor>> GetDoctorByFilterAsync(string? fullName);
         Task AddAsync(Doctor doctor);
         Task UpdateAsync(Doctor doctor);
         Task DeleteAsync(int id);
