@@ -40,6 +40,10 @@ namespace VKmfSoft_EHealth_API.AutoMapper
             CreateMap<IntensiveCareRoom, IntensiveCareRoomCreateDTO>().ReverseMap();
             CreateMap<IntensiveCareRoom, IntensiveCareRoomUpdateDTO>().ReverseMap();
 
+            CreateMap<EmergencyRoom, EmergencyRoomDTO>().ReverseMap();
+            CreateMap<EmergencyRoom, EmergencyRoomCreateDTO>().ReverseMap();
+            CreateMap<EmergencyRoom, EmergencyRoomUpdateDTO>().ReverseMap();
+
             CreateMap<OnePersonPatientRoom, OnePersonPatientRoomDTO>().ReverseMap();
             CreateMap<OnePersonPatientRoom, OnePersonPatientRoomCreateDTO>().ReverseMap();
             CreateMap<OnePersonPatientRoom, OnePersonPatientRoomUpdateDTO>().ReverseMap();

@@ -1,5 +1,4 @@
 ﻿using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel;
-using VKmfSoft_EHealth_API.Models.Domain.Patient;
 
 namespace VKmfSoft_EHealth_API.Repositories.Interfaces
 {

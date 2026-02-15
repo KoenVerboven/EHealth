@@ -68,13 +68,11 @@ namespace VKmfSoft_EHealth_API.Controllers
             return CreatedAtAction(nameof(GetIntensiveCareRoomById), new { id = intensiveCareRoom.Id }, intensiveCareRoom);
         }
 
-
-
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> UpdateIntensiveCareRoomr(int id, IntensiveCareRoomUpdateDTO intensiveCareRoomUpdateDTO)
+        public async Task<ActionResult> UpdateIntensiveCareRoom(int id, IntensiveCareRoomUpdateDTO intensiveCareRoomUpdateDTO)
         {
             if (id != intensiveCareRoomUpdateDTO.Id)
             {
@@ -91,7 +89,6 @@ namespace VKmfSoft_EHealth_API.Controllers
              await _intensiveCareRoomRepository.UpdateAsync(intensiveCareRoom);
             return CreatedAtAction(nameof(GetIntensiveCareRoomById), new { id = intensiveCareRoom.Id }, intensiveCareRoom);
         }
-
 
     }
 }
