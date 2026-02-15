@@ -2,8 +2,6 @@
 {
     public class EmergencyRoom : HospitalRoom
     {
-        public int PatientId { get; set; }
-        public byte EmergencyGrade { get; set; } // from 1 to 10
-
+        public ICollection<EmergencyRoomOccupation>? emergencyRoomOccupations { get; set; }
     }
 }
