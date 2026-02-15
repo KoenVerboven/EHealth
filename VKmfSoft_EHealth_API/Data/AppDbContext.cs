@@ -19,6 +19,8 @@ namespace VKmfSoft_EHealth_API.Data
         public DbSet<Nurse> Nurses { get; set; }
         public DbSet<DoctorAppointment> DoctorAppointments { get; set; }
         public DbSet<IntensiveCareRoom> IntensiveCareRooms { get; set; }
+        public DbSet<EmergencyRoom> EmergencyRooms { get; set; }
+        public DbSet<EmergencyRoomOccupation> EmergencyRoomOccupations { get; set; }
         public DbSet<OnePersonPatientRoom> OnePersonPatientRooms { get; set; }
         public DbSet<MorePersonPatientRoom> MorePersonPatientRooms { get; set; }
 
