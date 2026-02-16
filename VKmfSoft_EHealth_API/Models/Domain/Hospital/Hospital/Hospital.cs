@@ -21,6 +21,7 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital
         public ICollection<OnePersonPatientRoom>? OnePersonPatientRoom { get; set; }
         public ICollection<MorePersonPatientRoom>? morePersonPatientRooms { get; set; }
         public ICollection<IntensiveCareRoom>? IntensiveCareRooms { get; set; }
+        public ICollection<EmergencyRoom>? EmergencyRooms { get; set; }
         
     }
 }

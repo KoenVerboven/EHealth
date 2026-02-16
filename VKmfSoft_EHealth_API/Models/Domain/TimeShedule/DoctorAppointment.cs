@@ -11,8 +11,9 @@ namespace VKmfSoft_EHealth_API.Models.Domain.TimeShedule
         public DateTime AppointmentDate { get; set; }
         [Required(ErrorMessage = "ReasonForVisit is required.")]
         public required string ReasonForVisit { get; set; }
+        public string? CancellingReason { get; set; }
         public string? Notes { get; set; }
-        public int Status { get; set; } // Scheduled, Completed, Canceled
+        public int Status { get; set; } // Scheduled, Completed, CanceledByPatient, CanceledByDoctor
         public int DegreeOfUrgency { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }

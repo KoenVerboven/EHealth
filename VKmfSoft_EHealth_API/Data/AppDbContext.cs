@@ -22,7 +22,9 @@ namespace VKmfSoft_EHealth_API.Data
         public DbSet<EmergencyRoom> EmergencyRooms { get; set; }
         public DbSet<EmergencyRoomOccupation> EmergencyRoomOccupations { get; set; }
         public DbSet<OnePersonPatientRoom> OnePersonPatientRooms { get; set; }
+        public DbSet<OnePersonPatientRoomOccupation> OnePersonPatientRoomOccupations { get; set; }
         public DbSet<MorePersonPatientRoom> MorePersonPatientRooms { get; set; }
+        public DbSet<MorePersonPatientRoomOccupation> MorePersonPatientRoomOccupations { get; set; }
 
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
