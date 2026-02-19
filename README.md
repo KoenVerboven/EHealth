@@ -5,7 +5,9 @@ web API (C#) for a hospital or doctor's practice.
 * Manage Patient, PatientRelatives ,Doctor and Nurse-data.
 * Manage the PatienthealthHistory (Medication, Scans, Vacciantions, Surgeries).
 * Make or Cancel a DoctorAppointment.
+  
 Work in Progress:
+
 * PatientInvoices and Payments.
 * Stock, Articles, Orders and Suppliers.
 * MedicalWorkerTimeShedule, ScannerShedule.
