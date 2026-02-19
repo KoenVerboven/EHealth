@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using VKmfSoft_EHealth_API.Models.Domain.General;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hardware;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel;
@@ -25,6 +26,10 @@ namespace VKmfSoft_EHealth_API.Data
         public DbSet<OnePersonPatientRoomOccupation> OnePersonPatientRoomOccupations { get; set; }
         public DbSet<MorePersonPatientRoom> MorePersonPatientRooms { get; set; }
         public DbSet<MorePersonPatientRoomOccupation> MorePersonPatientRoomOccupations { get; set; }
+        public DbSet<PatientRelative> PatientRelatives { get; set; }
+        public DbSet<PatientPainRegistration> PatientPainRegistrations { get; set; }
+        public DbSet<PatientAllergies> PatientAllergies { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
