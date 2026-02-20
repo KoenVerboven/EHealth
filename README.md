@@ -3,7 +3,7 @@ web API (C#) for a hospital or doctor's practice.
 * Manage Hospital and HospitalDepartments.
 * Manage PatatientRooms, EmergencyRooms ,IntensiveCareRooms.
 * Manage Patient, PatientRelatives ,Doctor and Nurse-data.
-* Manage the PatienthealthHistory (Medication, Scans, Vacciantions, Surgeries).
+* Manage the PatientMedicalRecord (Medication, Scans, Vacciantions, Surgeries, LabResults).
 * Make or Cancel a DoctorAppointment.
   
 Work in Progress:
