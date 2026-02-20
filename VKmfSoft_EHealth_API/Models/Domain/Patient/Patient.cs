@@ -1,4 +1,5 @@
-﻿using VKmfSoft_EHealth_API.Models.Domain.Other;
+﻿using VKmfSoft_EHealth_API.Models.Domain.Messages;
+using VKmfSoft_EHealth_API.Models.Domain.Other;
 using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
 
 namespace VKmfSoft_EHealth_API.Models.Domain.Patient
@@ -17,6 +18,7 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Patient
         public PatientHealthHistory? PatientHealthHistory { get; set; }
         public List<DoctorAppointment>? DoctorAppointments { get; set; }
         public List<PatientRelative>? patientRelatives { get; set; }
+        public List<PatientMessage>? PatientMessages { get; set; }
 
     }
 }
