@@ -6,7 +6,7 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Patient
     {
         [Key]
         public int Id { get; set; }
-        public int PatientMedicalHistoryId { get; set; }//FK to PatientMedicalHistory
+        public int PatientMedicalRecordId { get; set; }//FK 
         [Required(ErrorMessage = "Vaccine is required.")]
         public required int VaccineId { get; set; }
         public string? VaccineName { get; set; }

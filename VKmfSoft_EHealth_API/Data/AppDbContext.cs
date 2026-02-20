@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using VKmfSoft_EHealth_API.Models.Domain.General;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hardware;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
@@ -27,10 +28,15 @@ namespace VKmfSoft_EHealth_API.Data
         public DbSet<MorePersonPatientRoom> MorePersonPatientRooms { get; set; }
         public DbSet<MorePersonPatientRoomOccupation> MorePersonPatientRoomOccupations { get; set; }
         public DbSet<PatientRelative> PatientRelatives { get; set; }
+        public DbSet<PatientMedicalRecord> PatientMedicalRecords { get; set; } 
         public DbSet<PatientPainRegistration> PatientPainRegistrations { get; set; }
-        public DbSet<PatientAllergies> PatientAllergies { get; set; }
+        public DbSet<PatientAllergy> PatientAllergies { get; set; }
+        public DbSet<PatientMedicationHistory> PatientMedications { get; set; }
+        public DbSet<PatientVaccination> PatientVaccinations { get; set; }
+        public DbSet<PatientScan> PatientScans { get; set; }
+        public DbSet<PatientSurgery> PatientSurgeries { get; set; }
+        public DbSet<PatientLabResult> PatientLabResults { get; set; }
         public DbSet<Address> Addresses { get; set; }
-
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)

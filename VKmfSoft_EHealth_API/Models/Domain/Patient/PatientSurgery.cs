@@ -9,8 +9,8 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Patient
         public int Id { get; set; }
 
         #region Info about Patient
-        public int PatientId { get; set; }
-        public int PatientMedicalHistoryId { get; set; }//FK to PatientMedicalHistory
+       public int PatientMedicalRecordId { get; set; }//FK
+        
         [Required(ErrorMessage = "SurgeryType is required.")]
         public required int PatientAdmissionId { get; set; } //FK to PatientAdmission
         #endregion

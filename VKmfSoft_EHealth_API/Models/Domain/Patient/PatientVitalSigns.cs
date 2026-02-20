@@ -7,7 +7,7 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Patient
         [Key]
         public int Id { get; set; }
         public int PatientDiagnoseId { get; set; }//FK
-        public int PatientMedicalHistoryId { get; set; }//FK to PatientMedicalHistory
+        public int PatientMedicalRecordId { get; set; }//FK
         public DateTime RecordedAt { get; set; }
         public float Temperature { get; set; }
         public int HeartRate { get; set; }

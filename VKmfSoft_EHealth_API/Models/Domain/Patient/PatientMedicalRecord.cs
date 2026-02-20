@@ -1,6 +1,6 @@
 ﻿namespace VKmfSoft_EHealth_API.Models.Domain.Patient
 {
-    public class PatientHealthHistory
+    public class PatientMedicalRecord
     {
         public int Id { get; set; }
         public int PatientId { get; set; }
@@ -10,7 +10,7 @@
        
         //public List<PatientVitalSigns> VitalSigns { get; set; } = [];
         public List<PatientMedicationHistory> Medications { get; set; } = [];
-        public List<PatientAllergies> PatientAllergies  { get; set; } = [];
+        public List<PatientAllergy> PatientAllergies  { get; set; } = [];
 
     }
 }
