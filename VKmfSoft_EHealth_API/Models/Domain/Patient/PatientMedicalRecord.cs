@@ -11,6 +11,7 @@
         //public List<PatientVitalSigns> VitalSigns { get; set; } = [];
         public List<PatientMedicationHistory> Medications { get; set; } = [];
         public List<PatientAllergy> PatientAllergies  { get; set; } = [];
+        public List<PatientLabResult> PatientLabResults { get; set; } = [];
 
     }
 }
