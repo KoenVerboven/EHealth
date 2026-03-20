@@ -1,5 +1,5 @@
 ﻿
-public enum Gender : byte
+internal enum Gender : byte
 {
     Unknown = 0,
     Male = 1,
@@ -7,7 +7,7 @@ public enum Gender : byte
     Other = 3
 }
 
-public enum AppointmentStatus
+internal enum AppointmentStatus
 {
     Scheduled = 1,
     Completed = 2,
@@ -15,21 +15,21 @@ public enum AppointmentStatus
     NoShow = 4
 }
 
-public enum DegreeOfUrgency
+internal enum DegreeOfUrgency
 {        
     Normal = 1,
     Urgent = 2,
     Emergency = 3
 }
 
-public enum ScanStatus
+internal enum ScanStatus
 {
     Scheduled = 1,
     Completed = 2,
     Canceled = 3
 }
 
-public enum  ScannerType
+internal enum  ScannerType
 {
     MRI = 1,
     CT = 2,
@@ -40,7 +40,7 @@ public enum  ScannerType
     Other = 7
 }
 
-public enum ScanPriority
+internal enum ScanPriority
 {
     Low = 1,
     Medium = 2,
@@ -48,21 +48,21 @@ public enum ScanPriority
     Urgent = 4
 }
 
-public enum SurgeryStatus
+internal enum SurgeryStatus
 {
     Scheduled = 1,
     Completed = 2,
     Canceled = 3
 }
 
-public enum VaccinationStatus
+internal enum VaccinationStatus
 {
     Scheduled = 1,
     Completed = 2,
     Canceled = 3
 }
 
-public enum AllergyType
+internal enum AllergyType
 {
     Food = 1,
     Drug = 2,
@@ -71,7 +71,7 @@ public enum AllergyType
     Other = 5
 }
 
-public enum BloodType: byte
+internal enum BloodType: byte
 {
     A_Positive = 1,
     A_Negative = 2,
@@ -83,7 +83,7 @@ public enum BloodType: byte
     O_Negative = 8
 }
 
-public enum MedicationFrequency
+internal enum MedicationFrequency
 {
     OnceDaily = 1,
     TwiceDaily = 2,
@@ -93,7 +93,7 @@ public enum MedicationFrequency
     AsNeeded = 6
 }
 
-public enum MedicationRoute
+internal enum MedicationRoute
 {
     Oral = 1,
     Intravenous = 2,
@@ -104,7 +104,7 @@ public enum MedicationRoute
     Other = 7
 }
 
-public enum ScanType
+internal enum ScanType
 {
     CT = 1,
     MRI = 2,
@@ -114,7 +114,7 @@ public enum ScanType
     Other = 6
 }
 
-public enum SurgeryType
+internal enum SurgeryType
 {
     Cardiac = 1,
     Orthopedic = 2,
@@ -124,14 +124,14 @@ public enum SurgeryType
     Other = 6
 }   
 
-public enum AllergySeverity
+internal enum AllergySeverity
 {
     Mild = 1,
     Moderate = 2,
     Severe = 3
 }
 
-public enum MedicalIssueType
+internal enum MedicalIssueType
 {
     Allergy = 1,
     Asthma = 2,
@@ -157,7 +157,7 @@ public enum MedicalIssueType
     Other = 22
 }
 
-public enum Language
+internal enum Language
 {
     English = 1,
     Spanish = 2,
