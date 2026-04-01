@@ -6,7 +6,8 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Stock
     {
         [Key]
         public int Id { get; set; }
-        public required string ArticleName { get; set; }
+        public required string ArticleName { get; set; } 
+        public  int  ArticleType { get; set; } // todo : enum medication,it equipment,other
         public string? Description { get; set; }
         public decimal Price { get; set; }
         public  int InStock { get; set; }

@@ -6,6 +6,7 @@ using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personnel;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Room;
+using VKmfSoft_EHealth_API.Models.Domain.Invoice;
 using VKmfSoft_EHealth_API.Models.Domain.Patient;
 using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
 
@@ -37,6 +38,9 @@ namespace VKmfSoft_EHealth_API.Data
         public DbSet<PatientSurgery> PatientSurgeries { get; set; }
         public DbSet<PatientLabResult> PatientLabResults { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<InvoiceDetailLine> InvoiceDetailLines { get; set; }
+        public DbSet<Payment> Payments { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)

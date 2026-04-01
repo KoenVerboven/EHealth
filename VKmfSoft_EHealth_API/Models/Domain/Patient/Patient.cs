@@ -19,6 +19,7 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Patient
         public List<DoctorAppointment>? DoctorAppointments { get; set; }
         public List<PatientRelative>? patientRelatives { get; set; }
         public List<PatientMessage>? PatientMessages { get; set; }
+        public List<Invoice.Invoice>? Invoices { get; set; }
 
     }
 }

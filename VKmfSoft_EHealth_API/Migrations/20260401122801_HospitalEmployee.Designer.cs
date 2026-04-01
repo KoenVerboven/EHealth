@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VKmfSoft_EHealth_API.Data;
 
@@ -11,9 +12,11 @@ using VKmfSoft_EHealth_API.Data;
 namespace VKmfSoft_EHealth_API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260401122801_HospitalEmployee")]
+    partial class HospitalEmployee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,15 +36,12 @@ namespace VKmfSoft_EHealth_API.Migrations
                     b.Property<string>("BusNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DoctorId")
+                    b.Property<int?>("HospitalEmployeeId")
                         .HasColumnType("int");
 
                     b.Property<string>("LandCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("NurseId")
-                        .HasColumnType("int");
 
                     b.Property<int?>("PatientId")
                         .HasColumnType("int");
@@ -61,9 +61,7 @@ namespace VKmfSoft_EHealth_API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("NurseId");
+                    b.HasIndex("HospitalEmployeeId");
 
                     b.HasIndex("PatientId");
 
@@ -140,7 +138,7 @@ namespace VKmfSoft_EHealth_API.Migrations
                     b.ToTable("HospitalDepartments");
                 });
 
-            modelBuilder.Entity("VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel.Doctor", b =>
+            modelBuilder.Entity("VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel.HospitalEmployee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -160,107 +158,10 @@ namespace VKmfSoft_EHealth_API.Migrations
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("Discriminator")
                         .IsRequired()
-                        .HasMaxLength(45)
-                        .HasColumnType("nvarchar(45)");
-
-                    b.Property<int>("FirstLanguageID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<byte>("Gender")
-                        .HasColumnType("tinyint");
-
-                    b.Property<int>("HospitalId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("InServiceDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<string>("LicenseNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("LicenseValidUntil")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("MedicalTitle")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MiddleName")
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<DateTime?>("OutServiceDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("PatientSurgeryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("Photo")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Position")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal?>("Salery")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("SpecializationId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("UpdatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("hospitalDepartmentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PatientSurgeryId");
-
-                    b.HasIndex("hospitalDepartmentId");
-
-                    b.ToTable("Doctors");
-                });
-
-            modelBuilder.Entity("VKmfSoft_EHealth_API.Models.Domain.Hospital.Personnel.Nurse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
+                        .HasMaxLength(21)
+                        .HasColumnType("nvarchar(21)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -277,9 +178,6 @@ namespace VKmfSoft_EHealth_API.Migrations
 
                     b.Property<byte>("Gender")
                         .HasColumnType("tinyint");
-
-                    b.Property<int>("Grade")
-                        .HasColumnType("int");
 
                     b.Property<int>("HospitalId")
                         .HasColumnType("int");
@@ -326,7 +224,11 @@ namespace VKmfSoft_EHealth_API.Migrations
 
                     b.HasIndex("hospitalDepartmentId");
 
-                    b.ToTable("Nurses");
+                    b.ToTable("HospitalEmployees");
+
+                    b.HasDiscriminator().HasValue("HospitalEmployee");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("VKmfSoft_EHealth_API.Models.Domain.Hospital.Room.EmergencyRoom", b =>
@@ -1135,15 +1037,46 @@ namespace VKmfSoft_EHealth_API.Migrations
                     b.ToTable("DoctorAppointments");
                 });
 
+            modelBuilder.Entity("VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel.Doctor", b =>
+                {
+                    b.HasBaseType("VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel.HospitalEmployee");
+
+                    b.Property<string>("LicenseNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LicenseValidUntil")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MedicalTitle")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PatientSurgeryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SpecializationId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("PatientSurgeryId");
+
+                    b.HasDiscriminator().HasValue("Doctor");
+                });
+
+            modelBuilder.Entity("VKmfSoft_EHealth_API.Models.Domain.Hospital.Personnel.Nurse", b =>
+                {
+                    b.HasBaseType("VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel.HospitalEmployee");
+
+                    b.Property<int>("Grade")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("Nurse");
+                });
+
             modelBuilder.Entity("VKmfSoft_EHealth_API.Models.Domain.General.Address", b =>
                 {
-                    b.HasOne("VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel.Doctor", null)
+                    b.HasOne("VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel.HospitalEmployee", null)
                         .WithMany("Addresses")
-                        .HasForeignKey("DoctorId");
-
-                    b.HasOne("VKmfSoft_EHealth_API.Models.Domain.Hospital.Personnel.Nurse", null)
-                        .WithMany("Addresses")
-                        .HasForeignKey("NurseId");
+                        .HasForeignKey("HospitalEmployeeId");
 
                     b.HasOne("VKmfSoft_EHealth_API.Models.Domain.Patient.Patient", null)
                         .WithMany("Addresses")
@@ -1165,20 +1098,7 @@ namespace VKmfSoft_EHealth_API.Migrations
                     b.Navigation("Hospital");
                 });
 
-            modelBuilder.Entity("VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel.Doctor", b =>
-                {
-                    b.HasOne("VKmfSoft_EHealth_API.Models.Domain.Patient.PatientSurgery", null)
-                        .WithMany("MediacalWorkers")
-                        .HasForeignKey("PatientSurgeryId");
-
-                    b.HasOne("VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital.HospitalDepartment", "hospitalDepartment")
-                        .WithMany()
-                        .HasForeignKey("hospitalDepartmentId");
-
-                    b.Navigation("hospitalDepartment");
-                });
-
-            modelBuilder.Entity("VKmfSoft_EHealth_API.Models.Domain.Hospital.Personnel.Nurse", b =>
+            modelBuilder.Entity("VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel.HospitalEmployee", b =>
                 {
                     b.HasOne("VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital.HospitalDepartment", "hospitalDepartment")
                         .WithMany()
@@ -1354,6 +1274,13 @@ namespace VKmfSoft_EHealth_API.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel.Doctor", b =>
+                {
+                    b.HasOne("VKmfSoft_EHealth_API.Models.Domain.Patient.PatientSurgery", null)
+                        .WithMany("MediacalWorkers")
+                        .HasForeignKey("PatientSurgeryId");
+                });
+
             modelBuilder.Entity("VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital.Hospital", b =>
                 {
                     b.Navigation("EmergencyRooms");
@@ -1367,14 +1294,7 @@ namespace VKmfSoft_EHealth_API.Migrations
                     b.Navigation("morePersonPatientRooms");
                 });
 
-            modelBuilder.Entity("VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel.Doctor", b =>
-                {
-                    b.Navigation("Addresses");
-
-                    b.Navigation("DoctorAppointments");
-                });
-
-            modelBuilder.Entity("VKmfSoft_EHealth_API.Models.Domain.Hospital.Personnel.Nurse", b =>
+            modelBuilder.Entity("VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel.HospitalEmployee", b =>
                 {
                     b.Navigation("Addresses");
                 });
@@ -1437,6 +1357,11 @@ namespace VKmfSoft_EHealth_API.Migrations
             modelBuilder.Entity("VKmfSoft_EHealth_API.Models.Domain.Patient.PatientSurgery", b =>
                 {
                     b.Navigation("MediacalWorkers");
+                });
+
+            modelBuilder.Entity("VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel.Doctor", b =>
+                {
+                    b.Navigation("DoctorAppointments");
                 });
 #pragma warning restore 612, 618
         }
