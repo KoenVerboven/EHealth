@@ -1,5 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using VKmfSoft_EHealth_API.Models.Domain.Messages;
 using VKmfSoft_EHealth_API.Models.Domain.Patient;
+using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
 
 namespace VKmfSoft_EHealth_API.Models.DTO.Patient
 {
@@ -11,7 +12,7 @@ namespace VKmfSoft_EHealth_API.Models.DTO.Patient
         public string? MiddleName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public required byte Gender { get; set; }
-        public required string Address { get; set; }
+        //public required string Address { get; set; }
         public required string PhoneNumber { get; set; }
         public required string Email { get; set; }
         public int FirstLanguageID { get; set; }
@@ -25,5 +26,9 @@ namespace VKmfSoft_EHealth_API.Models.DTO.Patient
         public string? EmergencyContactDescription { get; set; }
         public byte BloodTypeId { get; set; }
         public PatientMedicalRecord? PatientMedicalRecord { get; set; }
+        public List<DoctorAppointment>? DoctorAppointments { get; set; }
+        public List<PatientRelative>? PatientRelatives { get; set; }
+        public List<PatientMessage>? PatientMessages { get; set; }
+
     }
 }
