@@ -15,8 +15,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddAutoMapper(cfg =>
-           cfg.LicenseKey = "your_license_key_here"
-           , typeof(MappingConfig));
+               cfg.LicenseKey = builder.Configuration.GetValue<string>("AutoMapper:LicenseKey"),
+               typeof(MappingConfig));
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
