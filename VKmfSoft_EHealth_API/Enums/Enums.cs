@@ -7,7 +7,7 @@ internal enum Gender : byte
     Other = 3
 }
 
-internal enum AppointmentStatus
+public enum AppointmentStatus: byte   
 {
     Scheduled = 1,
     Completed = 2,

@@ -12,9 +12,6 @@ using VKmfSoft_EHealth_API.Repositories.Interfaces;
  * test whether it is feasible in the field of :
  * development time, performance, readability and maintainability.
  * 
- * We do not allow update a appointment. 
- * Delete and create a new one is the way to go.
- * 
  */
 
 
@@ -196,7 +193,7 @@ namespace VKmfSoft_EHealth_API.Controllers
                 AppointmentDate = doctorAppointmentCreateDTO.AppointmentDate,
                 ReasonForVisit = doctorAppointmentCreateDTO.ReasonForVisit,
                 Notes = doctorAppointmentCreateDTO.Notes,
-                Status = doctorAppointmentCreateDTO.Status,
+                Status = (byte)AppointmentStatus.Scheduled,
                 DegreeOfUrgency = doctorAppointmentCreateDTO.DegreeOfUrgency,
                 AppointmentPlaceId = doctorAppointmentCreateDTO.AppointmentPlaceId,
                 CreatedBy = doctorAppointmentCreateDTO.CreatedByPersonId,
@@ -207,13 +204,31 @@ namespace VKmfSoft_EHealth_API.Controllers
             return CreatedAtAction(nameof(GetAppointmentById), new { id = doctorAppointment.Id }, doctorAppointment);
         }
 
-        [HttpDelete("{id}")]
+        [HttpPut("setStatus/{id},{appointmentstatus},{cancellingReason},{userId}")]//todo : testing!!
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> DeleteCourse(int id)
+        public async Task<ActionResult> UpdateDoctorAppointmentStatus(int id, AppointmentStatus appointmentstatus, string cancellingReason, int userId)
         {
-            await _appointmentRepository.DeleteAsync(id);
+            var doctorAppointment = await _appointmentRepository.GetByIdAsync(id);
+
+            if (doctorAppointment == null)
+            {
+                return NotFound();
+            }
+
+            doctorAppointment.Status = (byte)appointmentstatus;
+
+            if (appointmentstatus == AppointmentStatus.Canceled)
+            {
+                doctorAppointment.CancellingReason = cancellingReason;
+            }
+
+            //doctorAppointment.Updatedby = userId; //todo : get the user id from the token
+            //doctorAppointment.UpdateAt = DateTime.Now;
+
+            await _appointmentRepository.UpdateAsync(doctorAppointment);
+
             return NoContent();
         }
 

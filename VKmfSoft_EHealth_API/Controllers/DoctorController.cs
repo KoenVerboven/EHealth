@@ -3,22 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel;
 using VKmfSoft_EHealth_API.Models.DTO.Hospital;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
-using VKmfSoft_EHealth_API.Repositories.Repos;
 
 namespace VKmfSoft_EHealth_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DoctorController : ControllerBase
+    public class DoctorController(IDoctorRepository doctorRepository, IMapper mapper) : ControllerBase
     {
-        private readonly IDoctorRepository _doctorRepository;
-        private readonly IMapper _mapper;
-
-        public DoctorController(IDoctorRepository doctorRepository, IMapper mapper)
-        {
-            _doctorRepository = doctorRepository;
-            _mapper = mapper;
-        }
+        private readonly IDoctorRepository _doctorRepository = doctorRepository;
+        private readonly IMapper _mapper = mapper;
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DoctorDTO>>> Get()
