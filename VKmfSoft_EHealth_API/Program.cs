@@ -1,12 +1,23 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+using Serilog;
 using VKmfSoft_EHealth_API.AutoMapper;
 using VKmfSoft_EHealth_API.Data;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
 using VKmfSoft_EHealth_API.Repositories.Repos;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//logger :
+var configuration = new ConfigurationBuilder()
+   .SetBasePath(Directory.GetCurrentDirectory())
+   .AddJsonFile("appsettings.json")
+   .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", true)
+   .Build();
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(configuration)
+    .CreateLogger();
+builder.Host.UseSerilog();
 
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(options =>
