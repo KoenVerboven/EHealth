@@ -23,7 +23,7 @@ namespace VKmfSoft_EHealth_API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PatientDTO>>> Get()
+        public async Task<ActionResult<IEnumerable<PatientDTO>>> GetAllPatientsAsync()
         {
             var patients = await _patientRepository.GetAllAsync();
             var patientDTO = _mapper.Map<List<PatientDTO>>(patients);
