@@ -14,7 +14,6 @@ namespace EhealthApiTests
 {
     public class PatientControllerTest
     {
-
         private readonly Mock<IPatientRepository> _mockPatientRepo;
         private readonly Mock<ILogger<PatientController>> _mockILogger;
         private readonly MapperConfiguration _mapperConfiguration;
