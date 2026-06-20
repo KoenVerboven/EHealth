@@ -148,6 +148,72 @@ namespace EhealthApiTests
             Assert.NotNull(notFoundObjectResult);
         }
 
+        [Fact]
+        public async Task GetAsynById_ShallReturnBadRequest_WhenDoctorAppointmentIdEqualsZero()
+        {
+            //arrange
+            var doctorAppointment = new DoctorAppointment()
+            {
+                Id = 1,
+                PatientId = 1,
+                DoctorId = 1,
+                AppointmentDate = DateTime.Now,
+                ReasonForVisit = "pain",
+                Status = 1,
+                DegreeOfUrgency = 1,
+                AppointmentPlaceId = 1
+            };
+
+            var mapper = new Mapper(_mapperConfiguration);
+            _mockDoctorAppointmentRepo.Setup(x => x.GetByIdAsync(1)).ReturnsAsync(doctorAppointment);
+            var controller = new DoctorAppointmentController(_mockDoctorAppointmentRepo.Object, mapper);
+
+            //act
+            var actionResult = await controller.GetAppointmentById(0);
+
+            //assert
+            Assert.IsType<BadRequestResult>(actionResult.Result);
+        }
+
+        [Fact]
+        public async Task CreateDoctorAppointment_AddDoctorAppointmentCorrectly_WhenNewDoctorAppointmentIsAdded()
+        {
+            //arrange
+            var doctorAppointment = new DoctorAppointment()
+            {
+                Id = 1,
+                PatientId = 1,
+                DoctorId = 1, //todo : check sometimes doctorId and medicalWorkerId are the same?
+                AppointmentDate = DateTime.Now,
+                ReasonForVisit = "pain",
+                Status = 1,
+                DegreeOfUrgency = 1,
+                AppointmentPlaceId = 1
+            };
+
+            var newDoctorAppointment = new DoctorAppointmentCreateDTO()
+            {
+                PatientId = 1,
+                MedicalWorkerId = 1,
+                AppointmentDate = DateTime.Now,
+                ReasonForVisit = "pain",
+                Status = 1,
+                DegreeOfUrgency = 1,
+                AppointmentPlaceId = 1
+            };
+
+            var mapper = new Mapper(_mapperConfiguration);
+            _mockDoctorAppointmentRepo.Setup(x => x.GetByIdAsync(1)).ReturnsAsync(doctorAppointment);
+            var controller = new DoctorAppointmentController(_mockDoctorAppointmentRepo.Object, mapper);
+
+            //act
+            var actionResult = await controller.AddDoctorAppointment(newDoctorAppointment);
+
+            //assert
+            Assert.IsType<CreatedAtActionResult>(actionResult.Result);
+             
+        }
+
         private IEnumerable<DoctorAppointment> DoctorAppointmentList()
         {
             IEnumerable<DoctorAppointment> doctorAppointments = [
