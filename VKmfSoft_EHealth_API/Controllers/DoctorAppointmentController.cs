@@ -4,6 +4,7 @@ using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
 using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
 using VKmfSoft_EHealth_API.Models.DTO.TimeShedule;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
+using VKmfSoft_EHealth_API.Specifications;
 
 /*
  * Author: Koen Verboven
@@ -56,6 +57,37 @@ namespace VKmfSoft_EHealth_API.Controllers
 
             return Ok(doctorAppointmentDTOs);
         }
+
+        [HttpGet("getDoctorAppointmentsByDoctorAppointmentSearchParamsFilter")]
+        [ProducesResponseType(typeof(IEnumerable<DoctorAppointmentDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<DoctorAppointmentDTO>>> GetDoctorAppointmentsByDoctorAppointmentSearchParamsFilter([FromQuery] DoctorAppointmentSearchParams doctorAppointmentSearchParams)
+        {
+            List<DoctorAppointmentDTO> doctorAppointmentDTOs = new();
+            var doctorAppointments = await _appointmentRepository.GetSearchAsync(doctorAppointmentSearchParams);
+  
+            foreach (var doctorAppointment in doctorAppointments)
+            {
+                doctorAppointmentDTOs.Add(
+                    new DoctorAppointmentDTO
+                    {
+                        Id = doctorAppointment.Id,
+                        PatientId = doctorAppointment.PatientId,
+                        MedicalWorkerId = doctorAppointment.DoctorId,
+                        AppointmentDate = doctorAppointment.AppointmentDate,
+                        ReasonForVisit = doctorAppointment.ReasonForVisit,
+                        Notes = doctorAppointment.Notes,
+                        Status = doctorAppointment.Status,
+                        DegreeOfUrgency = doctorAppointment.DegreeOfUrgency,
+                        AppointmentPlaceId = doctorAppointment.AppointmentPlaceId
+                    }
+                );
+            }
+
+            return Ok(doctorAppointmentDTOs);
+        }
+
 
         [HttpGet("getById/{id}")]
         [ProducesResponseType(typeof(DoctorAppointmentDTO), StatusCodes.Status200OK)]

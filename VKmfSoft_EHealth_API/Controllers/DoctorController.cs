@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel;
 using VKmfSoft_EHealth_API.Models.DTO.Hospital;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
+using VKmfSoft_EHealth_API.Specifications;
 
 namespace VKmfSoft_EHealth_API.Controllers
 {
@@ -48,9 +49,20 @@ namespace VKmfSoft_EHealth_API.Controllers
         [ProducesResponseType(typeof(IEnumerable<DoctorDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<DoctorDTO>>> GetDoctorByFilter([FromQuery] string? fullName)
+        public async Task<ActionResult<IEnumerable<DoctorDTO>>> GetDoctorByFilter([FromQuery] string? fullName)//todo: add more filters ; see schoolapi Student
         {
             var doctors = await _doctorRepository.GetDoctorByFilterAsync(fullName);
+            var doctorsDTO = _mapper.Map<IEnumerable<DoctorDTO>>(doctors);
+            return Ok(doctorsDTO);
+        }
+
+        [HttpGet("getDoctorByDoctorSearchParamsFilter")]
+        [ProducesResponseType(typeof(IEnumerable<DoctorDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<DoctorDTO>>> GetDoctorByDoctorSearchParamsFilter([FromQuery] DoctorSearchParams doctorSearchParams)
+        {
+            var doctors = await _doctorRepository.GetSearchAsync(doctorSearchParams);
             var doctorsDTO = _mapper.Map<IEnumerable<DoctorDTO>>(doctors);
             return Ok(doctorsDTO);
         }

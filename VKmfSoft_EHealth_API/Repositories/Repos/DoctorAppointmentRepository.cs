@@ -1,8 +1,10 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using VKmfSoft_EHealth_API.Data;
+using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personnel;
 using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
+using VKmfSoft_EHealth_API.Specifications;
 
 namespace VKmfSoft_EHealth_API.Repositories.Repos
 {
@@ -63,6 +65,56 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
         {
             _context.DoctorAppointments.Update(appointment);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<DoctorAppointment>> GetSearchAsync(DoctorAppointmentSearchParams doctorAppointmentSearchParams)
+        {
+            var pageSize = doctorAppointmentSearchParams.PageSize;
+            IQueryable<DoctorAppointment> doctorAppointments;
+
+            doctorAppointments = _context.DoctorAppointments;
+
+
+            if (doctorAppointmentSearchParams.PatientId != null)
+            {
+                doctorAppointments = doctorAppointments.Where(p => p.PatientId == doctorAppointmentSearchParams.PatientId);
+            }
+
+            if (doctorAppointmentSearchParams.DoctorId != null)                              
+            {
+                doctorAppointments = doctorAppointments.Where(p => p.DoctorId == doctorAppointmentSearchParams.DoctorId);
+            }
+
+            if (doctorAppointmentSearchParams.StartDate != null && doctorAppointmentSearchParams.EndDate != null)
+            {
+                doctorAppointments = doctorAppointments.Where(p => p.AppointmentDate >= doctorAppointmentSearchParams.StartDate 
+                                                                && p.AppointmentDate <= doctorAppointmentSearchParams.EndDate);
+            }
+
+            doctorAppointments = doctorAppointmentSearchParams.Sort.ToLower() switch
+            {
+                "id" => doctorAppointments.OrderBy(p => p.Id).AsQueryable(),
+                "id_desc" => doctorAppointments.OrderByDescending(p => p.Id).AsQueryable(),
+                "patientid" => doctorAppointments.OrderBy(p => p.PatientId).AsQueryable(),
+                "patientid_desc" => doctorAppointments.OrderByDescending(p => p.PatientId).AsQueryable(),
+                "doctorid" => doctorAppointments.OrderBy(p => p.DoctorId).AsQueryable(),
+                "doctorid_desc" => doctorAppointments.OrderByDescending(p => p.DoctorId ).AsQueryable(),
+                "appointmentdate" => doctorAppointments.OrderBy(p => p.AppointmentDate).AsQueryable(),
+                "appointmentdate_desc" => doctorAppointments.OrderByDescending(p => p.AppointmentDate).AsQueryable(),
+                _ => doctorAppointments.OrderBy(p => p.Id).AsQueryable(),
+            };
+
+            if (doctorAppointmentSearchParams.PageSize > 0 && doctorAppointmentSearchParams.PageNumber > 0) 
+            {
+                if (doctorAppointmentSearchParams.PageSize > 30)
+                {
+                    pageSize = 30;
+                }
+
+                doctorAppointments = doctorAppointments.Skip(doctorAppointmentSearchParams.PageSize * (doctorAppointmentSearchParams.PageNumber - 1)).Take(pageSize);
+            }
+
+            return await doctorAppointments.ToListAsync();
         }
     }
 }

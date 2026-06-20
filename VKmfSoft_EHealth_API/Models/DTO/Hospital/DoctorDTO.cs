@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using VKmfSoft_EHealth_API.Models.Domain.General;
 
 namespace VKmfSoft_EHealth_API.Models.DTO.Hospital
 {
@@ -11,7 +12,7 @@ namespace VKmfSoft_EHealth_API.Models.DTO.Hospital
         public string? MiddleName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public required byte Gender { get; set; }
-        public required string Address { get; set; }
+        public List<Address>? Addresses { get; set; }
         public required string PhoneNumber { get; set; }
         public required string Email { get; set; }
         public int FirstLanguageID { get; set; }
