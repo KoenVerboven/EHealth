@@ -58,20 +58,9 @@ namespace VKmfSoft_EHealth_API.Controllers
         [ProducesResponseType(typeof(IEnumerable<PatientDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<PatientDTO>>> GetPatientByFilter([FromQuery] string? fullName)
+        public async Task<ActionResult<IEnumerable<PatientDTO>>> GetPatientByFilter([FromQuery] PatientSearchParams patientSearchParams)
         {
-            var patients = await _patientRepository.GetPatientByFilterAsync(fullName);
-            var patientsDTO = _mapper.Map<IEnumerable<PatientDTO>>(patients);
-            return Ok(patientsDTO);
-        }
-
-        [HttpGet("getPatientByPatientSearchParamsFilter")]
-        [ProducesResponseType(typeof(IEnumerable<PatientDTO>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<PatientDTO>>> GetPatientByPatientSearchParamsFilter([FromQuery] PatientSearchParams patientSearchParams)
-        {
-            var patients = await _patientRepository.GetSearchAsync(patientSearchParams);
+            var patients = await _patientRepository.GetPatientByFilterasync(patientSearchParams);
             var patientsDTO = _mapper.Map<IEnumerable<PatientDTO>>(patients);
             return Ok(patientsDTO);
         }

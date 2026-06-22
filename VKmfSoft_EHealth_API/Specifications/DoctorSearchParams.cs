@@ -5,6 +5,7 @@
         string? Lastname,
         string? Firstname,
         string? Email,
+        int? Specialization,
         string Sort,
         int PageSize,
         int PageNumber

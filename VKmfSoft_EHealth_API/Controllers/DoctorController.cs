@@ -44,25 +44,15 @@ namespace VKmfSoft_EHealth_API.Controllers
             var doctorDTO = _mapper.Map<DoctorDTO>(doctor);
             return Ok(doctorDTO);
         }
+               
 
         [HttpGet("getDoctorByFilter")]
         [ProducesResponseType(typeof(IEnumerable<DoctorDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<DoctorDTO>>> GetDoctorByFilter([FromQuery] string? fullName)//todo: add more filters ; see schoolapi Student
+        public async Task<ActionResult<IEnumerable<DoctorDTO>>> GetDoctorByFilter([FromQuery] DoctorSearchParams doctorSearchParams)
         {
-            var doctors = await _doctorRepository.GetDoctorByFilterAsync(fullName);
-            var doctorsDTO = _mapper.Map<IEnumerable<DoctorDTO>>(doctors);
-            return Ok(doctorsDTO);
-        }
-
-        [HttpGet("getDoctorByDoctorSearchParamsFilter")]
-        [ProducesResponseType(typeof(IEnumerable<DoctorDTO>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<DoctorDTO>>> GetDoctorByDoctorSearchParamsFilter([FromQuery] DoctorSearchParams doctorSearchParams)
-        {
-            var doctors = await _doctorRepository.GetSearchAsync(doctorSearchParams);
+            var doctors = await _doctorRepository.GetDoctorByFilterasync(doctorSearchParams);
             var doctorsDTO = _mapper.Map<IEnumerable<DoctorDTO>>(doctors);
             return Ok(doctorsDTO);
         }

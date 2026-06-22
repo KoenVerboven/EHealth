@@ -8,12 +8,10 @@ namespace VKmfSoft_EHealth_API.Repositories.Interfaces
     {
         Task<IEnumerable<Doctor>> GetAllAsync();
         Task<Doctor?> GetByIdAsync(int id);
-        Task<IEnumerable<Doctor>> GetDoctorByFilterAsync(string? fullName);
-        Task<IEnumerable<Doctor>> GetSearchAsync(DoctorSearchParams doctorSearchParameters);
+        Task<IEnumerable<Doctor>> GetDoctorByFilterasync(DoctorSearchParams doctorSearchParameters);
         Task AddAsync(Doctor doctor);
         Task UpdateAsync(Doctor doctor);
         Task DeleteAsync(int id);
-        Task<IEnumerable<Doctor>> GetFilterAsync(string? Name, string? Email, string Sort, int PageSize, int PageNumber);
         bool DoctorExists(int doctorId);
     }
 }

@@ -1,7 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using VKmfSoft_EHealth_API.Data;
-using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personnel;
 using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
 using VKmfSoft_EHealth_API.Specifications;
@@ -42,6 +41,8 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             return await _context.DoctorAppointments.FindAsync(id);
         }
 
+
+        //obsolete can be replaced with GetSearchAsync method
         public async Task<IEnumerable<DoctorAppointment?>> GetByDoctorIdAsync(int doctorId, DateTime startDate, DateTime endDate)
         {
             return await _context.DoctorAppointments.Where(
@@ -67,7 +68,7 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<DoctorAppointment>> GetSearchAsync(DoctorAppointmentSearchParams doctorAppointmentSearchParams)
+        public async Task<IEnumerable<DoctorAppointment>> GetDoctorAppointmentByFilterasync(DoctorAppointmentSearchParams doctorAppointmentSearchParams)
         {
             var pageSize = doctorAppointmentSearchParams.PageSize;
             IQueryable<DoctorAppointment> doctorAppointments;

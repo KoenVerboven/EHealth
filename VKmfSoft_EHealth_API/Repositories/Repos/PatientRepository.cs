@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VKmfSoft_EHealth_API.Data;
-using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel;
-using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personnel;
 using VKmfSoft_EHealth_API.Models.Domain.Patient;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
 using VKmfSoft_EHealth_API.Specifications;
@@ -16,7 +14,6 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
         {
             _context = context;
         }
-
 
         public async Task AddAsync(Patient patient)
         {
@@ -39,24 +36,7 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             return await _context.Patients.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Patient>> GetPatientByFilterAsync(string? fullName)
-        {
-            IQueryable<Patient> patients;
-
-            patients = _context.Patients;
-
-            if (fullName is not null)
-            {
-                if (fullName.Trim() != string.Empty)
-                {
-                    patients = patients.Where(p => (p.LastName.ToLower() + " " + p.FirstName).Contains(fullName.ToLower())).AsQueryable();
-                }
-            }
-
-            return await patients.ToListAsync();
-        }
-
-        public async Task<IEnumerable<Patient>> GetSearchAsync(PatientSearchParams patientSearchParameters)
+        public async Task<IEnumerable<Patient>> GetPatientByFilterasync(PatientSearchParams patientSearchParameters)
         {
             var pageSize = patientSearchParameters.PageSize;
             IQueryable<Patient> patients;
@@ -72,6 +52,16 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             {
                 patients = patients.Where(p => p.FirstName.ToLower().Contains(patientSearchParameters.Firstname.ToLower()));
             }
+
+            if (!string.IsNullOrWhiteSpace(patientSearchParameters.Email))
+            {
+                patients = patients.Where(p => p.Email.ToLower().Contains(patientSearchParameters.Email.ToLower()));
+            }
+
+            //if(patientSearchParameters.DateOfBirth.HasValue)
+            //{
+            //    patients = patients.Where(p => p.DateOfBirth == patientSearchParameters.DateOfBirth.Value);
+            //}
 
             patients = patientSearchParameters.Sort.ToLower() switch
             {

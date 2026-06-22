@@ -44,29 +44,7 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             return await _context.Doctors.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Doctor>> GetDoctorByFilterAsync(string? fullName)// todo : add more filters bv specialiteit , sort and pagination
-        {
-            IQueryable<Doctor> doctors;
-
-            doctors = _context.Doctors;
-
-            if (fullName is not null)
-            {
-                if (fullName.Trim() != string.Empty)
-                {
-                    doctors = doctors.Where(p => (p.LastName.ToLower() + " " + p.FirstName).Contains(fullName.ToLower())).AsQueryable();
-                }
-            }
-
-            return await doctors.ToListAsync();
-        }
-
-        public Task<IEnumerable<Doctor>> GetFilterAsync(string? Name, string? Email, string Sort, int PageSize, int PageNumber)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IEnumerable<Doctor>> GetSearchAsync(DoctorSearchParams doctorSearchParameters)
+        public async Task<IEnumerable<Doctor>> GetDoctorByFilterasync(DoctorSearchParams doctorSearchParameters)
         {
             var pageSize = doctorSearchParameters.PageSize;
             IQueryable<Doctor> doctors;
@@ -78,11 +56,19 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
                 doctors = doctors.Where(p => p.LastName.ToLower().Contains(doctorSearchParameters.Lastname.ToLower()));
             }
 
-            if (!string.IsNullOrWhiteSpace(doctorSearchParameters.Firstname) && !string.IsNullOrWhiteSpace(doctorSearchParameters.Firstname))
+            if (!string.IsNullOrWhiteSpace(doctorSearchParameters.Firstname))
             {
-                doctors = doctors.Where(p => p.FirstName.ToLower().Contains(doctorSearchParameters.Firstname.ToLower())
-                                         && p.LastName.ToLower().Contains(doctorSearchParameters.Lastname.ToLower()));//todo lastname may be null
+                doctors = doctors.Where(p => p.FirstName.ToLower().Contains(doctorSearchParameters.Firstname.ToLower()));
+            }
 
+            if (!string.IsNullOrWhiteSpace(doctorSearchParameters.Email))
+            {
+                doctors = doctors.Where(p => p.Email.ToLower().Contains(doctorSearchParameters.Email.ToLower()));
+            }
+
+            if (doctorSearchParameters.Specialization.HasValue)
+            {
+                doctors = doctors.Where(p => p.SpecializationId == doctorSearchParameters.Specialization);
             }
 
             doctors = doctorSearchParameters.Sort.ToLower() switch

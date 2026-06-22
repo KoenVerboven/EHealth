@@ -5,6 +5,7 @@
         string? Lastname,
         string? Firstname,
         string? Email,
+        DateOnly? DateOfBirth,
         string Sort,
         int PageSize,
         int PageNumber

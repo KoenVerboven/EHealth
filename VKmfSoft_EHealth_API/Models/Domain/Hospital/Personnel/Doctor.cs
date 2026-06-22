@@ -10,6 +10,7 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel
         [Required(ErrorMessage = "LicenseNumber is required.")]
         public required string LicenseNumber { get; set; }
         public DateTime LicenseValidUntil { get; set; }
+        public bool InService { get; set; }
         public List<DoctorAppointment>? DoctorAppointments { get; set; }
     }
 }
