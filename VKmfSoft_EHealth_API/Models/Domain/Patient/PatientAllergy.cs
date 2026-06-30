@@ -23,5 +23,7 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Patient
        
         public byte StatusId { get; set; }
 
+        //todo : make a extra table for allergy 
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
+using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personnel;
 using VKmfSoft_EHealth_API.Models.Domain.Other;
 
 namespace VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel
@@ -10,7 +11,8 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel
         public int DepartmentId { get; set; }
         public DateTime InServiceDate { get; set; }
         public DateTime? OutServiceDate { get; set; }
-        public  HospitalDepartment? hospitalDepartment { get; set; }
+        public  HospitalDepartment? HospitalDepartment { get; set; }
+        //public HospitalEmployeeDiploma? HospitalEmployeeDiploma { get; set; }
         public decimal? Salery { get; set; }
     }
 }
