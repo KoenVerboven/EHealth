@@ -1,0 +1,50 @@
+﻿Superadmin
+Can create, read, update and delete all entities in the system
+
+Administrator
+can create, read, update and delete HospitalDepartment, Doctor, Patient, Nurse, 
+MedicalAssistant, Appointment, Invoice, MedicalRecord, Prescription, LabResult,
+Medication, Allergy, Vaccination, Diagnosis, VitalSign, PainRegistration, Surgery, Scan and ScanImage
+
+MedicalAssistant
+can make appointments for patients
+
+
+Hospital
+can have 1 or more Departments
+can have 1 or more OnePersonPatientRooms
+can have 1 or more MorePersonPatientRooms
+can have 1 or more EmergencyRooms
+can have 1 or more OperatingRooms
+can have 1 or more Laboratories
+can have 1 or more Pharmacies
+can have 1 or more RadiologyDepartments
+can have 1 or more IntensiveCareUnits
+can have 1 or more Beds
+
+
+HospitalDepartment
+can have 1 or more Doctors
+can have 1 or more Nurses
+
+Doctor
+can have 1 or more Patients
+
+Patient
+can have 1 or more Adresses
+can have 1 or more PatientRelatives (contacts)
+can have 1 or more Appointments
+can have 1 or more Invoices
+can have 1 MedicalRecord
+	A MedicalRecord can have 
+		1 or more Prescriptions
+		1 or more LabResults
+		1 or more Medications
+		1 or more Allergies
+		1 or more Vaccinations
+		1 or more Diagnoses
+		1 or more VitalSigns
+		1 or more PainRegistrations
+		1 or more Surgeries
+		1 or more Scans
+			A scan a can have 1 or more ScanImages
