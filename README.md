@@ -29,7 +29,10 @@ UnitTests :
 
 <img width="927" height="606" alt="image" src="https://github.com/user-attachments/assets/6b7ed38a-f5b5-425b-8358-31dfc8c1eaaf" />
 
+Analyse :
+----------
 
+[Analyse](https://github.com/KoenVerboven/EHealth/blob/master/VKmfSoft_EHealth_API/Documentation-Info/Documentation/Analyse.txt)
 
 
 
