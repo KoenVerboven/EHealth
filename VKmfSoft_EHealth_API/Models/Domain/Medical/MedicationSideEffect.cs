@@ -1,4 +1,4 @@
-﻿namespace VKmfSoft_EHealth_API.Models.Domain.General
+﻿namespace VKmfSoft_EHealth_API.Models.Domain.Medical
 {
     public class MedicationSideEffect
     {

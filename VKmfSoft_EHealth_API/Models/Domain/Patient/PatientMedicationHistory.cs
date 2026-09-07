@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using VKmfSoft_EHealth_API.Models.Domain.General;
+using VKmfSoft_EHealth_API.Models.Domain.Medical;
 
 namespace VKmfSoft_EHealth_API.Models.Domain.Patient
 {
