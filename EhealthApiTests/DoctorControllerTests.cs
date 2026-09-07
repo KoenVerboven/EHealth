@@ -1,4 +1,5 @@
 using AutoMapper;
+using EhealthApiTests.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -6,10 +7,7 @@ using VKmfSoft_EHealth_API.AutoMapper;
 using VKmfSoft_EHealth_API.Controllers;
 using VKmfSoft_EHealth_API.Models.Domain.General;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel;
-using VKmfSoft_EHealth_API.Models.Domain.Patient;
-using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
 using VKmfSoft_EHealth_API.Models.DTO.Hospital;
-using VKmfSoft_EHealth_API.Models.DTO.TimeShedule;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
 
 namespace EhealthApiTests;
@@ -38,7 +36,7 @@ public class DoctorControllerTests
         //arrange
         var mapper = _mapperConfiguration.CreateMapper();
         var mockRepo = new Mock<IDoctorRepository>();
-        mockRepo.Setup(repo => repo.GetAllAsync()).ReturnsAsync(DoctorList());
+        mockRepo.Setup(repo => repo.GetAllAsync()).ReturnsAsync(DoctorMockData.DoctorList());
         var controller = new DoctorController(mockRepo.Object, mapper);
 
         //act
@@ -140,36 +138,6 @@ public class DoctorControllerTests
         //assert
         var notFoundObjectResult = actionResult.Result as NotFoundResult;
         Assert.NotNull(notFoundObjectResult);
-    }
-
-    private static IEnumerable<Doctor> DoctorList()
-    {
-        IEnumerable<Doctor> doctors = [
-            new Doctor()
-                {
-                    Id = 1,
-                    LastName = "Poels",
-                    FirstName = "Maria",
-                    DateOfBirth = new DateTime(1996, 6, 1),
-                    Gender = 1,
-                    PhoneNumber = "123456789",
-                    Email = "maria@test.com",
-                    LicenseNumber = "12344444"
-                },
-                new Doctor()
-                {
-                    Id = 2,
-                    LastName = "Janssens",
-                    FirstName = "Dirk",
-                    DateOfBirth = new DateTime(1998, 1, 4),
-                    Gender = 1,
-                    PhoneNumber = "1234544789",
-                    Email = "dirk@test.com",
-                    LicenseNumber = "123456789"
-
-                }
-            ];
-        return doctors;
     }
 
 }

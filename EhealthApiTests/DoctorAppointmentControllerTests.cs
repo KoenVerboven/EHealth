@@ -1,5 +1,6 @@
 ﻿
 using AutoMapper;
+using EhealthApiTests.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -34,7 +35,7 @@ namespace EhealthApiTests
         {
             //arrange
             var mapper = new Mapper(_mapperConfiguration);
-            _mockDoctorAppointmentRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(DoctorAppointmentList());
+            _mockDoctorAppointmentRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(DoctorAppointmentMockData.DoctorAppointmentList());
             var controller = new DoctorAppointmentController(_mockDoctorAppointmentRepo.Object, mapper);
 
             //act
@@ -46,14 +47,13 @@ namespace EhealthApiTests
         }
 
 
-
         [Fact]
         public async Task GetAllAync_ShallReturnItemsCount_ForDoctorAppointmentListContainItems()
         {
             //arrange
             var mapper = _mapperConfiguration.CreateMapper();
             var mockRepo = new Mock<IDoctorAppointmentRepository>();
-            mockRepo.Setup(repo => repo.GetAllAsync()).ReturnsAsync(DoctorAppointmentList());
+            mockRepo.Setup(repo => repo.GetAllAsync()).ReturnsAsync(DoctorAppointmentMockData.DoctorAppointmentList());
             var controller = new DoctorAppointmentController(mockRepo.Object, mapper);
 
             //act
@@ -211,36 +211,6 @@ namespace EhealthApiTests
 
             //assert
             Assert.IsType<CreatedAtActionResult>(actionResult.Result);
-             
-        }
-
-        private IEnumerable<DoctorAppointment> DoctorAppointmentList()
-        {
-            IEnumerable<DoctorAppointment> doctorAppointments = [
-                new DoctorAppointment()
-                {
-                    Id= 1,
-                    PatientId= 1,
-                    DoctorId=1,
-                    AppointmentDate= DateTime.Now,
-                    ReasonForVisit = "pain",
-                    Status = 1,
-                    DegreeOfUrgency = 1,
-                    AppointmentPlaceId= 1
-                },
-                new DoctorAppointment()
-                {
-                    Id=2,
-                    PatientId= 1,
-                    DoctorId=1,
-                    AppointmentDate= DateTime.Now,
-                    ReasonForVisit = "pain",
-                    Status = 1,
-                    DegreeOfUrgency = 1,
-                    AppointmentPlaceId= 1
-                }
-            ];
-            return doctorAppointments;
         }
 
     }
