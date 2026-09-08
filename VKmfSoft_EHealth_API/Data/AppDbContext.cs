@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using VKmfSoft_EHealth_API.Models.Domain.General;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hardware;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
@@ -9,6 +8,7 @@ using VKmfSoft_EHealth_API.Models.Domain.Hospital.Room;
 using VKmfSoft_EHealth_API.Models.Domain.Invoice;
 using VKmfSoft_EHealth_API.Models.Domain.Patient;
 using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
+using VKmfSoft_EHealth_API.Models.Domain.Medical;
 
 namespace VKmfSoft_EHealth_API.Data
 {
@@ -41,6 +41,7 @@ namespace VKmfSoft_EHealth_API.Data
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoiceDetailLine> InvoiceDetailLines { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<Medication> Medications { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
