@@ -23,7 +23,8 @@ Development:
 
 Database diagram :
 
-<img width="1548" height="916" alt="image" src="https://github.com/user-attachments/assets/a702eaf8-76f3-48c3-b479-ee59e306042d" />
+<img width="1686" height="912" alt="Schermafbeelding 2026-09-08 174838" src="https://github.com/user-attachments/assets/e9a63ef2-f8c8-46b6-875d-0afa42371a85" />
+
 
 UnitTests : 
 
