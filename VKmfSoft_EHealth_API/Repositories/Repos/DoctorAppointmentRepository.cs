@@ -11,6 +11,7 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
 
     {
         private readonly AppDbContext _context;
+        const int MaxPageSize = 30;
 
         public DoctorAppointmentRepository(AppDbContext context)
         {
@@ -32,7 +33,9 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
 
         public async Task<IEnumerable<DoctorAppointment>> GetAllAsync()
         {
-            return await _context.DoctorAppointments.ToListAsync();
+            return await _context.DoctorAppointments
+                .AsNoTracking()
+                .ToListAsync();
         }
       
 
@@ -107,15 +110,17 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
 
             if (doctorAppointmentSearchParams.PageSize > 0 && doctorAppointmentSearchParams.PageNumber > 0) 
             {
-                if (doctorAppointmentSearchParams.PageSize > 30)
+                if (doctorAppointmentSearchParams.PageSize > MaxPageSize)
                 {
-                    pageSize = 30;
+                    pageSize = MaxPageSize;
                 }
 
                 doctorAppointments = doctorAppointments.Skip(doctorAppointmentSearchParams.PageSize * (doctorAppointmentSearchParams.PageNumber - 1)).Take(pageSize);
             }
 
-            return await doctorAppointments.ToListAsync();
+            return await doctorAppointments
+                .AsNoTracking()
+                .ToListAsync();
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VKmfSoft_EHealth_API.Data;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personel;
-using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personnel;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
 using VKmfSoft_EHealth_API.Specifications;
 
@@ -10,6 +9,7 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
     public class DoctorRepository : IDoctorRepository
     {
         private readonly AppDbContext _context;
+        const int MaxPageSize = 30;
 
         public DoctorRepository(AppDbContext appDbContext)
         {
@@ -36,12 +36,15 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
 
         public async Task<IEnumerable<Doctor>> GetAllAsync()
         {
-            return await _context.Doctors.ToListAsync();
+            return await _context.Doctors
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<Doctor?> GetByIdAsync(int id)
         {
-            return await _context.Doctors.FindAsync(id);
+            return await _context.Doctors
+                .FindAsync(id);
         }
 
         public async Task<IEnumerable<Doctor>> GetDoctorByFilterasync(DoctorSearchParams doctorSearchParameters)
@@ -86,15 +89,17 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
 
             if (doctorSearchParameters.PageSize > 0 && doctorSearchParameters.PageNumber > 0) //todo : kan korter
             {
-                if (doctorSearchParameters.PageSize > 30)
+                if (doctorSearchParameters.PageSize > MaxPageSize)
                 {
-                    pageSize = 30;
+                    pageSize = MaxPageSize;
                 }
 
                 doctors = doctors.Skip(doctorSearchParameters.PageSize * (doctorSearchParameters.PageNumber - 1)).Take(pageSize);
             }
 
-            return await doctors.ToListAsync();
+            return await doctors
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task UpdateAsync(Doctor doctor)

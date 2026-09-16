@@ -9,6 +9,7 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
     public class PatientRepository : IPatientRepository
     {
         private readonly AppDbContext _context;
+        const int MaxPageSize = 30;
 
         public PatientRepository(AppDbContext context)
         {
@@ -28,7 +29,9 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
 
         public async Task<IEnumerable<Patient>> GetAllAsync()
         {
-            return await _context.Patients.ToListAsync();
+            return await _context.Patients
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<Patient?> GetByIdAsync(int id)
@@ -78,15 +81,17 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
 
             if (patientSearchParameters.PageSize > 0 && patientSearchParameters.PageNumber > 0) 
             {
-                if (patientSearchParameters.PageSize > 30)
+                if (patientSearchParameters.PageSize > MaxPageSize)
                 {
-                    pageSize = 30;
+                    pageSize = MaxPageSize;
                 }
 
                 patients = patients.Skip(patientSearchParameters.PageSize * (patientSearchParameters.PageNumber - 1)).Take(pageSize);
             }
 
-            return await patients.ToListAsync();
+            return await patients
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public bool PatientExists(int patientId)
