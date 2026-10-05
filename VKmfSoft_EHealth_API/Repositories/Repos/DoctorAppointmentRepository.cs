@@ -122,5 +122,16 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
                 .AsNoTracking()
                 .ToListAsync();
         }
+
+        public async Task UpdateStatus(int id, AppointmentStatus appointmentstatus, string cancellingReason, int userId)
+        {
+            int rowsAffected = await _context.DoctorAppointments
+                .Where(p => p.Id == id)
+                .ExecuteUpdateAsync(setters => setters
+                .SetProperty(p => p.Status, (byte)appointmentstatus)
+                .SetProperty(p=>p.CancellingReason, cancellingReason)
+                .SetProperty(p => p.Updatedby, userId));
+
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using VKmfSoft_EHealth_API.Models.Domain.Hospital.Personnel;
-using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
+﻿using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
 using VKmfSoft_EHealth_API.Specifications;
 
 namespace VKmfSoft_EHealth_API.Repositories.Interfaces
@@ -13,6 +12,7 @@ namespace VKmfSoft_EHealth_API.Repositories.Interfaces
         Task<IEnumerable<DoctorAppointment>> GetDoctorAppointmentByFilterasync(DoctorAppointmentSearchParams doctorAppointmentSearchParams);
         Task AddAsync(DoctorAppointment appointment);
         Task UpdateAsync(DoctorAppointment appointment);
+        Task UpdateStatus(int id, AppointmentStatus appointmentstatus, string cancellingReason, int userId);
         Task DeleteAsync(int id);
     }
 }

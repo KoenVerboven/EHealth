@@ -235,12 +235,13 @@ namespace VKmfSoft_EHealth_API.Controllers
             await _appointmentRepository.AddAsync(doctorAppointment);
             return CreatedAtAction(nameof(GetAppointmentById), new { id = doctorAppointment.Id }, doctorAppointment);
         }
+                
 
-        [HttpPut("setStatus/{id},{appointmentstatus},{cancellingReason},{userId}")]//todo : testing!!
+        [HttpPatch("setStatus/{id},{appointmentstatus},{cancellingReason},{userId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> UpdateDoctorAppointmentStatus(int id, AppointmentStatus appointmentstatus, string cancellingReason, int userId)
+        public async Task<ActionResult> UpdateStatus(int id, AppointmentStatus appointmentstatus, string cancellingReason, int userId)
         {
             var doctorAppointment = await _appointmentRepository.GetByIdAsync(id);
 
@@ -249,17 +250,7 @@ namespace VKmfSoft_EHealth_API.Controllers
                 return NotFound();
             }
 
-            doctorAppointment.Status = (byte)appointmentstatus;
-
-            if (appointmentstatus == AppointmentStatus.Canceled)
-            {
-                doctorAppointment.CancellingReason = cancellingReason;
-            }
-
-            //doctorAppointment.Updatedby = userId; //todo : get the user id from the token
-            //doctorAppointment.UpdateAt = DateTime.Now;
-
-            await _appointmentRepository.UpdateAsync(doctorAppointment);
+            await _appointmentRepository.UpdateStatus(id, appointmentstatus, cancellingReason, userId);
 
             return NoContent();
         }
