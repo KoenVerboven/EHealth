@@ -23,7 +23,7 @@ Development:
 
 Database diagram :
 
-<img width="1686" height="912" alt="Schermafbeelding 2026-09-08 174838" src="https://github.com/user-attachments/assets/e9a63ef2-f8c8-46b6-875d-0afa42371a85" />
+<img width="1567" height="892" alt="schemaEHealth" src="https://github.com/user-attachments/assets/fe8b6aa4-36cd-4813-990b-5a2638fe60f2" />
 
 
 UnitTests : 
