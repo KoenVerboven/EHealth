@@ -17,7 +17,9 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Patient
         public string? ImageUrl { get; set; }
         public PatientMedicalRecord? PatientHealthHistory { get; set; }
         public List<DoctorAppointment>? DoctorAppointments { get; set; }
-        public List<PatientRelative>? patientRelatives { get; set; }
+        public List<VaccinationAppointment>? VaccinationAppointments { get; set; }
+        public List<ScannerAppointment>? ScannerAppointments { get; set; }
+        public List<PatientRelative>? patientRelatives { get; set; } // todo: consider renaming to PatientRelatives for consistency
         public List<PatientMessage>? PatientMessages { get; set; }
         public List<Invoice.Invoice>? Invoices { get; set; }
 

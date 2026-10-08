@@ -50,8 +50,8 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
         {
             return await _context.DoctorAppointments.Where(
                 p=>p.DoctorId == doctorId && 
-                p.AppointmentDate >= startDate && 
-                p.AppointmentDate <= endDate
+                p.StartDateTime >= startDate && 
+                p.EndDateTime <= endDate
                 ).ToListAsync();
         }
 
@@ -60,8 +60,8 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
         {
             return await _context.DoctorAppointments.Where(
                 p=>p.PatientId == patientId && 
-                p.AppointmentDate >= startDate && 
-                p.AppointmentDate <= endDate
+                p.StartDateTime >= startDate && 
+                p.EndDateTime <= endDate
                 ).ToListAsync();
         }
 
@@ -91,8 +91,8 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
 
             if (doctorAppointmentSearchParams.StartDate != null && doctorAppointmentSearchParams.EndDate != null)
             {
-                doctorAppointments = doctorAppointments.Where(p => p.AppointmentDate >= doctorAppointmentSearchParams.StartDate 
-                                                                && p.AppointmentDate <= doctorAppointmentSearchParams.EndDate);
+                doctorAppointments = doctorAppointments.Where(p => p.StartDateTime >= doctorAppointmentSearchParams.StartDate 
+                                                                && p.EndDateTime <= doctorAppointmentSearchParams.EndDate);
             }
 
             doctorAppointments = doctorAppointmentSearchParams.Sort.ToLower() switch
@@ -103,8 +103,8 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
                 "patientid_desc" => doctorAppointments.OrderByDescending(p => p.PatientId).AsQueryable(),
                 "doctorid" => doctorAppointments.OrderBy(p => p.DoctorId).AsQueryable(),
                 "doctorid_desc" => doctorAppointments.OrderByDescending(p => p.DoctorId ).AsQueryable(),
-                "appointmentdate" => doctorAppointments.OrderBy(p => p.AppointmentDate).AsQueryable(),
-                "appointmentdate_desc" => doctorAppointments.OrderByDescending(p => p.AppointmentDate).AsQueryable(),
+                "startdatetime" => doctorAppointments.OrderBy(p => p.StartDateTime).AsQueryable(),
+                "startdatetime_desc" => doctorAppointments.OrderByDescending(p => p.StartDateTime).AsQueryable(),
                 _ => doctorAppointments.OrderBy(p => p.Id).AsQueryable(),
             };
 
@@ -123,13 +123,13 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
                 .ToListAsync();
         }
 
-        public async Task UpdateStatus(int id, AppointmentStatus appointmentstatus, string cancellingReason, int userId)
+        public async Task UpdateStatus(int id, AppointmentStatus appointmentstatus, string cancellationReason, int userId)
         {
             int rowsAffected = await _context.DoctorAppointments
                 .Where(p => p.Id == id)
                 .ExecuteUpdateAsync(setters => setters
                 .SetProperty(p => p.Status, (byte)appointmentstatus)
-                .SetProperty(p=>p.CancellingReason, cancellingReason)
+                .SetProperty(p=>p.CancellationReason, cancellationReason)
                 .SetProperty(p => p.Updatedby, userId));
 
         }
