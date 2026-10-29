@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
 using VKmfSoft_EHealth_API.Models.Domain.Patient;
-using VKmfSoft_EHealth_API.Models.DTO.Hospital;
 using VKmfSoft_EHealth_API.Models.DTO.Patient;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
-using VKmfSoft_EHealth_API.Repositories.Repos;
 using VKmfSoft_EHealth_API.Specifications;
 
 namespace VKmfSoft_EHealth_API.Controllers
@@ -122,6 +120,18 @@ namespace VKmfSoft_EHealth_API.Controllers
         
            await _patientRepository.UpdateAsync(patient);
            return CreatedAtAction(nameof(GetPatientById), new { id = patient.Id }, patient);
+        }
+
+        [HttpGet("getTotalPatientsCount")]
+        public async Task<int> GetTotalPatientsCount()
+        {
+            return await _patientRepository.CountAsync();
+        }
+
+        [HttpGet("getPatientsByFilterCount")]
+        public async Task<int> GetPatientsByFilterCount(string? lastName, string? firstName)
+        {
+            return await _patientRepository.CountByFilterAsync(lastName, firstName);
         }
 
     }

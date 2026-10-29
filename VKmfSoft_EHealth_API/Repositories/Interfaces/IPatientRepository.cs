@@ -12,5 +12,7 @@ namespace VKmfSoft_EHealth_API.Repositories.Interfaces
         Task UpdateAsync(Patient patient);
         Task<bool> DeleteAsync(int id);
         bool PatientExists(int patientId);
+        Task<int> CountAsync();
+        Task<int> CountByFilterAsync(string? Lastname, string? Firstname);
     }
 }

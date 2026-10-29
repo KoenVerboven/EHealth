@@ -35,6 +35,26 @@ builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
 
 
+//CORS :    
+
+var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("VKmfSoft_EHealth_APICors", policy =>
+    {
+        if (allowedOrigins == null || allowedOrigins.Length == 0)
+        {
+            // Choose a fallback: allow any origin in development or explicitly deny by not calling WithOrigins
+            policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        }
+        else
+        {   
+            policy.WithOrigins(allowedOrigins).AllowAnyMethod().AllowAnyHeader();
+        }
+    });
+});
+
 // Dependency Injection for Repositories:
 builder.Services.AddScoped<IHospitalRepository, HospitalRepository>();
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
@@ -59,6 +79,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("VKmfSoft_EHealth_APICors");
 app.UseAuthorization();
 
 app.MapControllers();

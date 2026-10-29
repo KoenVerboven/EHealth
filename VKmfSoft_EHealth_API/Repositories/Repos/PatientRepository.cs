@@ -104,5 +104,35 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             _context.Patients.Update(patient);
             await _context.SaveChangesAsync();
         }
+
+        public Task<int> CountAsync()
+        {
+            return _context.Patients.CountAsync();
+        }
+
+        public Task<int> CountByFilterAsync(string? lastName, string? firstName)
+        {
+            IQueryable<Patient> patients;
+
+            patients = _context.Patients;
+
+            if (lastName is not null)
+            {
+                if (lastName.Trim() != string.Empty)
+                {
+                    patients = patients.Where(p => (p.LastName.ToLower()).Contains(lastName.ToLower())).AsQueryable();
+                }
+            }
+
+            if (firstName is not null)
+            {
+                if (firstName.Trim() != string.Empty)
+                {
+                    patients = patients.Where(p => (p.Email.ToLower()).Contains(firstName.ToLower())).AsQueryable();
+                }
+            }
+
+            return patients.CountAsync();
+        }
     }
 }
