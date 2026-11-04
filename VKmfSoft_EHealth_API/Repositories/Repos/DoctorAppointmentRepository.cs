@@ -34,6 +34,8 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
         public async Task<IEnumerable<DoctorAppointment>> GetAllAsync()
         {
             return await _context.DoctorAppointments
+                .Include(p => p.Patient)
+                .Include(p => p.Doctor)
                 .AsNoTracking()
                 .ToListAsync();
         }
@@ -76,7 +78,9 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
             var pageSize = doctorAppointmentSearchParams.PageSize;
             IQueryable<DoctorAppointment> doctorAppointments;
 
-            doctorAppointments = _context.DoctorAppointments;
+            doctorAppointments = _context.DoctorAppointments
+                                         .Include(p => p.Patient)
+                                         .Include(p => p.Doctor);
 
 
             if (doctorAppointmentSearchParams.PatientId != null)

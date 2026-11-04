@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using VKmfSoft_EHealth_API.Models.Domain.Hospital.Hospital;
-using VKmfSoft_EHealth_API.Models.Domain.TimeShedule;
 using VKmfSoft_EHealth_API.Models.DTO.TimeShedule;
 using VKmfSoft_EHealth_API.Repositories.Interfaces;
 using VKmfSoft_EHealth_API.Specifications;
@@ -50,7 +48,12 @@ namespace VKmfSoft_EHealth_API.Controllers
                         Notes = doctorAppointment.Notes,
                         Status = doctorAppointment.Status,
                         DegreeOfUrgency = doctorAppointment.DegreeOfUrgency,
-                        AppointmentPlaceId = doctorAppointment.AppointmentPlaceId
+                        AppointmentPlaceId = doctorAppointment.AppointmentPlaceId,
+                        PatientLastName = doctorAppointment.Patient.LastName,
+                        PatientFirstName = doctorAppointment.Patient.FirstName,
+                        PatientDateOfBirth = doctorAppointment.Patient.DateOfBirth,
+                        DoctorLastName = doctorAppointment.Doctor.LastName,
+                        DoctorFirsName = doctorAppointment.Doctor.FirstName
                     }
                 );
             }
@@ -80,7 +83,12 @@ namespace VKmfSoft_EHealth_API.Controllers
                         Notes = doctorAppointment.Notes,
                         Status = doctorAppointment.Status,
                         DegreeOfUrgency = doctorAppointment.DegreeOfUrgency,
-                        AppointmentPlaceId = doctorAppointment.AppointmentPlaceId
+                        AppointmentPlaceId = doctorAppointment.AppointmentPlaceId,
+                        PatientLastName = doctorAppointment.Patient.LastName,
+                        PatientFirstName = doctorAppointment.Patient.FirstName,
+                        PatientDateOfBirth = doctorAppointment.Patient.DateOfBirth,
+                        DoctorLastName = doctorAppointment.Doctor.LastName,
+                        DoctorFirsName = doctorAppointment.Doctor.FirstName
                     }
                 );
             }
@@ -118,7 +126,12 @@ namespace VKmfSoft_EHealth_API.Controllers
                 Notes = doctorAppointment.Notes,
                 Status = doctorAppointment.Status,
                 DegreeOfUrgency = doctorAppointment.DegreeOfUrgency,
-                AppointmentPlaceId = doctorAppointment.AppointmentPlaceId
+                AppointmentPlaceId = doctorAppointment.AppointmentPlaceId,
+                PatientLastName = doctorAppointment.Patient.LastName,
+                PatientFirstName = doctorAppointment.Patient.FirstName,
+                PatientDateOfBirth = doctorAppointment.Patient.DateOfBirth,
+                DoctorLastName = doctorAppointment.Doctor.LastName,
+                DoctorFirsName = doctorAppointment.Doctor.FirstName
             };  
             return Ok(doctorAppointmentDTO);
         }
@@ -157,7 +170,12 @@ namespace VKmfSoft_EHealth_API.Controllers
                         Notes = doctorAppointment.Notes,
                         Status = doctorAppointment.Status,
                         DegreeOfUrgency = doctorAppointment.DegreeOfUrgency,
-                        AppointmentPlaceId = doctorAppointment.AppointmentPlaceId
+                        AppointmentPlaceId = doctorAppointment.AppointmentPlaceId,
+                        PatientLastName = doctorAppointment.Patient.LastName,
+                        PatientFirstName = doctorAppointment.Patient.FirstName,
+                        PatientDateOfBirth = doctorAppointment.Patient.DateOfBirth,
+                        DoctorLastName = doctorAppointment.Doctor.LastName,
+                        DoctorFirsName = doctorAppointment.Doctor.FirstName
                     }
                 );
             }
@@ -199,7 +217,12 @@ namespace VKmfSoft_EHealth_API.Controllers
                         Notes = doctorAppointment.Notes,
                         Status = doctorAppointment.Status,
                         DegreeOfUrgency = doctorAppointment.DegreeOfUrgency,
-                        AppointmentPlaceId = doctorAppointment.AppointmentPlaceId
+                        AppointmentPlaceId = doctorAppointment.AppointmentPlaceId,
+                        PatientLastName = doctorAppointment.Patient.LastName,
+                        PatientFirstName = doctorAppointment.Patient.FirstName,
+                        PatientDateOfBirth = doctorAppointment.Patient.DateOfBirth,
+                        DoctorLastName = doctorAppointment.Doctor.LastName,
+                        DoctorFirsName = doctorAppointment.Doctor.FirstName
                     }
                 );
             }
@@ -210,14 +233,14 @@ namespace VKmfSoft_EHealth_API.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<Hospital>> AddDoctorAppointment(DoctorAppointmentCreateDTO doctorAppointmentCreateDTO)
+        public async Task<ActionResult<DoctorAppointmentCreateDTO>> AddDoctorAppointment(DoctorAppointmentCreateDTO doctorAppointmentCreateDTO)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            var doctorAppointment = new DoctorAppointment
+            var doctorAppointment = new Models.Domain.TimeShedule.DoctorAppointment
             {
                 Id = doctorAppointmentCreateDTO.Id,
                 PatientId = doctorAppointmentCreateDTO.PatientId,
@@ -229,13 +252,13 @@ namespace VKmfSoft_EHealth_API.Controllers
                 DegreeOfUrgency = doctorAppointmentCreateDTO.DegreeOfUrgency,
                 AppointmentPlaceId = doctorAppointmentCreateDTO.AppointmentPlaceId,
                 CreatedBy = doctorAppointmentCreateDTO.CreatedByPersonId,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
             };
 
             await _appointmentRepository.AddAsync(doctorAppointment);
             return CreatedAtAction(nameof(GetAppointmentById), new { id = doctorAppointment.Id }, doctorAppointment);
         }
-                
+
 
         [HttpPatch("setStatus/{id},{appointmentstatus},{cancellingReason},{userId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

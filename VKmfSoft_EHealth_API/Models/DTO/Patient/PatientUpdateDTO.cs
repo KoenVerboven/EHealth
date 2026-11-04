@@ -14,7 +14,6 @@ namespace VKmfSoft_EHealth_API.Models.DTO.Patient
         public required string PhoneNumber { get; set; }
         public required string Email { get; set; }
         public int FirstLanguageID { get; set; }
-        public byte[]? Photo { get; set; }
         public string? InsuranceNumber { get; set; }
         public string? InsuranceProvider { get; set; }
         public DateTime? InsuranceExpiryDate { get; set; }
@@ -23,7 +22,6 @@ namespace VKmfSoft_EHealth_API.Models.DTO.Patient
         public string? EmergencyContactPhoneNumber { get; set; }
         public string? EmergencyContactDescription { get; set; }
         public byte BloodTypeId { get; set; }
-        public PatientMedicalRecord? PatientMedicalRecord { get; set; }
         public int UpdatedByPersonId { get; set; }
         public DateTime UpdateDate { get; set; }
     }

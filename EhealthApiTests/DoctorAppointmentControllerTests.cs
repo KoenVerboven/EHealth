@@ -96,7 +96,10 @@ namespace EhealthApiTests
                 ReasonForVisit = doctorAppointment.ReasonForVisit,
                 Status = doctorAppointment.Status,
                 DegreeOfUrgency = doctorAppointment.DegreeOfUrgency,
-                AppointmentPlaceId = doctorAppointment.AppointmentPlaceId
+                AppointmentPlaceId = doctorAppointment.AppointmentPlaceId,
+                PatientLastName = doctorAppointment.Patient?.LastName,
+                PatientFirstName = doctorAppointment.Patient?.FirstName,
+                PatientDateOfBirth = Convert.ToDateTime(doctorAppointment.Patient?.DateOfBirth)
             };
 
             var mapper = new Mapper(_mapperConfiguration);

@@ -12,7 +12,7 @@ namespace VKmfSoft_EHealth_API.Models.Domain.Patient
         public bool IsMobile { get; set; }
         public string? EmergencyContactName { get; set; }
         public string? EmergencyContactPhoneNumber { get; set; }
-        public string? EmergencyContactDescription { get; set; }
+        public string? EmergencyContactDescription { get; set; }//change to emergencyContactRelationship
         public byte BloodTypeId { get; set; }
         public string? ImageUrl { get; set; }
         public PatientMedicalRecord? PatientHealthHistory { get; set; }

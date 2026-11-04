@@ -11,5 +11,10 @@
         public int Status { get; set; }
         public int DegreeOfUrgency { get; set; }
         public int AppointmentPlaceId { get; set; }
+        public required string PatientLastName { get; set; }
+        public required string PatientFirstName { get; set; }
+        public DateTime PatientDateOfBirth { get; set; }
+        public required string DoctorLastName { get; set; }
+        public required string DoctorFirsName { get; set; }
     }
 }
