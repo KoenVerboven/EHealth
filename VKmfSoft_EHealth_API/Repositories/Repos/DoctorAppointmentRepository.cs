@@ -85,12 +85,14 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
 
             if (doctorAppointmentSearchParams.PatientId != null)
             {
-                doctorAppointments = doctorAppointments.Where(p => p.PatientId == doctorAppointmentSearchParams.PatientId);
+                if(doctorAppointmentSearchParams.PatientId > 0)
+                    doctorAppointments = doctorAppointments.Where(p => p.PatientId == doctorAppointmentSearchParams.PatientId);
             }
 
             if (doctorAppointmentSearchParams.DoctorId != null)                              
             {
-                doctorAppointments = doctorAppointments.Where(p => p.DoctorId == doctorAppointmentSearchParams.DoctorId);
+                if(doctorAppointmentSearchParams.DoctorId > 0)
+                    doctorAppointments = doctorAppointments.Where(p => p.DoctorId == doctorAppointmentSearchParams.DoctorId);
             }
 
             if (doctorAppointmentSearchParams.StartDate != null && doctorAppointmentSearchParams.EndDate != null)
@@ -136,6 +138,31 @@ namespace VKmfSoft_EHealth_API.Repositories.Repos
                 .SetProperty(p=>p.CancellationReason, cancellationReason)
                 .SetProperty(p => p.Updatedby, userId));
 
+        }
+
+        public Task<int> GetDoctorAppointmentCountByFilterasync(int? patientId, int? doctorId, DateTime? startDate, DateTime? endDate)
+        {
+            IQueryable<DoctorAppointment> doctorAppointments;
+
+            doctorAppointments = _context.DoctorAppointments;
+
+            if (patientId != null)
+            {
+                doctorAppointments = doctorAppointments.Where(p => p.PatientId == patientId);
+            }
+
+            if (doctorId != null)
+            {
+                doctorAppointments = doctorAppointments.Where(p => p.DoctorId == doctorId);
+            }
+
+            if (startDate != null && endDate != null)
+            {
+                doctorAppointments = doctorAppointments.Where(p => p.StartDateTime >= startDate
+                                                                && p.EndDateTime <= endDate);
+            }
+
+            return doctorAppointments.CountAsync();
         }
     }
 }

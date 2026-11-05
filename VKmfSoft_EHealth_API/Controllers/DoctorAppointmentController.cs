@@ -61,11 +61,11 @@ namespace VKmfSoft_EHealth_API.Controllers
             return Ok(doctorAppointmentDTOs);
         }
 
-        [HttpGet("GetDoctorAppointmentByFilter")]
+        [HttpGet("getDoctorAppointmentsByFilter")]
         [ProducesResponseType(typeof(IEnumerable<DoctorAppointmentDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<DoctorAppointmentDTO>>> GetDoctorAppointmentByFilter([FromQuery] DoctorAppointmentSearchParams doctorAppointmentSearchParams)
+        public async Task<ActionResult<IEnumerable<DoctorAppointmentDTO>>> GetDoctorAppointmentsByFilter([FromQuery] DoctorAppointmentSearchParams doctorAppointmentSearchParams)
         {
             List<DoctorAppointmentDTO> doctorAppointmentDTOs = new();
             var doctorAppointments = await _appointmentRepository.GetDoctorAppointmentByFilterasync(doctorAppointmentSearchParams);
@@ -96,6 +96,11 @@ namespace VKmfSoft_EHealth_API.Controllers
             return Ok(doctorAppointmentDTOs);
         }
 
+        [HttpGet("getAppointmentsByFilterCount")]
+        public async Task<int> GetAppointmentsByFilterCount(int? patientId, int? doctorId, DateTime? startDate, DateTime? endDate)
+        {
+            return await _appointmentRepository.GetDoctorAppointmentCountByFilterasync(patientId, doctorId, startDate, endDate);
+        }
 
         [HttpGet("getById/{id}")]
         [ProducesResponseType(typeof(DoctorAppointmentDTO), StatusCodes.Status200OK)]
