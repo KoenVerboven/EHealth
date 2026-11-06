@@ -15,6 +15,6 @@
         public required string PatientFirstName { get; set; }
         public DateTime PatientDateOfBirth { get; set; }
         public required string DoctorLastName { get; set; }
-        public required string DoctorFirsName { get; set; }
+        public required string DoctorFirstName { get; set; }
     }
 }

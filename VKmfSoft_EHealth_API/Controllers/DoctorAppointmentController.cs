@@ -53,7 +53,7 @@ namespace VKmfSoft_EHealth_API.Controllers
                         PatientFirstName = doctorAppointment.Patient.FirstName,
                         PatientDateOfBirth = doctorAppointment.Patient.DateOfBirth,
                         DoctorLastName = doctorAppointment.Doctor.LastName,
-                        DoctorFirsName = doctorAppointment.Doctor.FirstName
+                        DoctorFirstName = doctorAppointment.Doctor.FirstName
                     }
                 );
             }
@@ -88,7 +88,7 @@ namespace VKmfSoft_EHealth_API.Controllers
                         PatientFirstName = doctorAppointment.Patient.FirstName,
                         PatientDateOfBirth = doctorAppointment.Patient.DateOfBirth,
                         DoctorLastName = doctorAppointment.Doctor.LastName,
-                        DoctorFirsName = doctorAppointment.Doctor.FirstName
+                        DoctorFirstName = doctorAppointment.Doctor.FirstName
                     }
                 );
             }
@@ -136,7 +136,7 @@ namespace VKmfSoft_EHealth_API.Controllers
                 PatientFirstName = doctorAppointment.Patient.FirstName,
                 PatientDateOfBirth = doctorAppointment.Patient.DateOfBirth,
                 DoctorLastName = doctorAppointment.Doctor.LastName,
-                DoctorFirsName = doctorAppointment.Doctor.FirstName
+                DoctorFirstName = doctorAppointment.Doctor.FirstName
             };  
             return Ok(doctorAppointmentDTO);
         }
@@ -180,7 +180,7 @@ namespace VKmfSoft_EHealth_API.Controllers
                         PatientFirstName = doctorAppointment.Patient.FirstName,
                         PatientDateOfBirth = doctorAppointment.Patient.DateOfBirth,
                         DoctorLastName = doctorAppointment.Doctor.LastName,
-                        DoctorFirsName = doctorAppointment.Doctor.FirstName
+                        DoctorFirstName = doctorAppointment.Doctor.FirstName
                     }
                 );
             }
@@ -227,7 +227,7 @@ namespace VKmfSoft_EHealth_API.Controllers
                         PatientFirstName = doctorAppointment.Patient.FirstName,
                         PatientDateOfBirth = doctorAppointment.Patient.DateOfBirth,
                         DoctorLastName = doctorAppointment.Doctor.LastName,
-                        DoctorFirsName = doctorAppointment.Doctor.FirstName
+                        DoctorFirstName = doctorAppointment.Doctor.FirstName
                     }
                 );
             }

@@ -101,7 +101,7 @@ namespace EhealthApiTests
                 PatientFirstName = doctorAppointment.Patient?.FirstName,
                 PatientDateOfBirth = Convert.ToDateTime(doctorAppointment.Patient?.DateOfBirth),
                 DoctorLastName = doctorAppointment.Doctor?.LastName,
-                DoctorFirsName = doctorAppointment.Doctor?.FirstName
+                DoctorFirstName = doctorAppointment.Doctor?.FirstName
             };
 
             var mapper = new Mapper(_mapperConfiguration);
